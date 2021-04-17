@@ -1,5 +1,5 @@
 package de.htwg.se.ConnectFour.model
 
-case class Cell (value: String){
-  def isSet: Boolean = value != ""
+case class Cell (value: Int){
+  def isSet: Boolean = value != 0
 }
