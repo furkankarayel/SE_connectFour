@@ -1,13 +1,17 @@
 package de.htwg.se.ConnectFour.model
 
-case class Grid() {
-  def this(size: Int) = this(new Array.ofDim[Cell](size, Cell("")))
+import scala.runtime.Nothing$
 
-  val size: Int = t.size
 
-  def cell(row: Int, col: Int): Cell = cells.cell(row, col)
+case class Grid(settings: Settings) {
+  //private val settings = Settings()
+  //val grid = (Array.ofDim[Cell](settings.dimensionRow, settings.dimensionColumn))
+  val grid = Vector.fill[Option[Cell]](settings.dimensionRow, settings.dimensionColumn)(None)
+  def row(index: Int) = grid(index)
+  def column(index: Int) = grid.map(row => row(index))
+  //def cell(row: InCt, col: Int): Cell = cells.cell(row, col)
 
-  def set(row: Int, col: Int, value: String): Grid = copy(cells.replaceCell(row, col, Cell(value)))
+  //def set(row: Int, col: Int, value: String): Grid = copy(cells.replaceCell(row, col, Cell(value)))
 
 }
 
