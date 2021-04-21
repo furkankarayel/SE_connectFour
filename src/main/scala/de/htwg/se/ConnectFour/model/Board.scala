@@ -5,6 +5,7 @@ case class Board(/*private val cells:Matrix[Cell]*/) {
   val rowfields = 6
   val grid = Array.ofDim[Piece](columnfields,rowfields)
 
+
   def drop(col: Int, piece: Piece): Unit ={
     /*
     val idx = grid(5).lastIndexWhere(_ == None)
