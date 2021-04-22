@@ -4,12 +4,11 @@ case class Board() {
 
   var grid = new Grid()
 
-  def drop(col: Int, piece: Piece): Unit ={
-    /*
-    val idx = grid(5).lastIndexWhere(_ == None)
-    grid.updated(5, grid(5).updated(idx, Some(Cell())));
-    grid[5][idx] = Some(Cell())
-     */
+  def drop(col: Int, piece: Piece): Unit = {
+    val idx = grid.rows.indexWhere(row => !row(col).isSet)
+    if(idx > -1) {
+      grid = grid.replaceCell(idx, col, Cell(Some(piece)))
+    }
   }
 
   def printGrid(): Unit = {
