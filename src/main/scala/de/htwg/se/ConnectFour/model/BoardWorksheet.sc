@@ -1,29 +1,27 @@
-import de.htwg.se.ConnectFour.model.Player
+import de.htwg.se.ConnectFour.model._
 
-val player1 = new Player("Hansi", 2)
-val player2 = new Player("Franzi", 1)
+val player1 = Player("Hansi", 2)
+val player2 = Player("Franzi", 1)
 
-case class Piece(player: Player) {
-  override def toString: String = player.playerNumber match {
-    case 1 => "red"
-    case 2 => "yellow"
-  }
-}
 
 print(Piece(player1))
 print(Piece(player2))
 
-val columnfields = 7
-val rowfields = 6
-val grid = Array.ofDim[Piece](columnfields,rowfields)
+val grid = Grid
+val board = Board()
+val piecep1 = Piece(player1)
+val piecep2 = Piece(player2)
 
-def drop(col: Int, piece: Piece): Unit ={
+board.grid = board.grid.replaceCell(0,2, Cell(Some(piecep1)))
+board.grid = board.grid.replaceCell(0,0, Cell(Some(piecep2)))
+board.printGrid()
 
-  val idx = grid(5).lastIndexWhere(_ == None)
-  grid.updated(5, grid(5).updated(idx, Some(Cell())));
-  grid[5][idx] = Some(Cell())
+board.drop(2,piecep2)
+board.printGrid()
 
-}
+
+
+
 
 
 
