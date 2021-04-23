@@ -12,6 +12,5 @@ class PieceSpec extends AnyWordSpec with Matchers {
         piece.toString should be ("red")
       }
     }
-
   }
 }
