@@ -3,7 +3,7 @@ package de.htwg.se.ConnectFour.model
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 
-class Boardspec extends AnyWordSpec with Matchers {
+class BoardSpec extends AnyWordSpec with Matchers {
 
   "A Board" when {
     "to be printed" should {
