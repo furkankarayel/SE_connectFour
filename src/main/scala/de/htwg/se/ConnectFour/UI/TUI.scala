@@ -10,6 +10,7 @@ object TUI {
 
   def main(args: Array[String]): Unit = {
     var input: String = ""
+    gamestart()
     do {
       input = readLine()
       processInputLine(input)
@@ -37,6 +38,13 @@ object TUI {
 
   def gamestart(): Unit ={
     println("Welcome to Connect Four")
-    println("Type a name for Player 1")
+
+    println("You can start playing with your partner by typing a column number 0-6")
+    println("After each move it will be the turn of the other player")
+    println("Good luck and have fun!")
+
+    println("To print the latest board press 'p'")
+    println("_______________________________")
+    println("If you want to quit the game press 'q'")
   }
 }
