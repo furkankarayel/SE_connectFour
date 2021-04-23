@@ -3,16 +3,20 @@ package de.htwg.se.ConnectFour.model
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 
-class Boardtest extends AnyWordSpec with Matchers {
-  /*
+class Boardspec extends AnyWordSpec with Matchers {
+
   "A Board" when {
-    "not set to any value " should {
-      val emptyBoard = Board(Matrix[Cell])
-      "have empty columns and rows" in {
-        grid.value should be(0)
+    "to be printed" should {
+      "show the Status of the Cells" in {
+        val board = Board()
+        val printedGrid = board.printGrid()
       }
-      "not be set" in {
-        Board. should be(false)
+      "be empty" in {
+        val board = Board()
+        val emptyGrid = board.reset()
+      }
+      "get a Piece at the lowest possible row" in {
+        val board = Board()
       }
     }
     "set to a specific value" should {
@@ -25,5 +29,5 @@ class Boardtest extends AnyWordSpec with Matchers {
       }
     }
   }
-  */
+
 }

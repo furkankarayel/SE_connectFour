@@ -9,7 +9,7 @@ class PieceSpec extends AnyWordSpec with Matchers {
       val player = Player("Your Name", 1)
       val piece = Piece(player)
       "have a color" in {
-        piece.toString should be ("red")
+        piece.toString should be ("R")
       }
     }
   }

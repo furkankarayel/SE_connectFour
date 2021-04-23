@@ -7,19 +7,18 @@ class CellSpec extends AnyWordSpec with Matchers {
 
   "A Cell" when {
     "not set to any value " should {
-      val emptyCell = Cell(None)
-      "have no value" in {
-        emptyCell.piece should be(None)
+      val emptyCell = Cell(0)
+      "have value 0" in {
+        emptyCell.value should be(0)
       }
       "not be set" in {
         emptyCell.isSet should be(false)
       }
     }
     "set to a specific value" should {
-      val player = Player("Your Name", 1)
-      val nonEmptyCell = Cell(Some(Piece(player)))
+      val nonEmptyCell = Cell(5)
       "return that value" in {
-        nonEmptyCell.piece should be(Some(Piece(player)))
+        nonEmptyCell.value should be(5)
       }
       "be set" in {
         nonEmptyCell.isSet should be(true)
