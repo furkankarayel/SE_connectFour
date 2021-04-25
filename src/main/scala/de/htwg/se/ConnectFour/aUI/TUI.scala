@@ -1,4 +1,4 @@
-package de.htwg.se.ConnectFour.UI
+package de.htwg.se.ConnectFour.aUI
 
 import de.htwg.se.ConnectFour._
 import de.htwg.se.ConnectFour.model.Piece
