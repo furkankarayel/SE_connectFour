@@ -3,23 +3,16 @@ package de.htwg.se.ConnectFour.model
 case class Board() {
 
   var grid = new Grid()
-// grid return
-  def drop(col: Int, piece: Piece): Unit = {
+
+  def drop(col: Int, piece: Piece): Grid = {
     val idx = grid.rows.indexWhere(row => !row(col).isSet)
     if(idx > -1) {
-      grid = grid.replaceCell(idx, col, Cell(Some(piece)))
+      grid.replaceCell(idx, col, Cell(Some(piece)))
+    } else {
+      grid
     }
   }
-//will be replaced by toString
-  def printGrid(): Unit = {
-    for (row <- grid.rows.reverse) {
-      for (col <- row) {
-        print(col)
-      }
-      println("\n")
-    }
-  }
-// grid reset return grid type
+
   def reset(): Grid = {
     new Grid
   }
