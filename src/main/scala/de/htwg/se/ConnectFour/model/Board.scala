@@ -28,4 +28,15 @@ case class Board() {
     builder.toString()
   }
 
+  def wincheck(): Boolean = {
+    def iswon: Boolean = false
+    val verticalFour = 0;
+    val horizontalFour = 0;
+    val diagonalFour = 0;
+    do {
+      if(grid.rows)
+
+    } while (iswon = false)
+  }
+
 }
