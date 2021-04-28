@@ -6,6 +6,7 @@ case class Grid(rows: Vector[Vector[Cell]]) {
   def cell(row: Int, col: Int): Cell = rows(row)(col)
   def replaceCell(row: Int, col: Int, cell: Cell): Grid = copy(rows.updated(row, rows(row).updated(col, cell)))
 
+
   def drop(column: Int, piece: Piece): Grid = {
     val idx = this.rows.indexWhere(row => !row(column).isSet)
     if(idx > -1) {
