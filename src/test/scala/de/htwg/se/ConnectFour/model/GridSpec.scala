@@ -18,8 +18,8 @@ class GridSpec extends AnyWordSpec with Matchers {
         grid.cell(5,6) should be (Cell(None))
       }
       "have a method to replace specific cells" in {
-        val updatedGrid = grid.replaceCell(0,3, Cell(Some(Piece(Player("Your Name", 1)))))
-        grid.cell(0,3).piece should be
+        val replaced = grid.replaceCell(0,3, Cell(Some(Piece(Player("Your Name", 1)))))
+        replaced.cell(0,3).piece should be (Some(Piece(Player("Your Name", 1))))
       }
     }
   }

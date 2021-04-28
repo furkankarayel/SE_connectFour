@@ -6,20 +6,27 @@ import org.scalatest.matchers.should.Matchers
 class PlayerSpec extends AnyWordSpec with Matchers {
   "A Player" when {
     "new" should {
-      val player = Player("Your Name", 1)
+      val player1 = Player("Your Name", 1)
+      val player2 = Player("Yo Name", 2)
       "have a name" in {
-        player.name should be ("Your Name")
+        player1.name should be ("Your Name")
+        player2.name should be ("Yo Name")
       }
       "have a number" in{
-        player.number should be (1)
+        player1.number should be (1)
+        player2.number should be (2)
       }
       "have a color" in {
-        player.color should be ("red")
+        player1.color should be ("red")
+        player2.color should be ("yellow")
       }
       "have a nice String representation" in {
-        player.toString should be
-        "Der Spieler " + player.name + " mit der Nummer "+
-          player.number +" hat die Farbe "+ player.color
+        player1.toString should be
+        "Der Spieler " + player1.name + " mit der Nummer "+
+          player1.number +" hat die Farbe "+ player1.color
+        player2.toString should be
+        "Der Spieler " + player2.name + " mit der Nummer "+
+          player2.number +" hat die Farbe "+ player2.color
       }
     }
   }

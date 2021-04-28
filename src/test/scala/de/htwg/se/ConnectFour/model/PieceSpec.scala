@@ -6,10 +6,13 @@ import org.scalatest.wordspec.AnyWordSpec
 class PieceSpec extends AnyWordSpec with Matchers {
   "A Piece" when {
     "new" should {
-      val player = Player("Your Name", 1)
-      val piece = Piece(player)
+      val player1 = Player("Your Name", 1)
+      val player2 = Player("Your Name", 2)
+      val piece1 = Piece(player1)
+      val piece2 = Piece(player2)
       "have a color" in {
-        piece.toString should be ("R")
+        piece1.toString should be ("R")
+        piece2.toString should be ("Y")
       }
     }
   }
