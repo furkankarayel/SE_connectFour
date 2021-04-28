@@ -1,15 +1,27 @@
 package de.htwg.se.ConnectFour
 
-import de.htwg.se.ConnectFour.UI.TUI
+import de.htwg.se.ConnectFour.aUI.TUI
+import de.htwg.se.ConnectFour.controller._
 import de.htwg.se.ConnectFour.model._
 
+import scala.io.StdIn.readLine
 
-
-class Game {
-  val board = new Board()
+object Game {
   val player1 = Player("Jens", 1)
   val player2 = Player("Eric", 2)
   var player = player1
   var move = 0
+
+  val controller = new Controller(new Grid())
+  val tui = new TUI(controller)
+
+  def main(args: Array[String]): Unit = {
+    var input: String = ""
+    tui.gamestart()
+    do {
+      input = readLine()
+      tui.processInputLine(input)
+    } while (input != "q")
+  }
 
 }
