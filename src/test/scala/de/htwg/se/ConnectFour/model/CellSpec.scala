@@ -14,15 +14,21 @@ class CellSpec extends AnyWordSpec with Matchers {
       "not be set" in {
         emptyCell.isSet should be(false)
       }
+      "have a nice String representation" in {
+        emptyCell.toString should be ("_")
+      }
     }
     "set to a specific value" should {
       val player = Player("Your Name",1)
       val nonEmptyCell = Cell(Some(Piece(player)))
       "return that value" in {
-        nonEmptyCell.piece should be(Some)
+        nonEmptyCell.piece should be(Some(Piece(Player("Your Name",1))))
       }
       "be set" in {
         nonEmptyCell.isSet should be(true)
+      }
+      "have a nice String representation" in {
+        nonEmptyCell.toString should be ("R")
       }
     }
   }
