@@ -16,7 +16,8 @@ class CellSpec extends AnyWordSpec with Matchers {
       }
     }
     "set to a specific value" should {
-      val nonEmptyCell = Cell(Some(Piece.toString())"R")
+      val player = Player("Your Name",1)
+      val nonEmptyCell = Cell(Some(Piece(player)))
       "return that value" in {
         nonEmptyCell.piece should be(Some)
       }
