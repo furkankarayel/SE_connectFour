@@ -9,19 +9,15 @@ class Controller(var grid:Grid) extends Observable {
     reset()
     notifyObservers
   }
-
   def reset(): Unit = {
     grid = new Grid
     notifyObservers
   }
-
   def dropPiece(col: Int,piece: Piece): Unit = {
     grid = grid.drop(col,piece)
     notifyObservers
   }
-
   def gridPrint(): String = grid.toString
-
 
 }
 
