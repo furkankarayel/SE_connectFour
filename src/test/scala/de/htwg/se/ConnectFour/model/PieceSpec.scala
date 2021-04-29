@@ -11,8 +11,8 @@ class PieceSpec extends AnyWordSpec with Matchers {
       val piece1 = Piece(player1)
       val piece2 = Piece(player2)
       "have a color" in {
-        piece1.toString should be ("R")
-        piece2.toString should be ("Y")
+        piece1.toString should be (Console.RED + "☻ ")
+        piece2.toString should be (Console.YELLOW + "☻ ")
       }
     }
   }

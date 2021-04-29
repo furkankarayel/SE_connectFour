@@ -15,7 +15,7 @@ class CellSpec extends AnyWordSpec with Matchers {
         emptyCell.isSet should be(false)
       }
       "have a nice String representation" in {
-        emptyCell.toString should be ("_ ")
+        emptyCell.toString should be (Console.BLUE + "_ ")
       }
     }
     "set to a specific value" should {
@@ -28,7 +28,7 @@ class CellSpec extends AnyWordSpec with Matchers {
         nonEmptyCell.isSet should be(true)
       }
       "have a nice String representation" in {
-        nonEmptyCell.toString should be ("R")
+        nonEmptyCell.toString should be (Console.RED + "☻ ")
       }
     }
   }
