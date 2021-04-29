@@ -21,6 +21,13 @@ class GridSpec extends AnyWordSpec with Matchers {
         val replaced = grid.replaceCell(0,3, Cell(Some(Piece(Player("Your Name", 1)))))
         replaced.cell(0,3).piece should be (Some(Piece(Player("Your Name", 1))))
       }
+      "have a method to put Pieces into the Grid" in {
+        val dropped = grid.drop(0, Piece(Player("Your Name", 1)))
+        dropped.cell(0,0).piece should be (Some(Piece(Player("Your Name", 1))))
+      }
+      "have a method to reset the whole Grid" in {
+        grid.reset() should be (new Grid())
+      }
     }
   }
 }
