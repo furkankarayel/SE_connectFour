@@ -15,7 +15,7 @@ class CellSpec extends AnyWordSpec with Matchers {
         emptyCell.isSet should be(false)
       }
       "have a nice String representation" in {
-        emptyCell.toString should be ("_")
+        emptyCell.toString should be ("_ ")
       }
     }
     "set to a specific value" should {
