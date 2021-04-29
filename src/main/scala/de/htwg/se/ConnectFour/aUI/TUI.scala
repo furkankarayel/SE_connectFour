@@ -3,16 +3,17 @@ package de.htwg.se.ConnectFour.aUI
 import de.htwg.se.ConnectFour._
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.Piece
+import de.htwg.se.ConnectFour.util.Observer
 import io.AnsiColor._
 
 import scala.io.StdIn.readLine
 
-class TUI(controller: Controller) {
+class TUI(controller: Controller) extends Observer{
 
   def processInputLine(input: String):Unit = {
     input match {
       //case "n"=> Board().grid
-      case "p" => controller.gridPrint()
+      case "p" => print(controller.gridPrint)
       case "q" => println("Tschüss")
       case _ =>
         input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
@@ -39,4 +40,6 @@ class TUI(controller: Controller) {
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.MAGENTA + " Good luck and have fun! " + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
   }
+
+  override def update: Unit =  println(controller.toString)
 }
