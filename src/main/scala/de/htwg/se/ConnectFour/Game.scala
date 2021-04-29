@@ -14,6 +14,7 @@ object Game {
 
   val controller = new Controller(new Grid())
   val tui = new TUI(controller)
+  controller.notifyObservers
 
   def main(args: Array[String]): Unit = {
     var input: String = ""
