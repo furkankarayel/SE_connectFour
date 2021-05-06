@@ -38,5 +38,5 @@ class TUI(controller: Controller) extends Observer{
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
   }
 
-  override def update: Unit =  println(controller.toString)
+  override def update: Boolean =  { println(controller.toString);true }
 }
