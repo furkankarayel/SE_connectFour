@@ -1,6 +1,5 @@
 package de.htwg.se.ConnectFour.util
 
-import de.htwg.se.ConnectFour.Game.controller
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -11,7 +10,7 @@ class ObservableSpec extends AnyWordSpec with Matchers {
     val observer = new Observer {
       var updated: Boolean = false
       def isUpdated: Boolean = updated
-      override def update: Boolean = { updated=true; true}
+      override def update: Boolean = { updated=true; updated}
     }
     "add an Observer" in {
       observable.add(observer)
