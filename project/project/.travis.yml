@@ -7,3 +7,8 @@ script:
 
 after_success:
   - sbt coverageReport coveralls
+
+# safelist
+branches:
+  only:
+    - dev
