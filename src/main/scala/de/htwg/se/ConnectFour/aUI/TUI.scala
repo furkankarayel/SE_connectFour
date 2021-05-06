@@ -12,7 +12,7 @@ class TUI(controller: Controller) extends Observer{
   def processInputLine(input: String):Unit = {
     input match {
       case "p" => print(controller.gridPrint)
-      case "q" => println("Tschüss")
+      case "t" => println("Tschüss")
       case _ =>
         input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
           case col :: Nil =>
