@@ -1,6 +1,6 @@
 language: scala
 scala:
-  - 2.13
+  - '2.13'
 
 script:
   - sbt clean coverage test coverageReport
