@@ -32,16 +32,17 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
     }
     "when full" should {
-      val newGrid = new Grid()
+
       "have no new dropped Piece" in {
-      newGrid.drop(0, Piece(Player("Your Name", 1)))
-      newGrid.drop(0, Piece(Player("Your Name", 1)))
-      newGrid.drop(0, Piece(Player("Your Name", 1)))
-      newGrid.drop(0, Piece(Player("Your Name", 1)))
-      newGrid.drop(0, Piece(Player("Your Name", 1)))
-      val afterFull = newGrid.drop(0, Piece(Player("Your Name", 1)))
-      val noNewDroppedPieceGrid = newGrid.drop(0, Piece(Player("Your Name", 1)))
-      noNewDroppedPieceGrid should be (afterFull)
+        var afterFull = new Grid()
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
+        val newDrop = afterFull.drop(0, Piece(Player("Your Name", 1)))
+        newDrop.rows should be (afterFull.rows)
       }
     }
   }
