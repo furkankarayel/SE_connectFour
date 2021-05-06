@@ -6,13 +6,11 @@ import de.htwg.se.ConnectFour.model.Piece
 import de.htwg.se.ConnectFour.util.Observer
 import io.AnsiColor._
 
-import scala.io.StdIn.readLine
 
 class TUI(controller: Controller) extends Observer{
 
   def processInputLine(input: String):Unit = {
     input match {
-      //case "n"=> Board().grid
       case "p" => print(controller.gridPrint)
       case "q" => println("Tschüss")
       case _ =>
@@ -22,7 +20,6 @@ class TUI(controller: Controller) extends Observer{
             controller.dropPiece(col, Piece(Game.player))
             Game.move+=1
             print(controller.gridPrint)
-          case _ => print(controller.gridPrint)
         }
     }
   }

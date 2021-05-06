@@ -13,10 +13,6 @@ class TuiSpec extends AnyWordSpec with Matchers{
     "create an empty ConnectFour grid on start" in {
       controller.grid should be (new Grid())
     }
-    /*"print the empty grid on input 'p'" in {
-      tui.processInputLine("p")
-      controller.grid.toString should be ("_______\n_______\n_______\n_______\n_______\n_______")
-    }*/
     "should replace a specific cell by typing a number 0-6" in {
       tui.processInputLine("0")
       controller.grid.cell(0,0).isSet should be (true)
