@@ -22,7 +22,7 @@ class TUI(controller: Controller) extends Observer{
             Game.move+=1
             print(controller.gridPrint)
         }
-      case _ => println("Invalid input.");System.exit(0)
+      case _ => println("Invalid input.");
     }
   }
 
