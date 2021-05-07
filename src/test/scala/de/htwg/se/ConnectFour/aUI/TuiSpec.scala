@@ -17,6 +17,8 @@ class TuiSpec extends AnyWordSpec with Matchers{
       tui.processInputLine("0")
       controller.grid.cell(0,0).isSet should be (true)
     }
+    "print the latest grid on input 'p'" in {
+      tui.processInputLine("p")
+    }
   }
-
 }
