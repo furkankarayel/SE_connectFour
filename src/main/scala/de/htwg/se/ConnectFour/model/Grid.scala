@@ -9,13 +9,12 @@ case class Grid(rows: Vector[Vector[Cell]]) {
 
   def drop(column: Int, piece: Piece): Grid = {
     val idx = this.rows.indexWhere(row => !row(column).isSet)
-    if(idx > -1) {
+    if (idx > -1) {
       this.replaceCell(idx, column, Cell(Some(piece)))
     } else {
       this
     }
   }
-
   def reset(): Grid = {
     new Grid
   }

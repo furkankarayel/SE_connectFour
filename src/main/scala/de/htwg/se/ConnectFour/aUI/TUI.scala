@@ -10,10 +10,11 @@ import io.AnsiColor._
 class TUI(controller: Controller) extends Observer{
 
   def processInputLine(input: String):Unit = {
+    val Pattern = "([0-6])".r
     input match {
       case "p" => print(controller.gridPrint)
-      case "q" => println("Tschüss")
-      case _ =>
+      case "t" => println("Tschüss")
+      case Pattern(input) =>
         input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
           case col :: Nil =>
             Game.player = if(Game.move % 2 == 0)  Game.player1 else Game.player2
@@ -21,6 +22,7 @@ class TUI(controller: Controller) extends Observer{
             Game.move+=1
             print(controller.gridPrint)
         }
+      case _ => println("Invalid input.");System.exit(0)
     }
   }
 
@@ -37,6 +39,5 @@ class TUI(controller: Controller) extends Observer{
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.MAGENTA + " Good luck and have fun! " + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
   }
-
-  override def update: Unit =  println(controller.toString)
+  override def update: Boolean =  { println(controller.toString);true }
 }
