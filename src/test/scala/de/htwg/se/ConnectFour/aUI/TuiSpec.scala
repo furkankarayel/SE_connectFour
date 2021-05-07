@@ -20,7 +20,5 @@ class TuiSpec extends AnyWordSpec with Matchers{
     "print the latest grid on input 'p'" in {
       tui.processInputLine("p")
     }
-
   }
-
 }
