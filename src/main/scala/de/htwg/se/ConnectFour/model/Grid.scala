@@ -1,7 +1,6 @@
 package de.htwg.se.ConnectFour.model
 
-
-case class Grid(rows: Vector[Vector[Cell]]) {
+case class Grid(rows: Vector[Vector[Cell]]) extends GridTemplate {
   def this() = this(Vector.tabulate(6, 7) { (row, col) => Cell(None) })
   override def cell(row: Int, col: Int): Cell = rows(row)(col)
   def replaceCell(row: Int, col: Int, cell: Cell): Grid = copy(rows.updated(row, rows(row).updated(col, cell)))

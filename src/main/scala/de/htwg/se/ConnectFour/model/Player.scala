@@ -1,14 +1,19 @@
 package de.htwg.se.ConnectFour.model
 
-case class Player(playerName: String, playerNumber: Int) {
-  val name: String = playerName
-  val number: Int = playerNumber
-  val color: String = number match {
-    case 1 => "red"
-    case 2 => "yellow"
-  }
-  override def toString:String = "Der Spieler " + name + " mit der Nummer "+
-                                  number + " hat die Farbe " + color
+import de.htwg.se.ConnectFour.util.Strategy
+
+trait Player {
+  def pname:String
+  def pnumber: Int
+  def pcolor: String
+}
+
+private class Player1(playerName: String, playerNumber: Int) extends Player {
+  override def pname: String = playerName
+  override def pnumber: Int = playerNumber
+  override def pcolor: String = "red"
+  override def toString:String = "Der Spieler " + pname + " mit der Nummer "+
+                                  pnumber + " hat die Farbe " + pcolor
 }
 
 private class Player2(playerName: String, playerNumber: Int) extends Player {
@@ -25,5 +30,6 @@ object Player {
       case playerNumber=> new Player2(playerName,playerNumber)
     }
 }
+
 
 
