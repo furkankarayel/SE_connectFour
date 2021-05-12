@@ -1,7 +1,7 @@
 package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour._
-import de.htwg.se.ConnectFour.model.{Grid, GridTemplate, Piece, Player, Player1, Player2}
+import de.htwg.se.ConnectFour.model.{Grid, Piece, Player}
 import de.htwg.se.ConnectFour.util.Observable
 
 

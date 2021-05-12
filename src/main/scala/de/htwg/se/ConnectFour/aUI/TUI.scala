@@ -1,8 +1,6 @@
 package de.htwg.se.ConnectFour.aUI
 
-import de.htwg.se.ConnectFour._
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model.Piece
 import de.htwg.se.ConnectFour.util.Observer
 import io.AnsiColor._
 
@@ -14,9 +12,7 @@ class TUI(controller: Controller) extends Observer{
     input match {
       case "p" => print(controller.gridPrint)
       case "t" => println("Tschüss")
-      case "special" =>
       case Pattern(input) => controller.doMove(input)
-      //case "special" =>
       case _ => println("Invalid input.");
     }
   }

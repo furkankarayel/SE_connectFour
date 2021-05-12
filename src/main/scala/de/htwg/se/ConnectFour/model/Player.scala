@@ -1,7 +1,5 @@
 package de.htwg.se.ConnectFour.model
 
-import de.htwg.se.ConnectFour.util.Strategy
-
 trait Player {
   def pname:String
   def pnumber: Int
