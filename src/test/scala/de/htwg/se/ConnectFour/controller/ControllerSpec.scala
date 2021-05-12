@@ -7,7 +7,9 @@ import org.scalatest.wordspec.AnyWordSpec
 
 class ControllerSpec extends AnyWordSpec with Matchers{
   "observed by an Observer" should {
-    val controller = new Controller(new Grid())
+    val player1 = Player("Jens", 1)
+    val player2 = Player("Eric", 2)
+    val controller = new Controller(new Grid(),player1,player2)
     val observer = new Observer {
       var updated: Boolean = false
       def isUpdated: Boolean = updated
@@ -25,7 +27,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
       controller.grid should be (new Grid())
     }
     "notify its Observer after dropping a piece" in {
-      val piece = Piece(Player("Your Name", 1))
+      val piece = Piece(Player("Your Name", 1).pnumber)
       controller.dropPiece(0,piece)
       observer.updated should be (true)
       controller.grid.cell(0,0).isSet should be (true)

@@ -8,8 +8,8 @@ class PieceSpec extends AnyWordSpec with Matchers {
     "new" should {
       val player1 = Player("Your Name", 1)
       val player2 = Player("Your Name", 2)
-      val piece1 = Piece(player1)
-      val piece2 = Piece(player2)
+      val piece1 = Piece(player1.pnumber)
+      val piece2 = Piece(player2.pnumber)
       "have a color" in {
         piece1.toString should be (Console.RED + "☻ ")
         piece2.toString should be (Console.YELLOW + "☻ ")

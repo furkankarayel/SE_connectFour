@@ -9,24 +9,24 @@ class PlayerSpec extends AnyWordSpec with Matchers {
       val player1 = Player("Your Name", 1)
       val player2 = Player("Yo Name", 2)
       "have a name" in {
-        player1.name should be ("Your Name")
-        player2.name should be ("Yo Name")
+        player1.pname should be ("Your Name")
+        player2.pname should be ("Yo Name")
       }
       "have a number" in{
-        player1.number should be (1)
-        player2.number should be (2)
+        player1.pnumber should be (1)
+        player2.pnumber should be (2)
       }
       "have a color" in {
-        player1.color should be ("red")
-        player2.color should be ("yellow")
+        player1.pcolor should be ("red")
+        player2.pcolor should be ("yellow")
       }
       "have a nice String representation" in {
         player1.toString should be
-        "Der Spieler " + player1.name + " mit der Nummer "+
-          player1.number +" hat die Farbe "+ player1.color
+        "Der Spieler " + player1.pname + " mit der Nummer "+
+          player1.pnumber +" hat die Farbe "+ player1.pcolor
         player2.toString should be
-        "Der Spieler " + player2.name + " mit der Nummer "+
-          player2.number +" hat die Farbe "+ player2.color
+        "Der Spieler " + player2.pname + " mit der Nummer "+
+          player2.pnumber +" hat die Farbe "+ player2.pcolor
       }
     }
   }

@@ -1,14 +1,16 @@
 package de.htwg.se.ConnectFour.aUI
 
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model.Grid
+import de.htwg.se.ConnectFour.model.{Grid, Player}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class TuiSpec extends AnyWordSpec with Matchers{
 
   "A ConnectFour Tui" should {
-    val controller = new Controller(new Grid())
+    val player1 = Player("Your Name", 1)
+    val player2 = Player("Your Name", 2)
+    val controller = new Controller(new Grid(), player1, player2)
     val tui = new TUI(controller)
     "create an empty ConnectFour grid on start" in {
       controller.grid should be (new Grid())

@@ -20,12 +20,12 @@ class GridSpec extends AnyWordSpec with Matchers {
     }
     "when not full" should {
       "have a method to replace specific cells" in {
-        val replaced = grid.replaceCell(0,3, Cell(Some(Piece(Player("Your Name", 1)))))
-        replaced.cell(0,3).piece should be (Some(Piece(Player("Your Name", 1))))
+        val replaced = grid.replaceCell(0,3, Cell(Some(Piece(Player("Your Name", 1).pnumber))))
+        replaced.cell(0,3).piece should be (Some(Piece(Player("Your Name", 1).pnumber)))
       }
       "have a method to put Pieces into the Grid" in {
-        val dropped = grid.drop(0, Piece(Player("Your Name", 1)))
-        dropped.cell(0,0).piece should be (Some(Piece(Player("Your Name", 1))))
+        val dropped = grid.drop(0, Piece(Player("Your Name", 1).pnumber))
+        dropped.cell(0,0).piece should be (Some(Piece(Player("Your Name", 1).pnumber)))
       }
       "have a method to reset the whole Grid" in {
         grid.reset() should be (new Grid())
@@ -35,13 +35,13 @@ class GridSpec extends AnyWordSpec with Matchers {
 
       "have no new dropped Piece" in {
         var afterFull = new Grid()
-        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
-        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
-        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
-        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
-        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
-        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
-        val newDrop = afterFull.drop(0, Piece(Player("Your Name", 1)))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1).pnumber))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1).pnumber))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1).pnumber))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1).pnumber))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1).pnumber))
+        afterFull = afterFull.drop(0, Piece(Player("Your Name", 1).pnumber))
+        val newDrop = afterFull.drop(0, Piece(Player("Your Name", 1).pnumber))
         newDrop.rows should be (afterFull.rows)
       }
     }

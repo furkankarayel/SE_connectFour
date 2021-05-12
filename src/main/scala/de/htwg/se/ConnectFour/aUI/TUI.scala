@@ -14,14 +14,9 @@ class TUI(controller: Controller) extends Observer{
     input match {
       case "p" => print(controller.gridPrint)
       case "t" => println("Tschüss")
-      case Pattern(input) =>
-        input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
-          case col :: Nil =>
-            Game.player = if(Game.move % 2 == 0)  Game.player1 else Game.player2
-            controller.dropPiece(col, Piece(Game.player))
-            Game.move+=1
-            print(controller.gridPrint)
-        }
+      case "special" =>
+      case Pattern(input) => controller.doMove(input)
+      //case "special" =>
       case _ => println("Invalid input.");
     }
   }

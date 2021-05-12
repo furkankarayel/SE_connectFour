@@ -12,7 +12,7 @@ object Game {
   var player = player1
   var move = 0
 
-  val controller = new Controller(new Grid())
+  val controller = new Controller(new Grid(),player1,player2)
   val tui = new TUI(controller)
   controller.notifyObservers
 
