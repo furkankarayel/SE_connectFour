@@ -13,8 +13,9 @@ class TUI(controller: Controller) extends Observer{
     val Pattern = "([0-6])".r
     input match {
       case "p" => print(controller.gridPrint)
-      case "t" => println("Tschüss")
-      case Pattern(input) => controller.doMove(input)
+      case "u" => controller.undoStep()
+      case "r" => controller.redoStep()
+      case Pattern(input) => controller.doStep(input)
       case _ => println("Invalid input.");
     }
   }
@@ -25,6 +26,7 @@ class TUI(controller: Controller) extends Observer{
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.RED + " WELCOME TO CONNECT FOUR " + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
     println("◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
     println(Console.BLUE + "◙◙" + Console.YELLOW + " You can start playing by typing a column number 0-6 " + Console.BLUE + "◙")
+    println(Console.BLUE + "◙◙◙" + Console.YELLOW + " There is an option 'u' for undo and 'r' for redo " + Console.BLUE + "◙◙◙")
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙" + Console.YELLOW + " Your turns are always alternating " + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙")
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.GREEN + " With typing 'q' you can quit " + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙")

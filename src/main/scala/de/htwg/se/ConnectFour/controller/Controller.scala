@@ -2,44 +2,42 @@ package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour._
 import de.htwg.se.ConnectFour.model.{Grid, Piece, Player}
-import de.htwg.se.ConnectFour.util.Observable
+import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
 class Controller(var grid:Grid, val p1:Player,val p2:Player) extends Observable {
+
+  private val undoManager = new UndoManager
   def createGrid(): Unit = {
     reset()
     notifyObservers
   }
 
+  def whoseTurnIsIt(): Unit = {
+    Game.player = if (Game.move % 2 == 0) Game.player1 else Game.player2
+  }
+
   def doStep(input:String): Unit = {
-
+    whoseTurnIsIt()
     input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
       case col :: Nil =>
-        Game.player = if (Game.move % 2 == 0) Game.player1 else Game.player2
-        dropPiece(col, Piece(Game.player))
+        undoManager.doStep(new SetCommand(col,Piece(Game.player),this))
         Game.move += 1
         print(gridPrint)
     }
   }
 
-  def undoStep(input:String): Unit = {
-    input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
-      case col :: Nil =>
-
-        Game.move -= 1
-        print (gridPrint)
-    }
+  def undoStep(): Unit = {
+    undoManager.undoStep
+    Game.move -= 1
+    print (gridPrint)
   }
 
-  def redoStep(input:String): Unit = {
-    input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
-      case col :: Nil =>
+  def redoStep(): Unit = {
+    undoManager.redoStep
+    Game.move += 1
+    print(gridPrint)
 
-        Game.move += 1
-        print(gridPrint)
-    }
   }
-
-
 
   def reset(): Unit = {
     grid = new Grid
