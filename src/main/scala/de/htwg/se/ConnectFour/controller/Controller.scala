@@ -14,6 +14,7 @@ class Controller(var grid:Grid, val p1:Player,val p2:Player) extends Observable 
 
   def whoseTurnIsIt(): Unit = {
     Game.player = if (Game.move % 2 == 0) Game.player1 else Game.player2
+    notifyObservers
   }
 
   def doStep(input:String): Unit = {
@@ -24,19 +25,21 @@ class Controller(var grid:Grid, val p1:Player,val p2:Player) extends Observable 
         Game.move += 1
         print(gridPrint)
     }
+    notifyObservers
   }
 
   def undoStep(): Unit = {
     undoManager.undoStep
     Game.move -= 1
     print (gridPrint)
+    notifyObservers
   }
 
   def redoStep(): Unit = {
     undoManager.redoStep
     Game.move += 1
     print(gridPrint)
-
+    notifyObservers
   }
 
   def reset(): Unit = {
