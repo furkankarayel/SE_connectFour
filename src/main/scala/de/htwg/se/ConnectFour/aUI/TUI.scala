@@ -1,6 +1,8 @@
 package de.htwg.se.ConnectFour.aUI
 
+import de.htwg.se.ConnectFour._
 import de.htwg.se.ConnectFour.controller.Controller
+import de.htwg.se.ConnectFour.model.Piece
 import de.htwg.se.ConnectFour.util.Observer
 import io.AnsiColor._
 

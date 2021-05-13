@@ -4,19 +4,17 @@ import de.htwg.se.ConnectFour._
 import de.htwg.se.ConnectFour.model.{Grid, Piece, Player}
 import de.htwg.se.ConnectFour.util.Observable
 
-
-
 class Controller(var grid:Grid, val p1:Player,val p2:Player) extends Observable {
   def createGrid(): Unit = {
-    grid = new Grid
+    reset()
     notifyObservers
   }
 
   def doMove(input:String): Unit = {
-    Game.player = if (Game.move % 2 == 0) Player(p1.pname,p1.pnumber) else Player(p2.pname,p2.pnumber)
     input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
       case col :: Nil =>
-        dropPiece(col, Piece(Game.player.pnumber))
+        Game.player = if (Game.move % 2 == 0) Game.player1 else Game.player2
+        dropPiece(col, Piece(Game.player))
         Game.move += 1
         print(gridPrint)
     }

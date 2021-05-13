@@ -5,7 +5,7 @@ case class Grid(rows: Vector[Vector[Cell]]) extends GridTemplate {
   override def cell(row: Int, col: Int): Cell = rows(row)(col)
   def replaceCell(row: Int, col: Int, cell: Cell): Grid = copy(rows.updated(row, rows(row).updated(col, cell)))
 
-  def drop(column: Int, piece: Piece): Grid = {
+  override def drop(column: Int, piece: Piece): Grid = {
     val idx = this.rows.indexWhere(row => !row(column).isSet)
     if (idx > -1) {
       this.replaceCell(idx, column, Cell(Some(piece)))
@@ -13,7 +13,7 @@ case class Grid(rows: Vector[Vector[Cell]]) extends GridTemplate {
       this
     }
   }
-  def reset(): Grid = {
+  override def reset(): Grid = {
     new Grid
   }
 
