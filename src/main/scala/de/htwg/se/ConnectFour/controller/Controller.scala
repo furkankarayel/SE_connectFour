@@ -10,7 +10,8 @@ class Controller(var grid:Grid, val p1:Player,val p2:Player) extends Observable 
     notifyObservers
   }
 
-  def doMove(input:String): Unit = {
+  def doStep(input:String): Unit = {
+
     input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
       case col :: Nil =>
         Game.player = if (Game.move % 2 == 0) Game.player1 else Game.player2
@@ -19,6 +20,26 @@ class Controller(var grid:Grid, val p1:Player,val p2:Player) extends Observable 
         print(gridPrint)
     }
   }
+
+  def undoStep(input:String): Unit = {
+    input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
+      case col :: Nil =>
+
+        Game.move -= 1
+        print (gridPrint)
+    }
+  }
+
+  def redoStep(input:String): Unit = {
+    input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
+      case col :: Nil =>
+
+        Game.move += 1
+        print(gridPrint)
+    }
+  }
+
+
 
   def reset(): Unit = {
     grid = new Grid
