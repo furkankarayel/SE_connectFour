@@ -1,10 +1,10 @@
 package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour._
-import de.htwg.se.ConnectFour.model.{Grid, Piece, Player}
+import de.htwg.se.ConnectFour.model.{Grid, Piece}
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
-class Controller(var grid:Grid, val p1:Player,val p2:Player) extends Observable {
+class Controller(var grid:Grid) extends Observable {
 
   private val undoManager = new UndoManager
   def createGrid(): Unit = {
