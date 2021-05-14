@@ -10,7 +10,7 @@ class TuiSpec extends AnyWordSpec with Matchers{
   "A ConnectFour Tui" should {
     val player1 = Player("Your Name", 1)
     val player2 = Player("Your Name", 2)
-    val controller = new Controller(new Grid(), player1, player2)
+    val controller = new Controller(new Grid())
     val tui = new TUI(controller)
     "create an empty ConnectFour grid on start" in {
       controller.grid should be (new Grid())

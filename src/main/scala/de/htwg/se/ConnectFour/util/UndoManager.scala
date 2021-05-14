@@ -1,7 +1,5 @@
 package de.htwg.se.ConnectFour.util
 
-import de.htwg.se.ConnectFour.controller.Command
-
 class UndoManager {
   private var undoStack: List[Command]= Nil
   private var redoStack: List[Command]= Nil
