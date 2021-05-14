@@ -21,6 +21,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
       controller.grid should be (new Grid())
     }
     "notify its Observer which player has the turn" in {
+      Game.move = 0
       controller.whoseTurnIsIt()
       observer.updated should be (true)
       Game.player should be (Game.player1)
