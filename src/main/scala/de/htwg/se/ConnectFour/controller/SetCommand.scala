@@ -1,12 +1,7 @@
 package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour.model.{Grid, Piece}
-
-trait Command {
-  def doStep:Unit
-  def undoStep:Unit
-  def redoStep:Unit
-}
+import de.htwg.se.ConnectFour.util.Command
 
 class SetCommand(col: Int, piece:Piece, controller: Controller) extends Command {
   var memento:Grid = controller.grid
