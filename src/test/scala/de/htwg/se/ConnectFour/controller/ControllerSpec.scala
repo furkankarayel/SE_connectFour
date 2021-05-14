@@ -23,7 +23,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
     "notify its Observer which player has the turn" in {
       controller.whoseTurnIsIt()
       observer.updated should be (true)
-      Game.player should be (Game.player2)
+      Game.player should be (Game.player1)
     }
     "notify its Observer if an do/undo/redo step is done" in {
       controller.doStep("0")
