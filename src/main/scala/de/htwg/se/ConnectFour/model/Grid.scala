@@ -30,3 +30,4 @@ case class Grid(rows: Vector[Vector[Cell]]) {
   }
 }
 
+
