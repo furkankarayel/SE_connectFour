@@ -1,11 +1,11 @@
 package de.htwg.se.ConnectFour.model
 
-case class Grid(rows: Vector[Vector[Cell]]) extends GridTemplate {
-  def this() = this(Vector.tabulate(6, 7) { (row, col) => Cell(None) })
-  override def cell(row: Int, col: Int): Cell = rows(row)(col)
+case class Grid(rows: Vector[Vector[Cell]]) {
+  def this() = this(Vector.tabulate(6, 7) { (rowCount, col) => Cell(None) })
+  def cell(row: Int, col: Int): Cell = rows(row)(col)
   def replaceCell(row: Int, col: Int, cell: Cell): Grid = copy(rows.updated(row, rows(row).updated(col, cell)))
 
-  override def drop(column: Int, piece: Piece): Grid = {
+  def drop(column: Int, piece: Piece): Grid = {
     val idx = this.rows.indexWhere(row => !row(column).isSet)
     if (idx > -1) {
       this.replaceCell(idx, column, Cell(Some(piece)))
@@ -13,7 +13,8 @@ case class Grid(rows: Vector[Vector[Cell]]) extends GridTemplate {
       this
     }
   }
-  override def reset(): Grid = {
+
+  def reset(): Grid = {
     new Grid
   }
 
