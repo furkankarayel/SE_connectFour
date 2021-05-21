@@ -1,7 +1,7 @@
 package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour._
-import de.htwg.se.ConnectFour.model.{Grid, Piece, Player}
+import de.htwg.se.ConnectFour.model.{Grid, Piece, Player, PlayerBuilder}
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
 class Controller(var grid:Grid) extends Observable {
@@ -24,13 +24,16 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def addPlayer(name:String):Unit = {
+    val playerBuilder = PlayerBuilder()
     if (players.size == 0) {
-      players = players.appended(Player(name,1))
-      println("Player 1 is called :" + name)
+      val player = playerBuilder.setPlayer(name,1).build()
+      players = players.appended(player)
+      println("Player 1 is called: " + name)
     }
     else {
-      players = players.appended(Player(name,2))
-      println("Player 2 is called :" + name)
+      val player = playerBuilder.setPlayer(name,2).build()
+      players = players.appended(player)
+      println("Player 2 is called: " + name)
     }
   }
 
@@ -48,8 +51,8 @@ class Controller(var grid:Grid) extends Observable {
 
   def winPatternHorizontal():Boolean = {
     val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 0 to colCount-4){
-      for (j <- 0 to rowCount){
+    for (i <- 0 to rowCount-1){
+      for (j <- 0 to colCount-3){
         if (grid.cell(i,j).piece == currentPiece && grid.cell(i,j+1).piece == currentPiece && grid.cell(i,j+2).piece == currentPiece && grid.cell(i,j+3).piece == currentPiece)
           return true
       }
@@ -59,8 +62,8 @@ class Controller(var grid:Grid) extends Observable {
 
   def winPatternVertical():Boolean = {
     val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 0 to colCount-4){
-      for (j <- 0 to rowCount-1){
+    for (i <- 0 to rowCount-3){
+      for (j <- 0 to colCount-1){
         if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j).piece == currentPiece && grid.cell(i+2,j).piece == currentPiece && grid.cell(i+3,j).piece == currentPiece)
           return true
       }
@@ -69,9 +72,9 @@ class Controller(var grid:Grid) extends Observable {
   }
   def winPatternAscendingDiagonal():Boolean = {
     val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 3 to colCount-1){
-      for (j <- 3 to rowCount-4){
-        if (grid.cell(i,j).piece == currentPiece && grid.cell(i-1,j+1).piece == currentPiece && grid.cell(i-2,j+2).piece == currentPiece && grid.cell(i-3,j+3).piece == currentPiece)
+    for (i <- 0 to rowCount-4){
+      for (j <- 0 to colCount-4){
+        if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j+1).piece == currentPiece && grid.cell(i+2,j+2).piece == currentPiece && grid.cell(i+3,j+3).piece == currentPiece)
           return true
       }
     }
@@ -79,15 +82,14 @@ class Controller(var grid:Grid) extends Observable {
   }
   def winPatternDescendingDiagonal():Boolean = {
     val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 3 to colCount-1){
-      for (j <- 3 to rowCount-4){
-        if (grid.cell(i,j).piece == currentPiece && grid.cell(i-1,j-1).piece == currentPiece && grid.cell(i-2,j-2).piece == currentPiece && grid.cell(i-3,j-3).piece == currentPiece)
+    for (i <- 3 to rowCount-1){
+      for (j <- 0 to colCount-4){
+        if (grid.cell(i,j).piece == currentPiece && grid.cell(i-1,j+1).piece == currentPiece && grid.cell(i-2,j+2).piece == currentPiece && grid.cell(i-3,j+3).piece == currentPiece)
           return true
       }
     }
     false
   }
-
   def drop(input:String): Unit = {
     whoseTurnIsIt()
     input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
@@ -98,7 +100,6 @@ class Controller(var grid:Grid) extends Observable {
     }
     notifyObservers
   }
-
   def undoDrop(): Unit = {
     undoManager.undoStep
     move -= 1
