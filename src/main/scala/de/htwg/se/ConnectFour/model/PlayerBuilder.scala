@@ -8,6 +8,7 @@ case class PlayerBuilder() extends Builder {
 
   override def setPlayer(name: String, number: Int): PlayerBuilder = {
     this.name = name
+    this.number = number
     this
   }
   def build(): Player = Player(name, number)

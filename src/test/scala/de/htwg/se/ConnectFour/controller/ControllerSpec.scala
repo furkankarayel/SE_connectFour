@@ -24,6 +24,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
       controller.move = 0
       controller.addPlayer("Player1")
       controller.addPlayer("Player2")
+      controller.currentPlayer = controller.players(0)
       controller.whoseTurnIsIt()
       observer.updated should be (true)
       controller.currentPlayer should be (controller.players(0))
