@@ -8,7 +8,6 @@ case class WinState(controller: Controller) extends State[GameState]{
         println(Console.RED +"BOOOOOOOOOOM!!!! Player "+ controller.currentPlayer.playerNumber + " called " + controller.currentPlayer.playerName + " has won the game.")
       else
         println(Console.YELLOW +"BOOOOOOOOOOM!!!! Player "+ controller.currentPlayer.playerNumber + " called " + controller.currentPlayer.playerName + " has won the game.")
-
     } else
       println("Nobody has won, try playing smarter next time.")
   }
