@@ -19,6 +19,14 @@ case class Grid(rows: Vector[Vector[Cell]]) {
   }
 
   override def toString: String = {
+    /*
+    try {
+      Some.toString
+    } catch {
+      case e: Exception => None
+    }
+
+     */
     val builder = new StringBuilder
     for (row <- this.rows.reverse) {
       for (col <- row) {
