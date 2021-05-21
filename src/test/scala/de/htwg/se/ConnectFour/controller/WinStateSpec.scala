@@ -17,12 +17,10 @@ class WinStateSpec extends AnyWordSpec with Matchers {
         gameState.state should be (WinState(controller))
       }
       "process input won" in {
+        controller.currentPlayer = controller.players(0)
         gameState.handle("won")
-        if (controller.currentPlayer.color == "red")
-          println(Console.RED +"BOOOOOOOOOOM!!!! Player "+ controller.currentPlayer.playerNumber + " called " + controller.currentPlayer.playerName + " has won the game.")
-        else
-          println(Console.YELLOW +"BOOOOOOOOOOM!!!! Player "+ controller.currentPlayer.playerNumber + " called " + controller.currentPlayer.playerName + " has won the game.")
-
+        controller.currentPlayer = controller.players(1)
+        gameState.handle("won")
       }
       "process invalid input" in {
         gameState.handle("asdasd")
