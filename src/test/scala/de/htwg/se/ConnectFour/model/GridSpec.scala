@@ -43,9 +43,65 @@ class GridSpec extends AnyWordSpec with Matchers {
         afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
         afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
         val newDrop = afterFull.drop(0, Piece(Player("Your Name", 1)))
-        newDrop.rows should be (afterFull.rows)
+        newDrop.rows should be(afterFull.rows)
       }
-      "the bottom left corner be checked correctly ascending diagonally if a player has won the game" in {
+    }
+    "when filled specifically" should {
+      "wrong it should'nt be checked correctly" in {
+        var controller = new Controller(new Grid())
+        controller.grid.reset()
+        controller.addPlayer("Player1")
+        controller.addPlayer("Player2")
+        controller.currentPlayer = controller.players(0)
+        controller.checkWin() should be(false)
+      }
+      "all patterns should be checked correctly" in {
+        var controller = new Controller(new Grid())
+        controller.grid.reset()
+        controller.addPlayer("Player1")
+        controller.addPlayer("Player2")
+        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,1, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,2, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,3, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,1, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,2, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(5,6, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(4,5, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,4, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(Piece(controller.players(0)))))
+        controller.currentPlayer = controller.players(0)
+        controller.checkWin() should be (true)
+      }
+      "any horizontal pattern be checked correctly" in {
+        var controller = new Controller(new Grid())
+        controller.grid.reset()
+        controller.addPlayer("Player1")
+        controller.addPlayer("Player2")
+        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,1, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,2, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,3, Cell(Some(Piece(controller.players(0)))))
+        controller.currentPlayer = controller.players(0)
+        controller.winPatternHorizontal() should be (true)
+      }
+      "any vertical pattern be checked correctly" in {
+        var controller = new Controller(new Grid())
+        controller.grid.reset()
+        controller.addPlayer("Player1")
+        controller.addPlayer("Player2")
+        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,0, Cell(Some(Piece(controller.players(0)))))
+        controller.currentPlayer = controller.players(0)
+        controller.winPatternVertical() should be (true)
+      }
+      "the bottom left corner be checked correctly ascending diagonally" in {
         var controller = new Controller(new Grid())
         controller.grid.reset()
         controller.addPlayer("Player1")
@@ -58,7 +114,7 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.winPatternAscendingDiagonal() should be (true)
       }
 
-      "the upper right corner be checked correctly ascending diagonally if a player has won the game" in {
+      "the upper right corner be checked correctly ascending diagonally" in {
         var controller = new Controller(new Grid())
         controller.grid.reset()
         controller.addPlayer("Player1")

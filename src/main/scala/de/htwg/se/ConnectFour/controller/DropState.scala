@@ -10,7 +10,6 @@ case class DropState(controller:Controller) extends State[GameState] {
         state.changeState(WinState(controller))
         state.handle("won")
       }
-
     if(controller.checkWin())
       state.changeState(WinState(controller))
   }
