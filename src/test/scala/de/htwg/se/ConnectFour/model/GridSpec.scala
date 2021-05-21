@@ -2,6 +2,8 @@ package de.htwg.se.ConnectFour.model
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
+import de.htwg.se.ConnectFour.controller
+import de.htwg.se.ConnectFour.controller.Controller
 
 class GridSpec extends AnyWordSpec with Matchers {
 
@@ -32,7 +34,6 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
     }
     "when full" should {
-
       "have no new dropped Piece" in {
         var afterFull = new Grid()
         afterFull = afterFull.drop(0, Piece(Player("Your Name", 1)))
@@ -44,6 +45,56 @@ class GridSpec extends AnyWordSpec with Matchers {
         val newDrop = afterFull.drop(0, Piece(Player("Your Name", 1)))
         newDrop.rows should be (afterFull.rows)
       }
+      "the bottom left corner be checked correctly ascending diagonally if a player has won the game" in {
+        var controller = new Controller(new Grid())
+        controller.grid.reset()
+        controller.addPlayer("Player1")
+        controller.addPlayer("Player2")
+        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,1, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,2, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(Piece(controller.players(0)))))
+        controller.currentPlayer = controller.players(0)
+        controller.winPatternAscendingDiagonal() should be (true)
+      }
+
+      "the upper right corner be checked correctly ascending diagonally if a player has won the game" in {
+        var controller = new Controller(new Grid())
+        controller.grid.reset()
+        controller.addPlayer("Player1")
+        controller.addPlayer("Player2")
+        controller.grid = controller.grid.replaceCell(5,6, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(4,5, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,4, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(Piece(controller.players(0)))))
+        controller.currentPlayer = controller.players(0)
+        controller.winPatternAscendingDiagonal() should be (true)
+      }
+      "the upper left corner be checked correctly descending diagonally if a player has won the game" in {
+        var controller = new Controller(new Grid())
+        controller.grid.reset()
+        controller.addPlayer("Player1")
+        controller.addPlayer("Player2")
+        controller.grid = controller.grid.replaceCell(5,0, Cell(Some(Piece(controller.players(1)))))
+        controller.grid = controller.grid.replaceCell(4,1, Cell(Some(Piece(controller.players(1)))))
+        controller.grid = controller.grid.replaceCell(3,2, Cell(Some(Piece(controller.players(1)))))
+        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(Piece(controller.players(1)))))
+        controller.currentPlayer = controller.players(1)
+        controller.winPatternDescendingDiagonal() should be (true)
+      }
+      "the bottom right corner be checked correctly descending diagonally if a player has won the game" in {
+        var controller = new Controller(new Grid())
+        controller.grid.reset()
+        controller.addPlayer("Player1")
+        controller.addPlayer("Player2")
+        controller.grid = controller.grid.replaceCell(0,6, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,5, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,4, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(Piece(controller.players(0)))))
+        controller.currentPlayer = controller.players(0)
+        controller.winPatternDescendingDiagonal() should be (true)
+      }
+
     }
   }
 
