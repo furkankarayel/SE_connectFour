@@ -1,7 +1,6 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour.Game
-import de.htwg.se.ConnectFour.model.{Grid, Piece, Player}
+import de.htwg.se.ConnectFour.model.Grid
 import de.htwg.se.ConnectFour.util.Observer
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
