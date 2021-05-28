@@ -1,17 +1,26 @@
 package de.htwg.se.ConnectFour
 
-import de.htwg.se.ConnectFour.aUI.TUI
+import de.htwg.se.ConnectFour.aUI.{GUI, TUI}
 import de.htwg.se.ConnectFour.controller._
 import de.htwg.se.ConnectFour.model._
+import de.htwg.se.ConnectFour.util.UI
 
 import scala.io.StdIn.readLine
+import scala.util.Failure
 
 object Game {
-  val controller = new Controller(new Grid())
-  val tui = new TUI(controller)
-  controller.notifyObservers
 
   def main(args: Array[String]): Unit = {
+    val controller = new Controller(new Grid())
+    val uiType = "GUI"
+    var ui:UI =  new TUI(controller)
+
+    uiType match {
+      case "TUI" => ui = new TUI(controller)
+      case "GUI" => ui = new GUI(controller)
+      case _ => Failure(exception = new Exception)
+    }
+    controller.notifyObservers
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.RED + " WELCOME TO CONNECT FOUR " + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
     println("◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.BLUE + "Type 2 player names first." + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙")
     println(Console.BLUE + "◙◙" + Console.YELLOW + " You can start playing by typing a column number 0-6 " + Console.BLUE + "◙")
@@ -22,10 +31,10 @@ object Game {
     if (args.length>0){
       input = args(0)
     }
-    if (!input.isEmpty) tui.processInput(input)
+    if (!input.isEmpty) ui.processInput(input)
     else do {
       input = readLine()
-      tui.processInput(input)
+      ui.processInput(input)
     } while (input != "q")
   }
 
