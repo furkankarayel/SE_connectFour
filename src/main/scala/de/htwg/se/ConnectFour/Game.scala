@@ -13,7 +13,7 @@ object Game {
   def main(args: Array[String]): Unit = {
     val controller = new Controller(new Grid())
     val uiType = "GUI"
-    var ui:UI =  new TUI(controller)
+    var ui:UI =  new GUI(controller)
 
     uiType match {
       case "TUI" => ui = new TUI(controller)
