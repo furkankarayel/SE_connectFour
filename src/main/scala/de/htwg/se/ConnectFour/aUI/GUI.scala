@@ -12,7 +12,7 @@ object GUI extends JFXApp with UI{
   }
 
   stage = new JFXApp.PrimaryStage {
-    title.value = "Hello Stage"
+    title.value = "Connect4 GUI"
     width = 600
     height = 450
     scene = new Scene {
