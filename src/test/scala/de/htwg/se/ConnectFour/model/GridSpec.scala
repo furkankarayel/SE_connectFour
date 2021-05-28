@@ -87,7 +87,13 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.grid = controller.grid.replaceCell(0,2, Cell(Some(Piece(controller.players(0)))))
         controller.grid = controller.grid.replaceCell(0,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
-        controller.winPatternHorizontal() should be (true)
+        val horizontal = controller.winPatternHorizontal()
+        var bool = false
+        horizontal match {
+          case Some(v) => bool = v
+          case None => bool = false
+        }
+        bool should be (true)
       }
       "any vertical pattern be checked correctly" in {
         var controller = new Controller(new Grid())
@@ -99,7 +105,13 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.grid = controller.grid.replaceCell(2,0, Cell(Some(Piece(controller.players(0)))))
         controller.grid = controller.grid.replaceCell(3,0, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
-        controller.winPatternVertical() should be (true)
+        val vertical = controller.winPatternVertical()
+        var bool = false
+        vertical match {
+          case Some(v) => bool = v
+          case None => bool = false
+        }
+        bool should be (true)
       }
       "the bottom left corner be checked correctly ascending diagonally" in {
         var controller = new Controller(new Grid())
@@ -111,7 +123,13 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.grid = controller.grid.replaceCell(2,2, Cell(Some(Piece(controller.players(0)))))
         controller.grid = controller.grid.replaceCell(3,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
-        controller.winPatternAscendingDiagonal() should be (true)
+        val ascDiagonal = controller.winPatternAscendingDiagonal()
+        var bool = false
+        ascDiagonal match {
+          case Some(v) => bool = v
+          case None => bool = false
+        }
+        bool should be (true)
       }
 
       "the upper right corner be checked correctly ascending diagonally" in {
@@ -124,7 +142,13 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.grid = controller.grid.replaceCell(3,4, Cell(Some(Piece(controller.players(0)))))
         controller.grid = controller.grid.replaceCell(2,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
-        controller.winPatternAscendingDiagonal() should be (true)
+        val ascDiagonal = controller.winPatternAscendingDiagonal()
+        var bool = false
+        ascDiagonal match {
+          case Some(v) => bool = v
+          case None => bool = false
+        }
+        bool should be (true)
       }
       "the upper left corner be checked correctly descending diagonally if a player has won the game" in {
         var controller = new Controller(new Grid())
@@ -136,7 +160,13 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.grid = controller.grid.replaceCell(3,2, Cell(Some(Piece(controller.players(1)))))
         controller.grid = controller.grid.replaceCell(2,3, Cell(Some(Piece(controller.players(1)))))
         controller.currentPlayer = controller.players(1)
-        controller.winPatternDescendingDiagonal() should be (true)
+        val descDiagonal = controller.winPatternDescendingDiagonal()
+        var bool = false
+        descDiagonal match {
+          case Some(v) => bool = v
+          case None => bool = false
+        }
+        bool should be (true)
       }
       "the bottom right corner be checked correctly descending diagonally if a player has won the game" in {
         var controller = new Controller(new Grid())
@@ -148,7 +178,13 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.grid = controller.grid.replaceCell(2,4, Cell(Some(Piece(controller.players(0)))))
         controller.grid = controller.grid.replaceCell(3,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
-        controller.winPatternDescendingDiagonal() should be (true)
+        val descDiagonal = controller.winPatternDescendingDiagonal()
+        var bool = false
+        descDiagonal match {
+          case Some(v) => bool = v
+          case None => bool = false
+        }
+        bool should be (true)
       }
 
     }
