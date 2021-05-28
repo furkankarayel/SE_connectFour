@@ -1,9 +1,9 @@
 package de.htwg.se.ConnectFour
 
-import de.htwg.se.ConnectFour.util.UI
-import de.htwg.se.ConnectFour.aUI.{GUI, TUI, guiTest}
+import de.htwg.se.ConnectFour.aUI.{GUI, TUI}
 import de.htwg.se.ConnectFour.controller._
 import de.htwg.se.ConnectFour.model._
+import de.htwg.se.ConnectFour.util.UI
 
 import scala.io.StdIn.readLine
 
@@ -20,7 +20,6 @@ object Game {
       case "GUI" => ui = new GUI(controller)
     }
 
-    val test = new guiTest
     controller.notifyObservers
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.RED + " WELCOME TO CONNECT FOUR " + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙◙")
     println("◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.BLUE + "Type 2 player names first." + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙")

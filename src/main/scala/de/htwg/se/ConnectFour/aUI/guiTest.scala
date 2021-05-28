@@ -1,23 +1,45 @@
 package de.htwg.se.ConnectFour.aUI
 
 import scalafx.application.JFXApp
+import scalafx.application.JFXApp._
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
+import scalafx.scene.effect.DropShadow
+import scalafx.scene.layout.HBox
 import scalafx.scene.paint.Color._
-import scalafx.scene.shape._
+import scalafx.scene.paint.{Color, LinearGradient, Stops}
+import scalafx.scene.text.Text
 
 
-object guiTest {
-  val stage = new JFXApp.PrimaryStage {
-    title.value = "Hello Stage"
-    width = 600
-    height = 450
+object guiTest extends JFXApp {
+  stage = new PrimaryStage {
+    title = "ScalaFX Hello World"
     scene = new Scene {
-      fill = LightGreen
-      content = new Rectangle {
-        x = 25
-        y = 40
-        width = 100
-        height = 100
+      fill = Color.rgb(38, 38, 38)
+      content = new HBox {
+        padding = Insets(50, 80, 50, 80)
+        children = Seq(
+          new Text {
+            text = "Scala"
+            style = "-fx-font: normal bold 100pt sans-serif"
+            fill = new LinearGradient(
+              endX = 0,
+              stops = Stops(Red, DarkRed))
+          },
+          new Text {
+            text = "FX"
+            style = "-fx-font: italic bold 100pt sans-serif"
+            fill = new LinearGradient(
+              endX = 0,
+              stops = Stops(White, DarkGray)
+            )
+            effect = new DropShadow {
+              color = DarkGray
+              radius = 15
+              spread = 0.25
+            }
+          }
+        )
       }
     }
   }
