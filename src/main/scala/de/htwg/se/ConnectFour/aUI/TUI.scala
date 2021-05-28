@@ -1,8 +1,7 @@
 package de.htwg.se.ConnectFour.aUI
 
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.util.{UI,Observer}
-import io.AnsiColor._
+import de.htwg.se.ConnectFour.util.{Observer, UI}
 
 
 class TUI(controller: Controller) extends UI with Observer{
@@ -16,5 +15,13 @@ class TUI(controller: Controller) extends UI with Observer{
   def gamestart(): Unit = {
 
   }
-  override def update: Boolean =  { println(controller.toString);true }
+
+  override def update: Option[Boolean] =  {
+    try {
+      println(controller.toString)
+      Some(true)
+    } catch {
+      case e: Exception => None
+    }
+  }
 }

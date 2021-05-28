@@ -1,5 +1,5 @@
 package de.htwg.se.ConnectFour.util
 
-trait UI {
+trait UI{
   def processInput(input: String)
 }

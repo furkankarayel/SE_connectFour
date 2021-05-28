@@ -1,7 +1,7 @@
 package de.htwg.se.ConnectFour.util
 
 trait Observer {
-  def update: Boolean
+  def update: Option[Boolean]
 }
 
 class Observable {

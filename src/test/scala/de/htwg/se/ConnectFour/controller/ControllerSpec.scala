@@ -1,7 +1,6 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour.Game
-import de.htwg.se.ConnectFour.model.{Grid, Piece, Player}
+import de.htwg.se.ConnectFour.model.Grid
 import de.htwg.se.ConnectFour.util.Observer
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -12,7 +11,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
     val observer = new Observer {
       var updated: Boolean = false
       def isUpdated: Boolean = updated
-      override def update: Boolean = {updated = true; updated}
+      override def update: Option[Boolean] = {updated = true; Some(updated)}
     }
     controller.add(observer)
     "notify its Observer after grid creation" in {
