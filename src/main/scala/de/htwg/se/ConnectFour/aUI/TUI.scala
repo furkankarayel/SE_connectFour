@@ -6,7 +6,7 @@ import de.htwg.se.ConnectFour.util.{Observer, UI}
 
 class TUI(controller: Controller) extends UI with Observer{
 
-   override def processInput(input: String):Unit = {
+  override def processInput(input: String):Unit = {
     input match {
       case _ => controller.execute(input);
     }

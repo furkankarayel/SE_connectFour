@@ -43,53 +43,90 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def checkWin():Boolean = {
-    if(winPatternHorizontal() | winPatternVertical() | winPatternAscendingDiagonal() | winPatternDescendingDiagonal())
-      true
-    else
-      false
+      var win = false
+      val horizontal = winPatternHorizontal()
+      val vertical = winPatternVertical()
+      val ascDiagonal = winPatternAscendingDiagonal()
+      val descDiagonal = winPatternDescendingDiagonal()
+
+      horizontal match {
+        case Some(v) => return true
+        case None => win = false
+      }
+      vertical match {
+        case Some(v) => return true
+        case None => win = false
+      }
+      ascDiagonal match {
+        case Some(v) => return true
+        case None => win = false
+      }
+      descDiagonal match {
+        case Some(v) => return true
+        case None => win = false
+      }
+      return win
   }
 
-  def winPatternHorizontal():Boolean = {
-    val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 0 to rowCount-1){
-      for (j <- 0 to colCount-3){
-        if (grid.cell(i,j).piece == currentPiece && grid.cell(i,j+1).piece == currentPiece && grid.cell(i,j+2).piece == currentPiece && grid.cell(i,j+3).piece == currentPiece)
-          return true
+  def winPatternHorizontal():Option[Boolean] = {
+    try {
+      val currentPiece = Some(Piece(currentPlayer))
+      for (i <- 0 to rowCount - 1) {
+        for (j <- 0 to colCount - 3) {
+          if (grid.cell(i, j).piece == currentPiece && grid.cell(i, j + 1).piece == currentPiece && grid.cell(i, j + 2).piece == currentPiece && grid.cell(i, j + 3).piece == currentPiece)
+            return Some(true)
+        }
       }
+      Some(false)
+    } catch {
+      case e: Exception => None
     }
-    false
   }
 
-  def winPatternVertical():Boolean = {
-    val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 0 to rowCount-3){
-      for (j <- 0 to colCount-1){
-        if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j).piece == currentPiece && grid.cell(i+2,j).piece == currentPiece && grid.cell(i+3,j).piece == currentPiece)
-          return true
+
+  def winPatternVertical():Option[Boolean] = {
+    try {
+      val currentPiece = Some(Piece(currentPlayer))
+      for (i <- 0 to rowCount - 3) {
+        for (j <- 0 to colCount - 1) {
+          if (grid.cell(i, j).piece == currentPiece && grid.cell(i + 1, j).piece == currentPiece && grid.cell(i + 2, j).piece == currentPiece && grid.cell(i + 3, j).piece == currentPiece)
+            return Some(true)
+        }
       }
+      Some(false)
+    } catch {
+      case e: Exception => None
     }
-    false
   }
-  def winPatternAscendingDiagonal():Boolean = {
+  def winPatternAscendingDiagonal():Option[Boolean] = {
+    try {
     val currentPiece = Some(Piece(currentPlayer))
     for (i <- 0 to rowCount-4){
       for (j <- 0 to colCount-4){
         if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j+1).piece == currentPiece && grid.cell(i+2,j+2).piece == currentPiece && grid.cell(i+3,j+3).piece == currentPiece)
-          return true
+          return Some(true)
       }
     }
-    false
-  }
-  def winPatternDescendingDiagonal():Boolean = {
-    val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 3 to rowCount-1){
-      for (j <- 0 to colCount-4){
-        if (grid.cell(i,j).piece == currentPiece && grid.cell(i-1,j+1).piece == currentPiece && grid.cell(i-2,j+2).piece == currentPiece && grid.cell(i-3,j+3).piece == currentPiece)
-          return true
-      }
+    Some(false)
+    } catch {
+      case e: Exception => None
     }
-    false
   }
+  def winPatternDescendingDiagonal():Option[Boolean] = {
+    try {
+      val currentPiece = Some(Piece(currentPlayer))
+      for (i <- 3 to rowCount - 1) {
+        for (j <- 0 to colCount - 4) {
+          if (grid.cell(i, j).piece == Some(currentPiece) && grid.cell(i - 1, j + 1).piece == Some(currentPiece) && grid.cell(i - 2, j + 2).piece == currentPiece && grid.cell(i - 3, j + 3).piece == currentPiece)
+            return Some(true)
+        }
+      }
+      Some(false)
+    } catch {
+      case e: Exception => None
+    }
+  }
+
   def drop(input:String): Unit = {
     whoseTurnIsIt()
     input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
@@ -118,7 +155,9 @@ class Controller(var grid:Grid) extends Observable {
     grid = new Grid
     notifyObservers
   }
+
   def gridPrint(): String = grid.toString
+
 
 }
 
