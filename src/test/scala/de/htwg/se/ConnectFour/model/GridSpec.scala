@@ -47,7 +47,7 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
     }
     "when filled specifically" should {
-      "wrong it should'nt be checked correctly" in {
+      "wrong it shouldn't be checked correctly" in {
         var controller = new Controller(new Grid())
         controller.grid.reset()
         controller.addPlayer("Player1")

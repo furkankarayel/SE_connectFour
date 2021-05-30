@@ -1,8 +1,10 @@
 package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour._
-import de.htwg.se.ConnectFour.model.{Grid, Piece, Player, PlayerBuilder}
+import de.htwg.se.ConnectFour.model.{Grid, InputExpected, InvalidColumnNumber, Piece, Player, PlayerBuilder}
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
+
+import scala.util.Failure
 
 class Controller(var grid:Grid) extends Observable {
   var players: Vector[Player] = Vector.empty
@@ -43,29 +45,11 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def checkWin():Boolean = {
-      var win = false
-      val horizontal = winPatternHorizontal()
-      val vertical = winPatternVertical()
-      val ascDiagonal = winPatternAscendingDiagonal()
-      val descDiagonal = winPatternDescendingDiagonal()
-
-      horizontal match {
-        case Some(v) => return true
-        case None => win = false
-      }
-      vertical match {
-        case Some(v) => return true
-        case None => win = false
-      }
-      ascDiagonal match {
-        case Some(v) => return true
-        case None => win = false
-      }
-      descDiagonal match {
-        case Some(v) => return true
-        case None => win = false
-      }
-      return win
+      val checkList:List[Option[Boolean]] = List(winPatternDescendingDiagonal(),winPatternVertical(),winPatternAscendingDiagonal(),winPatternDescendingDiagonal())
+      val win = checkList.filterNot(f => f.isEmpty).contains((Some(true)))
+      if (win)
+        return true
+      false
   }
 
   def winPatternHorizontal():Option[Boolean] = {
@@ -77,7 +61,7 @@ class Controller(var grid:Grid) extends Observable {
             return Some(true)
         }
       }
-      Some(false)
+      None
     } catch {
       case e: Exception => None
     }
@@ -93,7 +77,7 @@ class Controller(var grid:Grid) extends Observable {
             return Some(true)
         }
       }
-      Some(false)
+      None
     } catch {
       case e: Exception => None
     }
@@ -107,7 +91,7 @@ class Controller(var grid:Grid) extends Observable {
           return Some(true)
       }
     }
-    Some(false)
+    None
     } catch {
       case e: Exception => None
     }
@@ -121,20 +105,23 @@ class Controller(var grid:Grid) extends Observable {
             return Some(true)
         }
       }
-      Some(false)
+      None
     } catch {
       case e: Exception => None
     }
   }
 
-  def drop(input:String): Unit = {
+  def drop(input:Option[String]): Unit = {
     whoseTurnIsIt()
-    input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
-      case col :: Nil =>
-        undoManager.doStep(new SetCommand(col,Piece(currentPlayer),this))
-        move += 1
-        print(gridPrint)
+    var validCol = 0
+    input match {
+      case Some(col) => if (col.toInt >= 6) validCol = col.toInt else Failure(new InvalidColumnNumber)
+      case None => Failure(new InputExpected)
     }
+
+    undoManager.doStep(new SetCommand(validCol,Piece(currentPlayer),this));
+    move += 1
+    print(this.gridPrint)
     notifyObservers
   }
   def undoDrop(): Unit = {

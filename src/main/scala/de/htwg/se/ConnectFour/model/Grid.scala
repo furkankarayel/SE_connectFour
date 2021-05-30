@@ -15,7 +15,7 @@ case class Grid(rows: Vector[Vector[Cell]]) {
 
     if (idx > -1) {
       Try(this.replaceCell(idx, column, Cell(Some(piece)))) match {
-        case Success(grid) => grid
+        case Success(grid) => this.replaceCell(idx, column, Cell(Some(piece)))
         case Failure(_) => Failure(new CannotDropPiece);this
       }
     } else {
