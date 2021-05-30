@@ -31,4 +31,3 @@ class GUICore(controller:Controller) extends Observer {
 
   override def update: Boolean =  { println(controller.toString);true }
 }
-
