@@ -1,8 +1,7 @@
-package de.htwg.se.ConnectFour.controller
+package de.htwg.se.ConnectFour.aUI.states.GUI
 
-import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState}
-import de.htwg.se.ConnectFour.aUI.states.{GUI, TUI}
-import de.htwg.se.ConnectFour.aUI.states.TUI.GameState
+import de.htwg.se.ConnectFour.aUI.states.GUI
+import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.Grid
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

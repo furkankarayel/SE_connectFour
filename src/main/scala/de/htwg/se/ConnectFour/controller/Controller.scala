@@ -1,9 +1,8 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour._
+import de.htwg.se.ConnectFour.model._
+import de.htwg.se.ConnectFour.aUI._
 import de.htwg.se.ConnectFour.aUI.states.GUI.GameState
-import de.htwg.se.ConnectFour.aUI.states.{GUI, TUI}
-import de.htwg.se.ConnectFour.model.{Grid, InputExpected, InvalidColumnNumber, Piece, Player, PlayerBuilder}
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
 import scala.util.Failure
@@ -15,16 +14,12 @@ class Controller(var grid:Grid) extends Observable {
   val maxPlayers = 2
   val colCount = 7
   val rowCount = 6
-  var gameState:GameState = GUI.GameState(this)
+
 
   private val undoManager = new UndoManager
   def createGrid(): Unit = {
     reset()
     notifyObservers
-  }
-
-  def execute(input:String): Unit = {
-    gameState.handle(input)
   }
 
   def addPlayer(name:String):Unit = {
@@ -146,7 +141,5 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def gridPrint(): String = grid.toString
-
-
 }
 
