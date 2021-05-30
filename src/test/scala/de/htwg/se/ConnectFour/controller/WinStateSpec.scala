@@ -1,5 +1,8 @@
 package de.htwg.se.ConnectFour.controller
 
+import de.htwg.se.ConnectFour.aUI.states.GUI.{GameState, WinState}
+import de.htwg.se.ConnectFour.aUI.states.{GUI, TUI}
+import de.htwg.se.ConnectFour.aUI.states.TUI.WinState
 import de.htwg.se.ConnectFour.model.Grid
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -8,7 +11,7 @@ class WinStateSpec extends AnyWordSpec with Matchers {
   "A Winstate" when {
     val controller = new Controller(new Grid)
     val gameState = GameState(controller)
-    gameState.changeState(WinState(controller))
+    gameState.changeState(GUI.WinState(controller))
     controller.addPlayer("Franz")
     controller.addPlayer("Jens")
     controller.currentPlayer = controller.players(0)

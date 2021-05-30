@@ -1,6 +1,8 @@
 package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour._
+import de.htwg.se.ConnectFour.aUI.states.GUI.GameState
+import de.htwg.se.ConnectFour.aUI.states.{GUI, TUI}
 import de.htwg.se.ConnectFour.model.{Grid, InputExpected, InvalidColumnNumber, Piece, Player, PlayerBuilder}
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
@@ -13,7 +15,7 @@ class Controller(var grid:Grid) extends Observable {
   val maxPlayers = 2
   val colCount = 7
   val rowCount = 6
-  var gameState:GameState = GameState(this)
+  var gameState:GameState = GUI.GameState(this)
 
   private val undoManager = new UndoManager
   def createGrid(): Unit = {
