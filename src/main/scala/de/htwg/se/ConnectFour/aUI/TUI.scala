@@ -16,12 +16,5 @@ class TUI(controller: Controller) extends UI with Observer{
 
   }
 
-  override def update: Option[Boolean] =  {
-    try {
-      println(controller.toString)
-      Some(true)
-    } catch {
-      case e: Exception => None
-    }
-  }
+  override def update: Boolean =  {controller.toString;true}
 }

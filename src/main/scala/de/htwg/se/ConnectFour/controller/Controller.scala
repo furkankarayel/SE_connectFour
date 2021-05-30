@@ -101,7 +101,7 @@ class Controller(var grid:Grid) extends Observable {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 3 to rowCount - 1) {
         for (j <- 0 to colCount - 4) {
-          if (grid.cell(i, j).piece == Some(currentPiece) && grid.cell(i - 1, j + 1).piece == Some(currentPiece) && grid.cell(i - 2, j + 2).piece == currentPiece && grid.cell(i - 3, j + 3).piece == currentPiece)
+          if (grid.cell(i, j).piece == currentPiece && grid.cell(i - 1, j + 1).piece == currentPiece && grid.cell(i - 2, j + 2).piece == currentPiece && grid.cell(i - 3, j + 3).piece == currentPiece)
             return Some(true)
         }
       }

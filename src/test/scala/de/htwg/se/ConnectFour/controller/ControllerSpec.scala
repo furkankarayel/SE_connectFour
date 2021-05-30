@@ -15,7 +15,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
     val observer = new Observer {
       var updated: Boolean = false
       def isUpdated: Boolean = updated
-      override def update: Option[Boolean] = {updated = true; Some(updated)}
+      override def update: Boolean = {updated = true;updated}
     }
     controller.add(observer)
     "notify its Observer after grid creation" in {

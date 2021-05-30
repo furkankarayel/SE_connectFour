@@ -49,7 +49,6 @@ class GridSpec extends AnyWordSpec with Matchers {
     "when filled specifically" should {
       "wrong it shouldn't be checked correctly" in {
         var controller = new Controller(new Grid())
-        controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.currentPlayer = controller.players(0)
@@ -57,7 +56,6 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
       "all patterns should be checked correctly" in {
         var controller = new Controller(new Grid())
-        controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
@@ -79,7 +77,6 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
       "any horizontal pattern be checked correctly" in {
         var controller = new Controller(new Grid())
-        controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
@@ -97,7 +94,6 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
       "any vertical pattern be checked correctly" in {
         var controller = new Controller(new Grid())
-        controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
@@ -115,7 +111,6 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
       "the bottom left corner be checked correctly ascending diagonally" in {
         var controller = new Controller(new Grid())
-        controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
@@ -152,7 +147,6 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
       "the upper left corner be checked correctly descending diagonally if a player has won the game" in {
         var controller = new Controller(new Grid())
-        controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(5,0, Cell(Some(Piece(controller.players(1)))))
@@ -170,7 +164,6 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
       "the bottom right corner be checked correctly descending diagonally if a player has won the game" in {
         var controller = new Controller(new Grid())
-        controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,6, Cell(Some(Piece(controller.players(0)))))
