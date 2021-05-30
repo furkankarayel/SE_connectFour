@@ -45,11 +45,11 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def checkWin():Boolean = {
-      val checkList:List[Option[Boolean]] = List(winPatternDescendingDiagonal(),winPatternVertical(),winPatternAscendingDiagonal(),winPatternDescendingDiagonal())
-      val win = checkList.filterNot(f => f.isEmpty).contains((Some(true)))
-      if (win)
-        return true
-      false
+    val checkList:List[Option[Boolean]] = List(winPatternDescendingDiagonal(),winPatternVertical(),winPatternAscendingDiagonal(),winPatternDescendingDiagonal())
+    val win = checkList.filterNot(f => f.isEmpty).contains((Some(true)))
+    if (win)
+      return true
+    false
   }
 
   def winPatternHorizontal():Option[Boolean] = {
@@ -84,14 +84,14 @@ class Controller(var grid:Grid) extends Observable {
   }
   def winPatternAscendingDiagonal():Option[Boolean] = {
     try {
-    val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 0 to rowCount-4){
-      for (j <- 0 to colCount-4){
-        if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j+1).piece == currentPiece && grid.cell(i+2,j+2).piece == currentPiece && grid.cell(i+3,j+3).piece == currentPiece)
-          return Some(true)
+      val currentPiece = Some(Piece(currentPlayer))
+      for (i <- 0 to rowCount-4){
+        for (j <- 0 to colCount-4){
+          if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j+1).piece == currentPiece && grid.cell(i+2,j+2).piece == currentPiece && grid.cell(i+3,j+3).piece == currentPiece)
+            return Some(true)
+        }
       }
-    }
-    None
+      None
     } catch {
       case e: Exception => None
     }
