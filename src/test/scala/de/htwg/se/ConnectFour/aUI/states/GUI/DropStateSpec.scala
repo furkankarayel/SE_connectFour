@@ -1,5 +1,7 @@
-package de.htwg.se.ConnectFour.controller
+package de.htwg.se.ConnectFour.aUI.states.GUI
 
+import de.htwg.se.ConnectFour.aUI.states.GUI
+import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.Grid
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -8,7 +10,7 @@ class DropStateSpec extends AnyWordSpec with Matchers {
   "A Dropstate" when {
     val controller = new Controller(new Grid)
     val gameState = GameState(controller)
-    gameState.changeState(DropState(controller))
+    gameState.changeState(GUI.DropState(controller))
     controller.addPlayer("Franz")
     controller.addPlayer("Jens")
     controller.currentPlayer = controller.players(0)

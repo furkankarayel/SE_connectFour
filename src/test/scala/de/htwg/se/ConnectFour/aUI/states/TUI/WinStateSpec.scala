@@ -1,5 +1,6 @@
-package de.htwg.se.ConnectFour.controller
+package de.htwg.se.ConnectFour.aUI.states.TUI
 
+import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.Grid
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

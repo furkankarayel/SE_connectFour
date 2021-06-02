@@ -1,8 +1,11 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour._
-import de.htwg.se.ConnectFour.model.{Grid, Piece, Player, PlayerBuilder}
+import de.htwg.se.ConnectFour.model._
+import de.htwg.se.ConnectFour.aUI._
+import de.htwg.se.ConnectFour.aUI.states.GUI.GameState
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
+
+import scala.util.Failure
 
 class Controller(var grid:Grid) extends Observable {
   var players: Vector[Player] = Vector.empty
@@ -11,16 +14,12 @@ class Controller(var grid:Grid) extends Observable {
   val maxPlayers = 2
   val colCount = 7
   val rowCount = 6
-  var gameState:GameState = GameState(this)
+
 
   private val undoManager = new UndoManager
   def createGrid(): Unit = {
     reset()
     notifyObservers
-  }
-
-  def execute(input:String): Unit = {
-    gameState.handle(input)
   }
 
   def addPlayer(name:String):Unit = {
@@ -43,29 +42,11 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def checkWin():Boolean = {
-      var win = false
-      val horizontal = winPatternHorizontal()
-      val vertical = winPatternVertical()
-      val ascDiagonal = winPatternAscendingDiagonal()
-      val descDiagonal = winPatternDescendingDiagonal()
-
-      horizontal match {
-        case Some(v) => return true
-        case None => win = false
-      }
-      vertical match {
-        case Some(v) => return true
-        case None => win = false
-      }
-      ascDiagonal match {
-        case Some(v) => return true
-        case None => win = false
-      }
-      descDiagonal match {
-        case Some(v) => return true
-        case None => win = false
-      }
-      return win
+    val checkList:List[Option[Boolean]] = List(winPatternDescendingDiagonal(),winPatternVertical(),winPatternAscendingDiagonal(),winPatternDescendingDiagonal())
+    val win = checkList.filterNot(f => f.isEmpty).contains((Some(true)))
+    if (win)
+      return true
+    false
   }
 
   def winPatternHorizontal():Option[Boolean] = {
@@ -77,7 +58,7 @@ class Controller(var grid:Grid) extends Observable {
             return Some(true)
         }
       }
-      Some(false)
+      None
     } catch {
       case e: Exception => None
     }
@@ -93,21 +74,21 @@ class Controller(var grid:Grid) extends Observable {
             return Some(true)
         }
       }
-      Some(false)
+      None
     } catch {
       case e: Exception => None
     }
   }
   def winPatternAscendingDiagonal():Option[Boolean] = {
     try {
-    val currentPiece = Some(Piece(currentPlayer))
-    for (i <- 0 to rowCount-4){
-      for (j <- 0 to colCount-4){
-        if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j+1).piece == currentPiece && grid.cell(i+2,j+2).piece == currentPiece && grid.cell(i+3,j+3).piece == currentPiece)
-          return Some(true)
+      val currentPiece = Some(Piece(currentPlayer))
+      for (i <- 0 to rowCount-4){
+        for (j <- 0 to colCount-4){
+          if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j+1).piece == currentPiece && grid.cell(i+2,j+2).piece == currentPiece && grid.cell(i+3,j+3).piece == currentPiece)
+            return Some(true)
+        }
       }
-    }
-    Some(false)
+      None
     } catch {
       case e: Exception => None
     }
@@ -117,24 +98,27 @@ class Controller(var grid:Grid) extends Observable {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 3 to rowCount - 1) {
         for (j <- 0 to colCount - 4) {
-          if (grid.cell(i, j).piece == Some(currentPiece) && grid.cell(i - 1, j + 1).piece == Some(currentPiece) && grid.cell(i - 2, j + 2).piece == currentPiece && grid.cell(i - 3, j + 3).piece == currentPiece)
+          if (grid.cell(i, j).piece == currentPiece && grid.cell(i - 1, j + 1).piece == currentPiece && grid.cell(i - 2, j + 2).piece == currentPiece && grid.cell(i - 3, j + 3).piece == currentPiece)
             return Some(true)
         }
       }
-      Some(false)
+      None
     } catch {
       case e: Exception => None
     }
   }
 
-  def drop(input:String): Unit = {
+  def drop(input:Option[String]): Unit = {
     whoseTurnIsIt()
-    input.toList.filter(c => c != " ").map(c => c.toString.toInt) match {
-      case col :: Nil =>
-        undoManager.doStep(new SetCommand(col,Piece(currentPlayer),this))
-        move += 1
-        print(gridPrint)
+    var validCol = 0
+    input match {
+      case Some(col) => if (col.toInt >= 6) validCol = col.toInt else Failure(new InvalidColumnNumber)
+      case None => Failure(new InputExpected)
     }
+
+    undoManager.doStep(new SetCommand(validCol,Piece(currentPlayer),this));
+    move += 1
+    print(this.gridPrint)
     notifyObservers
   }
   def undoDrop(): Unit = {
@@ -157,7 +141,5 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def gridPrint(): String = grid.toString
-
-
 }
 

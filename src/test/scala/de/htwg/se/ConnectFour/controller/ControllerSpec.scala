@@ -8,10 +8,14 @@ import org.scalatest.wordspec.AnyWordSpec
 class ControllerSpec extends AnyWordSpec with Matchers{
   "observed by an Observer" should {
     val controller = new Controller(new Grid())
+    controller.move = 0
+    controller.addPlayer("Player1")
+    controller.addPlayer("Player2")
+    controller.currentPlayer = controller.players(0)
     val observer = new Observer {
       var updated: Boolean = false
       def isUpdated: Boolean = updated
-      override def update: Option[Boolean] = {updated = true; Some(updated)}
+      override def update: Boolean = {updated = true;updated}
     }
     controller.add(observer)
     "notify its Observer after grid creation" in {
@@ -20,16 +24,13 @@ class ControllerSpec extends AnyWordSpec with Matchers{
       controller.grid should be (new Grid())
     }
     "notify its Observer which player has the turn" in {
-      controller.move = 0
-      controller.addPlayer("Player1")
-      controller.addPlayer("Player2")
-      controller.currentPlayer = controller.players(0)
       controller.whoseTurnIsIt()
       observer.updated should be (true)
       controller.currentPlayer should be (controller.players(0))
     }
     "notify its Observer if an do/undo/redo step is done" in {
-      controller.drop("0")
+      controller.drop(Some("0"))
+      controller.gridPrint()
       controller.grid.cell(0,0).isSet should be (true)
       controller.undoDrop()
       controller.grid.cell(0,0).isSet should be (false)

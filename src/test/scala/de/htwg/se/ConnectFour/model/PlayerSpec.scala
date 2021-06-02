@@ -17,8 +17,8 @@ class PlayerSpec extends AnyWordSpec with Matchers {
         player2.number should be (2)
       }
       "have a color" in {
-        player1.color should be ("red")
-        player2.color should be ("yellow")
+        player1.color should be (Some("red"))
+        player2.color should be (Some("yellow"))
       }
       "have a nice String representation" in {
         player1.toString should be

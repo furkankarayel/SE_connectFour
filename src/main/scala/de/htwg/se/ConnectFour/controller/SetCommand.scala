@@ -7,7 +7,7 @@ class SetCommand(col: Int, piece:Piece, controller: Controller) extends Command 
   var memento:Grid = controller.grid
   override def doStep: Unit = {
     memento = controller.grid
-    controller.grid.drop(col:Int, piece:Piece)
+    controller.grid = controller.grid.drop(col:Int, piece:Piece)
   }
   override def undoStep: Unit = {
     val new_memento = controller.grid //save actual grid before undo

@@ -1,11 +1,13 @@
-package de.htwg.se.ConnectFour.controller
+package de.htwg.se.ConnectFour.aUI.states.GUI
+
+import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.util.State
 
-case class DropState(controller:Controller) extends State[GameState] {
+case class DropState(controller: Controller) extends State[GameState] {
   override def handle(input: String, state: GameState): Unit = {
     val regExCheck = "([0-6])".r
     if (regExCheck.matches(input))
-      controller.drop(input)
+      controller.drop(Some(input))
     if (controller.checkWin()) {
       state.changeState(WinState(controller))
       state.handle("won")
