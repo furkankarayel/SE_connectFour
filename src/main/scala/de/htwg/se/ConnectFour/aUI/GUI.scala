@@ -9,10 +9,9 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.TextInputDialog
 import scalafx.scene.effect.DropShadow
-import scalafx.scene.layout.HBox
+import scalafx.scene.layout._
 import scalafx.scene.paint.Color.{Black, DarkRed, LightYellow, Red, Yellow}
-import scalafx.scene.paint.{Color, LinearGradient, Stops}
-import scalafx.scene.shape.Rectangle
+import scalafx.scene.paint.{LinearGradient, Stops}
 import scalafx.scene.text.Text
 
 case class GUI(controller:Controller) extends UI with Observer with JFXApp {
