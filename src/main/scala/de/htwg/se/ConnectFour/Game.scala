@@ -3,13 +3,9 @@ package de.htwg.se.ConnectFour
 import de.htwg.se.ConnectFour.aUI.{GUI, TUI, UIFactory}
 import de.htwg.se.ConnectFour.controller._
 import de.htwg.se.ConnectFour.model._
-import de.htwg.se.ConnectFour.util.UI
-
-import scala.io.StdIn.readLine
 import scala.util.{Failure, Success, Try}
 
 object Game {
-
   def main(args: Array[String]): Unit = {
     val controller = new Controller(new Grid())
     val uiType = "GUI"
@@ -18,7 +14,5 @@ object Game {
       case Success(v) => print("Bye.")
       case Failure(v) => print("Could not create UI" + v.getMessage + v.getCause)
     }
-
   }
-
 }

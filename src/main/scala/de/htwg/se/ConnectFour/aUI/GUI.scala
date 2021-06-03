@@ -52,7 +52,7 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
   }
 
   def gameGrid: GridPane = new GridPane {
-    style = "-fx-border-color: #353535; -fx-background-color #f0e68c -fx-border-width: 0 2 0 0"
+    style = "-fx-border-color: #353535; -fx-border-width: 0 2 0 0"
     for (_ <- 0 until controller.colCount) {
       val row = new RowConstraints() {
         percentHeight = 100.0 / controller.rowCount
@@ -68,7 +68,7 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
 
   def logo:HBox = new HBox {
     style = "-fx-border-color: #353535; -fx-border-width: 0 2 0 0"
-    padding = Insets(5, 10, 5, 10)
+    padding = Insets(25, 100, 25, 100)
     children = Seq(
       new Text {
         text = "Connect"
@@ -105,7 +105,7 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
 
     scene = new Scene {
       root = new BorderPane {
-        style = "-fx-border-color: #353535; -fx-background-color #f0e68c -fx-border-width: 0 2 0 0"
+        style = "-fx-border-color: #353535; -fx-border-width: 0 2 0 0"
         top = logo
         center = gameGrid
       }
