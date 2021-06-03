@@ -1,7 +1,6 @@
 package de.htwg.se.ConnectFour.aUI.states.TUI
 
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.util.State
 
 case class GameState(controller: Controller) {
   var state: State[GameState] = InitialState(controller)

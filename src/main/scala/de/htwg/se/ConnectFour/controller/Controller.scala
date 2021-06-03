@@ -112,7 +112,7 @@ class Controller(var grid:Grid) extends Observable {
     whoseTurnIsIt()
     var validCol = 0
     input match {
-      case Some(col) => if (col.toInt >= 6) validCol = col.toInt else Failure(new InvalidColumnNumber)
+      case Some(col) => if (col.toInt <= 6) validCol = col.toInt else Failure(new InvalidColumnNumber)
       case None => Failure(new InputExpected)
     }
 

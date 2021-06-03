@@ -11,8 +11,8 @@ object Game {
     val uiType = "GUI"
 
     Try(UIFactory(uiType,controller)) match {
-      case Success(v) => print("Bye.")
-      case Failure(v) => print("Could not create UI" + v.getMessage + v.getCause)
+      case Success(v) => println("Bye.")
+      case Failure(v) => println("Could not create UI" + v.getMessage + v.getCause)
     }
   }
 }

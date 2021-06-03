@@ -1,13 +1,13 @@
 package de.htwg.se.ConnectFour.aUI.states.GUI
 
+import de.htwg.se.ConnectFour.aUI.GUI
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.util.State
 
-case class GameState(controller: Controller) {
-  var state: State[GameState] = InitialState(controller)
+case class GameState(controller: Controller, gui:GUI) {
+  var state: State[GameState] = InitialState(controller, gui)
 
   def handle(input: String): Unit = {
-    state.handle(input, this)
+    state.handle(input, gui, this)
   }
 
   def changeState(state: State[GameState]): Unit = {
