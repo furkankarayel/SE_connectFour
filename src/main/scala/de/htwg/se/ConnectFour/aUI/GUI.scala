@@ -1,6 +1,6 @@
 package de.htwg.se.ConnectFour.aUI;
 
-import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState, WinState}
+import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState, InitialState, WinState}
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.util.{Observer, UI}
 import org.scalactic.source.Position
@@ -55,8 +55,7 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
   }
 
   val gameGrid: GridPane = new GridPane {
-    style = "-fx-border-color: #353535; -fx-border-width: 0 2 0 0"
-    gridLinesVisible = true
+    gridLinesVisible = false
     padding = Insets(70)
     var i = 0
     for (_ <- 0 until controller.colCount) {
@@ -77,6 +76,7 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
 
   def gameFieldButton(x: Int, y: Int): Button = {
     val gameFieldButton = new Button {
+      style = "-fx-font: normal bold 16pt sans-serif;  -fx-border-color: lightgrey; -fx-text-fill: black; -fx-background-color: #e6f3ff;"
       onMouseClicked = _ => {
         gameState.handle(y.toString)
         if(controller.checkWin())
@@ -110,8 +110,8 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
             case 2 => new Image("/yellow.png")
           }
           val imgView = new ImageView(img)
-          imgView.setFitHeight(45)
-          imgView.setFitWidth(45)
+          imgView.setFitHeight(35)
+          imgView.setFitWidth(35)
           imgView.setPreserveRatio(true)
           piece.setGraphic(imgView)
           piece.setMaxSize(Double.MaxValue, Double.MaxValue)
@@ -126,38 +126,37 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
   }
 
   val gameLogo:HBox = new HBox {
-    style = "-fx-border-color: #353535; -fx-background-color: #e6f3ff; -fx-border-width: 0 2 0 0"
-    padding = Insets(15, 100, 15, 100)
+    style = "-fx-background-color: #b3daff;"
+    padding = Insets(30, 100, 0, 100)
     children = Seq(
       new Text {
-        text = "Connect"
-        style = "-fx-font: normal bold 50pt sans-serif"
+        text = "Connect "
+        style = "-fx-font: normal bold 80pt sans-serif"
         fill = new LinearGradient(
           endX = 0,
           stops = Stops(Red, DarkRed))
-        effect = new DropShadow {
+        effect = new InnerShadow() {
           color = Black
           radius = 5
-          spread = 0.3
         }
       },
       new Text {
         text = "Four"
-        style = "-fx-font: normal bold 50pt sans-serif"
+        style = "-fx-font: normal bold 80pt sans-serif"
         fill = new LinearGradient(
           endX = 0,
           stops = Stops(Yellow, LightYellow)
         )
-        effect = new DropShadow {
+        effect = new InnerShadow() {
           color = Black
           radius = 5
-          spread = 0.3
         }
       },
     )
   }
 
   val bottombar: GridPane = new GridPane {
+    padding = Insets(20)
     val row: RowConstraints = new RowConstraints() {
       percentHeight = 100
       prefHeight = 60
@@ -171,6 +170,8 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
       columnConstraints.add(colC)
     }
     val undo = new Button("Undo") {
+      padding = Insets(3)
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         controller.undoDrop()
@@ -179,6 +180,8 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
       onMouseExited = _ => effect = null
     }
     val redo = new Button("Redo") {
+      padding = Insets(3)
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         controller.redoDrop()
@@ -187,9 +190,12 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
       onMouseExited = _ => effect = null
     }
     val newGame = new Button("New Game") {
+      padding = Insets(3)
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         controller.reset()
+        gameState.changeState(DropState(controller))
       }
       onMouseEntered = _ => effect = new Glow( 0.7 )
       onMouseExited = _ => effect = null
@@ -207,7 +213,7 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
     resizable = false
     scene = new Scene {
       root = new BorderPane {
-        style = "-fx-border-color: #353535; -fx-background-color: #e6f3ff; -fx-border-width: 0 2 0 0"
+        style = "-fx-border-color: #353535; -fx-background-color: #b3daff;"
         top = gameLogo
         center = gameGrid
         bottom = bottombar
