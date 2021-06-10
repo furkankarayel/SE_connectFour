@@ -1,4 +1,6 @@
-package de.htwg.se.ConnectFour.aUI;
+package de.htwg.se.ConnectFour.aUI
+
+;
 
 import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState}
 import de.htwg.se.ConnectFour.controller.Controller
@@ -16,113 +18,54 @@ import scalafx.scene.paint.Color.{Black, DarkRed, LightYellow, Red, Yellow}
 import scalafx.scene.paint.{LinearGradient, Stops}
 import scalafx.scene.text.Text
 
-case class GUI(controller:Controller) extends UI with Observer with JFXApp {
+case class GUI(controller: Controller) extends UI with Observer with JFXApp {
   controller.add(this)
-  var gameState:GameState = GameState(controller,this)
+  var gameState: GameState = GameState(controller, this)
+
   def run(): Unit = {
     main(Array())
   }
 
-  def typeName():Unit = {
+  def typeName(): Unit = {
     val dialog = new TextInputDialog(defaultValue = "Detlef") {
-    initOwner(stage)
-    title = "ConnectFour Game"
-    headerText = "Welcome to Connect Four!"
+      initOwner(stage)
+      title = "ConnectFour Game"
+      headerText = "Welcome to Connect Four!"
       var number = ""
-      if(controller.players.size == 0) number = "one" else number = "two"
-    contentText = "Player " + number + " please enter your name:"
-  }
+      if (controller.players.size == 0) number = "one" else number = "two"
+      contentText = "Player " + number + " please enter your name:"
+    }
 
     val result = dialog.showAndWait()
     result match {
-    case Some(name) => controller.addPlayer(name)
-    case None       => println("Please type a name!")
-  }
+      case Some(name) => controller.addPlayer(name)
+      case None => println("Please type a name!")
+    }
   }
 
-  def begin():Unit = {
+  def begin(): Unit = {
     do {
       val playerSize = controller.players.size
       playerSize match {
         case 0 => typeName()
         case 1 => typeName()
       }
-    } while (controller.players.size<2)
-    gameState.handle("")
+    } while (controller.players.size < 2)
+    execute("") // changing the state
   }
 
-  val gameGrid: GridPane = new GridPane {
-    gridLinesVisible = false
-    padding = Insets(70)
-    var i = 0
-    for (_ <- 0 until controller.colCount) {
-      if(i<6){
-        val row = new RowConstraints() {
-          percentHeight = 100.0 / controller.rowCount
-        }
-        rowConstraints.add(row)
-      }
-      val column = new ColumnConstraints() {
-        percentWidth = 100.0 / controller.colCount
-      }
-      styleClass = List("gameGridRowColumn")
-      columnConstraints.add(column)
-      i += 1
-    }
-  }
 
   def gameFieldButton(x: Int, y: Int): Button = {
     val gameFieldButton = new Button {
       style = "-fx-font: normal bold 16pt sans-serif;  -fx-border-color: lightgrey; -fx-text-fill: black; -fx-background-color: #e6f3ff;"
       onMouseClicked = _ => {
         gameState.handle(y.toString)
-        if(controller.checkWin())
-            new Alert(AlertType.Information) {
-              initOwner(stage)
-              title = "We have a Winner!"
-              headerText = "Congratulations " + controller.currentPlayer.playerName + "!!!"
-              contentText = "you are the winner of this round! :)"
-            }.showAndWait()
       }
     }
     gameFieldButton
   }
 
-
-  def refreshView(): Unit = {
-    try {
-      for (x <-  0 to controller.colCount-1; y <- (0 to controller.rowCount-1).reverse){
-        var reverseY = y match {
-          case 0 => 5
-          case 1 => 4
-          case 2 => 3
-          case 3 => 2
-          case 4 => 1
-          case 5 => 0
-        }
-        val piece: Button = gameFieldButton(y, x)
-        if (controller.grid.cell(y, x).isSet) {
-          val img = controller.grid.cell(y, x).piece.get.player.playerNumber match {
-            case 1 => new Image("/red.png")
-            case 2 => new Image("/yellow.png")
-          }
-          val imgView = new ImageView(img)
-          imgView.setFitHeight(35)
-          imgView.setFitWidth(35)
-          imgView.setPreserveRatio(true)
-          piece.setGraphic(imgView)
-          piece.setMaxSize(Double.MaxValue, Double.MaxValue)
-        }
-        piece.setMaxSize(Double.MaxValue, Double.MaxValue)
-        gameGrid.add(piece,x,reverseY)
-      }
-    }catch {
-      case e => print(e)
-    }
-
-  }
-
-  val gameLogo:HBox = new HBox {
+  val gameLogo: HBox = new HBox {
     style = "-fx-background-color: #b3daff;"
     padding = Insets(30, 100, 0, 100)
     children = Seq(
@@ -152,6 +95,25 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
     )
   }
 
+  val gameGrid: GridPane = new GridPane {
+    gridLinesVisible = false
+    padding = Insets(70)
+    var i = 0
+    for (_ <- 0 until controller.colCount) {
+      if (i < 6) {
+        val row = new RowConstraints() {
+          percentHeight = 100.0 / controller.rowCount
+        }
+        rowConstraints.add(row)
+      }
+      val column = new ColumnConstraints() {
+        percentWidth = 100.0 / controller.colCount
+      }
+      columnConstraints.add(column)
+      i += 1
+    }
+  }
+
   val bottombar: GridPane = new GridPane {
     padding = Insets(20)
     val row: RowConstraints = new RowConstraints() {
@@ -161,43 +123,44 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
     rowConstraints.add(row)
 
     for (_ <- 0 until 3) {
-      val colC = new ColumnConstraints() {
-        percentWidth = 100
+      val col = new ColumnConstraints() {
+        percentWidth = 80
       }
-      columnConstraints.add(colC)
+      columnConstraints.add(col)
     }
+
     val undo = new Button("Undo") {
-      padding = Insets(3)
+      padding = Insets(10)
       style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
-        controller.undoDrop()
+        execute("u")
       }
-      onMouseEntered = _ => effect = new Glow( 0.7 )
-      onMouseExited = _ => effect = null
-    }
-    val redo = new Button("Redo") {
-      padding = Insets(3)
-      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
-      this.setMaxSize(Double.MaxValue, Double.MaxValue)
-      onMouseClicked = _ => {
-        controller.redoDrop()
-      }
-      onMouseEntered = _ => effect = new Glow( 0.7 )
-      onMouseExited = _ => effect = null
-    }
-    val newGame = new Button("New Game") {
-      padding = Insets(3)
-      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
-      this.setMaxSize(Double.MaxValue, Double.MaxValue)
-      onMouseClicked = _ => {
-        controller.reset()
-        gameState.changeState(DropState(controller))
-      }
-      onMouseEntered = _ => effect = new Glow( 0.7 )
+      onMouseEntered = _ => effect = new Glow(0.7)
       onMouseExited = _ => effect = null
     }
 
+    val redo = new Button("Redo") {
+      padding = Insets(10)
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      this.setMaxSize(Double.MaxValue, Double.MaxValue)
+      onMouseClicked = _ => {
+        execute("r")
+      }
+      onMouseEntered = _ => effect = new Glow(0.7)
+      onMouseExited = _ => effect = null
+    }
+
+    val newGame = new Button("New Game") {
+      padding = Insets(10)
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      this.setMaxSize(Double.MaxValue, Double.MaxValue)
+      onMouseClicked = _ => {
+        execute("n")
+      }
+      onMouseEntered = _ => effect = new Glow(0.7)
+      onMouseExited = _ => effect = null
+    }
     add(undo, 0, 0)
     add(redo, 1, 0)
     add(newGame, 2, 0)
@@ -219,13 +182,49 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
     }
   }
 
-  override def processInput(input: String):Unit = {
-    input match {
-      case _ =>
+  def refreshView(): Unit = {
+    try {
+      for (x <- 0 to controller.colCount - 1; y <- (0 to controller.rowCount - 1).reverse) {
+        var reverseY = y match {
+          case 0 => 5
+          case 1 => 4
+          case 2 => 3
+          case 3 => 2
+          case 4 => 1
+          case 5 => 0
+        }
+        val piece: Button = gameFieldButton(y, x)
+        if (controller.grid.cell(y, x).isSet) {
+          val img = controller.grid.cell(y, x).piece.get.player.playerNumber match {
+            case 1 => new Image("/red.png")
+            case 2 => new Image("/yellow.png")
+          }
+          val imgView = new ImageView(img)
+          imgView.setFitHeight(35)
+          imgView.setFitWidth(35)
+          imgView.setPreserveRatio(true)
+          piece.setGraphic(imgView)
+          piece.setMaxSize(Double.MaxValue, Double.MaxValue)
+        }
+        piece.setMaxSize(Double.MaxValue, Double.MaxValue)
+        gameGrid.add(piece, x, reverseY)
+      }
+    } catch {
+      case e => print(e)
     }
   }
 
-  override def update: Boolean =  {
+  override def processInput(input: String):Unit = {
+    input match {
+      case _ => execute(input);
+    }
+  }
+
+  def execute(input:String): Unit = {
+    gameState.handle(input)
+  }
+
+  override def update: Boolean = {
     refreshView()
     true
   }

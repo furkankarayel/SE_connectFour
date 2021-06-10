@@ -1,7 +1,7 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour.model.fieldbase.Grid
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase.Piece
+import de.htwg.se.ConnectFour.model.gridbase.Grid
+import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.Piece
 import de.htwg.se.ConnectFour.util.Command
 
 class SetCommand(col: Int, piece:Piece, controller: Controller) extends Command {

@@ -4,7 +4,7 @@ import de.htwg.se.ConnectFour.aUI.GUI
 import de.htwg.se.ConnectFour.aUI.states.GUI
 import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState}
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.GridImpl
+import de.htwg.se.ConnectFour.model.gridbase.impl.GridImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

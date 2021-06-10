@@ -1,6 +1,6 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.GridImpl
+import de.htwg.se.ConnectFour.model.gridbase.impl.GridImpl
 import de.htwg.se.ConnectFour.util.Observer
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

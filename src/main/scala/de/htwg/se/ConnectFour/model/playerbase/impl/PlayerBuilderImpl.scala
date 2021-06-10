@@ -1,6 +1,6 @@
-package de.htwg.se.ConnectFour.model.playerbase
+package de.htwg.se.ConnectFour.model.playerbase.impl
 
-import de.htwg.se.ConnectFour.model.{PlayerBuilder,Player}
+import de.htwg.se.ConnectFour.model.playerbase.{Player, PlayerBuilder}
 
 case class PlayerBuilderImpl() extends PlayerBuilder {
   var name: String = ""
@@ -12,5 +12,5 @@ case class PlayerBuilderImpl() extends PlayerBuilder {
     this
   }
 
-   def build(): Player = PlayerImpl(name, number)
+  def build(): Player = PlayerImpl(name, number)
 }

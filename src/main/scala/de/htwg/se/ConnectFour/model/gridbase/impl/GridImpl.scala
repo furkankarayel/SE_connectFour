@@ -1,8 +1,9 @@
-package de.htwg.se.ConnectFour.model.fieldbase.gridbase
+package de.htwg.se.ConnectFour.model.gridbase.impl
 
-import de.htwg.se.ConnectFour.model._
-import de.htwg.se.ConnectFour.model.fieldbase.Grid
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase.{Cell, Piece}
+import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase.Cell
+import de.htwg.se.ConnectFour.model.gridbase.Grid
+import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.{Cell, Piece}
+import de.htwg.se.ConnectFour.model.{CannotDropPiece, ColumnFull}
 
 import scala.util.{Failure, Success, Try}
 

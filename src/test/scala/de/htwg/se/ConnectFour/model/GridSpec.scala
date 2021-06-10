@@ -2,10 +2,11 @@ package de.htwg.se.ConnectFour.model
 
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model
-import de.htwg.se.ConnectFour.model.fieldbase.Grid
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase.{Cell, Piece}
-import de.htwg.se.ConnectFour.model.playerbase.PlayerImpl
+import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase
+import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase.Cell
+import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase
+import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.{Cell, Piece}
+import de.htwg.se.ConnectFour.model.playerbase.impl.PlayerImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -27,11 +28,11 @@ class GridSpec extends AnyWordSpec with Matchers {
     "when not full" should {
       "have a method to replace specific cells" in {
         val replaced = grid.replaceCell(0,3, Cell(Some(Piece(PlayerImpl("Your Name", 1)))))
-        replaced.cell(0,3).piece should be (Some(CellPieceBase.Piece(PlayerImpl("Your Name", 1))))
+        replaced.cell(0,3).piece should be (Some(Piece(PlayerImpl("Your Name", 1))))
       }
       "have a method to put Pieces into the Grid" in {
-        val dropped = grid.drop(0, CellPieceBase.Piece(PlayerImpl("Your Name", 1)))
-        dropped.cell(0,0).piece should be (Some(CellPieceBase.Piece(PlayerImpl("Your Name", 1))))
+        val dropped = grid.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
+        dropped.cell(0,0).piece should be (Some(cellpiecebase.Piece(PlayerImpl("Your Name", 1))))
       }
       "have a method to reset the whole Grid" in {
         grid.reset() should be (new GridImpl())
@@ -40,13 +41,13 @@ class GridSpec extends AnyWordSpec with Matchers {
     "when full" should {
       "have no new dropped Piece" in {
         var afterFull = new GridImpl()
-        afterFull = afterFull.drop(0, CellPieceBase.Piece(PlayerImpl("Your Name", 1)))
-        afterFull = afterFull.drop(0, CellPieceBase.Piece(PlayerImpl("Your Name", 1)))
-        afterFull = afterFull.drop(0, CellPieceBase.Piece(PlayerImpl("Your Name", 1)))
-        afterFull = afterFull.drop(0, CellPieceBase.Piece(PlayerImpl("Your Name", 1)))
-        afterFull = afterFull.drop(0, CellPieceBase.Piece(PlayerImpl("Your Name", 1)))
-        afterFull = afterFull.drop(0, CellPieceBase.Piece(PlayerImpl("Your Name", 1)))
-        val newDrop = afterFull.drop(0, CellPieceBase.Piece(PlayerImpl("Your Name", 1)))
+        afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
+        afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
+        afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
+        afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
+        afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
+        afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
+        val newDrop = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
         newDrop.rows should be(afterFull.rows)
       }
     }

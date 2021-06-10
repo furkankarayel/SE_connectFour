@@ -1,4 +1,4 @@
-package de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase
+package de.htwg.se.ConnectFour.model.gridbase.cellpiecebase
 
 case class Cell(piece: Option[Piece]) {
   def isSet: Boolean = piece.isDefined

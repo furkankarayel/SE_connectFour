@@ -1,7 +1,7 @@
 package de.htwg.se.ConnectFour.aUI.states.TUI
 
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.GridImpl
+import de.htwg.se.ConnectFour.model.gridbase.impl.GridImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

@@ -12,6 +12,7 @@ case class GameState(controller: Controller, gui:GUI) {
 
   def changeState(state: State[GameState]): Unit = {
     this.state = state
+    state.handle("",gui,this)
   }
 
 }

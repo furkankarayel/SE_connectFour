@@ -1,6 +1,6 @@
-package de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase
+package de.htwg.se.ConnectFour.model.gridbase.cellpiecebase
 
-import de.htwg.se.ConnectFour.model.Player
+import de.htwg.se.ConnectFour.model.playerbase.Player
 
 case class Piece(player: Player) {
 

@@ -2,8 +2,8 @@ package de.htwg.se.ConnectFour
 
 import de.htwg.se.ConnectFour.aUI.UIFactory
 import de.htwg.se.ConnectFour.controller._
-import de.htwg.se.ConnectFour.model.fieldbase.Grid
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.GridImpl
+import de.htwg.se.ConnectFour.model.gridbase.Grid
+import de.htwg.se.ConnectFour.model.gridbase.impl.GridImpl
 
 import scala.util.{Failure, Success, Try}
 
