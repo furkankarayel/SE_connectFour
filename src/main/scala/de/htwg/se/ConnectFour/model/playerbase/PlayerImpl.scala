@@ -1,6 +1,8 @@
-package de.htwg.se.ConnectFour.model.fieldbase
+package de.htwg.se.ConnectFour.model.playerbase
 
-case class PlayerImpl(playerName: String, playerNumber: Int) {
+import de.htwg.se.ConnectFour.model.Player
+
+case class PlayerImpl(playerName: String, playerNumber: Int) extends Player {
   val name: String = playerName
   val number: Int = playerNumber
   val color: Option[String] = {

@@ -1,6 +1,9 @@
-package de.htwg.se.ConnectFour.model.fieldbase
+package de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase
 
-case class PieceImpl(player: PlayerImpl) {
+import de.htwg.se.ConnectFour.model.Player
+
+case class Piece(player: Player) {
+
   override def toString: String = {
     player.playerNumber match {
       case 1 => Console.RED + "☻ "

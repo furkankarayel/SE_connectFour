@@ -1,6 +1,10 @@
 package de.htwg.se.ConnectFour.model
 
-import de.htwg.se.ConnectFour.model.fieldbase.{CellImpl, PieceImpl, PlayerImpl}
+import de.htwg.se.ConnectFour.model
+import de.htwg.se.ConnectFour.model.fieldbase.PieceImpl
+import de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase
+import de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase.{Cell, Piece}
+import de.htwg.se.ConnectFour.model.playerbase.PlayerImpl
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -8,7 +12,7 @@ class CellSpec extends AnyWordSpec with Matchers {
 
   "A Cell" when {
     "not set to any value " should {
-      val emptyCell = CellImpl(None)
+      val emptyCell = Cell(None)
       "have value 0" in {
         emptyCell.piece should be(None)
       }
@@ -21,9 +25,9 @@ class CellSpec extends AnyWordSpec with Matchers {
     }
     "set to a specific value" should {
       val player = PlayerImpl("Your Name",1)
-      val nonEmptyCell = CellImpl(Some(PieceImpl(player)))
+      val nonEmptyCell = Cell(Some(Piece(player)))
       "return that value" in {
-        nonEmptyCell.piece should be(Some(PieceImpl(PlayerImpl("Your Name",1))))
+        nonEmptyCell.piece should be(Some(CellPieceBase.Piece(PlayerImpl("Your Name",1))))
       }
       "be set" in {
         nonEmptyCell.isSet should be(true)

@@ -2,7 +2,7 @@ package de.htwg.se.ConnectFour.aUI.states.GUI
 
 import de.htwg.se.ConnectFour.aUI.states.TUI.{GameState, WinState}
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model.fieldbase.GridImpl
+import de.htwg.se.ConnectFour.model.fieldbase.gridbase.GridImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

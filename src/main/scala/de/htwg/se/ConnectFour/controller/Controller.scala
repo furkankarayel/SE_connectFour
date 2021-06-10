@@ -1,15 +1,18 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour.model._
-import de.htwg.se.ConnectFour.model.fieldbase.{GridImpl, PieceImpl, PlayerImpl, PlayerBuilderImpl}
+import de.htwg.se.ConnectFour.model.fieldbase.Grid
+import de.htwg.se.ConnectFour.model.playerbase.PlayerBuilderImpl
+import de.htwg.se.ConnectFour.model.Player
+import de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase
+import de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase.Piece
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
 import scala.util.Failure
 
-class Controller(var grid:GridImpl) extends Observable {
-  var players: Vector[PlayerImpl] = Vector.empty
+class Controller(var grid:Grid) extends Observable {
+  var players: Vector[Player] = Vector.empty
   var move = 0
-  var currentPlayer:PlayerImpl = _
+  var currentPlayer:Player = _
   val maxPlayers = 2
   val colCount = 7
   val rowCount = 6
@@ -50,7 +53,7 @@ class Controller(var grid:GridImpl) extends Observable {
 
   def winPatternHorizontal():Option[Boolean] = {
     try {
-      val currentPiece = Some(PieceImpl(currentPlayer))
+      val currentPiece = Some(Piece(currentPlayer))
       for (i <- 0 to rowCount - 1) {
         for (j <- 0 to colCount - 1) {
           if (grid.cell(i, j).piece == currentPiece && grid.cell(i, j + 1).piece == currentPiece && grid.cell(i, j + 2).piece == currentPiece && grid.cell(i, j + 3).piece == currentPiece)
@@ -66,7 +69,7 @@ class Controller(var grid:GridImpl) extends Observable {
 
   def winPatternVertical():Option[Boolean] = {
     try {
-      val currentPiece = Some(PieceImpl(currentPlayer))
+      val currentPiece = Some(CellPieceBase.Piece(currentPlayer : Player))
       for (i <- 0 to rowCount - 3) {
         for (j <- 0 to colCount - 1) {
           if (grid.cell(i, j).piece == currentPiece && grid.cell(i + 1, j).piece == currentPiece && grid.cell(i + 2, j).piece == currentPiece && grid.cell(i + 3, j).piece == currentPiece)
@@ -80,7 +83,7 @@ class Controller(var grid:GridImpl) extends Observable {
   }
   def winPatternAscendingDiagonal():Option[Boolean] = {
     try {
-      val currentPiece = Some(PieceImpl(currentPlayer))
+      val currentPiece = Some(CellPieceBase.Piece(currentPlayer))
       for (i <- 0 to rowCount-4){
         for (j <- 0 to colCount-4){
           if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j+1).piece == currentPiece && grid.cell(i+2,j+2).piece == currentPiece && grid.cell(i+3,j+3).piece == currentPiece)
@@ -94,7 +97,7 @@ class Controller(var grid:GridImpl) extends Observable {
   }
   def winPatternDescendingDiagonal():Option[Boolean] = {
     try {
-      val currentPiece = Some(PieceImpl(currentPlayer))
+      val currentPiece = Some(CellPieceBase.Piece(currentPlayer))
       for (i <- 3 to rowCount - 1) {
         for (j <- 0 to colCount - 4) {
           if (grid.cell(i, j).piece == currentPiece && grid.cell(i - 1, j + 1).piece == currentPiece && grid.cell(i - 2, j + 2).piece == currentPiece && grid.cell(i - 3, j + 3).piece == currentPiece)
@@ -115,7 +118,7 @@ class Controller(var grid:GridImpl) extends Observable {
       case None => Failure(new InputExpected)
     }
 
-    undoManager.doStep(new SetCommand(validCol,PieceImpl(currentPlayer),this));
+    undoManager.doStep(new SetCommand(validCol,CellPieceBase.Piece(currentPlayer),this));
     move += 1
     print(this.gridPrint)
     notifyObservers
@@ -135,7 +138,7 @@ class Controller(var grid:GridImpl) extends Observable {
   }
 
   def reset(): Unit = {
-    grid = new GridImpl
+    grid = grid.reset()
     notifyObservers
   }
 

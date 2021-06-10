@@ -1,6 +1,6 @@
-package de.htwg.se.ConnectFour.model.fieldbase
+package de.htwg.se.ConnectFour.model.fieldbase.gridbase.CellPieceBase
 
-case class CellImpl(piece: Option[PieceImpl]) {
+case class Cell(piece: Option[Piece]) {
   def isSet: Boolean = piece.isDefined
 
   override def toString: String = {
