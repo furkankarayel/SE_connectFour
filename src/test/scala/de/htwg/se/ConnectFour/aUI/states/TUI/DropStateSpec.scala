@@ -4,13 +4,13 @@ import de.htwg.se.ConnectFour.aUI.GUI
 import de.htwg.se.ConnectFour.aUI.states.GUI
 import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState}
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model.Grid
+import de.htwg.se.ConnectFour.model.fieldbase.GridImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class DropStateSpec extends AnyWordSpec with Matchers {
   "A Dropstate" when {
-    val controller = new Controller(new Grid)
+    val controller = new Controller(new GridImpl)
     val gui = new GUI(controller)
     val gameState = GameState(controller,gui)
     gameState.changeState(DropState(controller))

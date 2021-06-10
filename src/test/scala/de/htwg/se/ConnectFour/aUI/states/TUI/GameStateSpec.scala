@@ -2,13 +2,13 @@ package de.htwg.se.ConnectFour.aUI.states.TUI
 
 import de.htwg.se.ConnectFour.aUI.states.TUI
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model.Grid
+import de.htwg.se.ConnectFour.model.fieldbase.GridImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class GameStateSpec extends AnyWordSpec with Matchers{
   "An initial state" when {
-    val controller = new Controller(new Grid)
+    val controller = new Controller(new GridImpl)
     val gameState = GameState(controller)
     controller.addPlayer("Franz")
     controller.addPlayer("Jens")

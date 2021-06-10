@@ -1,13 +1,13 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour.model.Grid
+import de.htwg.se.ConnectFour.model.fieldbase.GridImpl
 import de.htwg.se.ConnectFour.util.Observer
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class ControllerSpec extends AnyWordSpec with Matchers{
   "observed by an Observer" should {
-    val controller = new Controller(new Grid())
+    val controller = new Controller(new GridImpl())
     controller.move = 0
     controller.addPlayer("Player1")
     controller.addPlayer("Player2")
@@ -21,7 +21,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
     "notify its Observer after grid creation" in {
       controller.createGrid()
       observer.updated should be (true)
-      controller.grid should be (new Grid())
+      controller.grid should be (new GridImpl())
     }
     "notify its Observer which player has the turn" in {
       controller.whoseTurnIsIt()
@@ -40,7 +40,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
     "notify its Observer after resetting the grid" in {
       controller.reset()
       observer.updated should be (true)
-      controller.grid should be (new Grid())
+      controller.grid should be (new GridImpl())
     }
   }
 }

@@ -1,13 +1,14 @@
 package de.htwg.se.ConnectFour.model
 
+import de.htwg.se.ConnectFour.model.fieldbase.PlayerImpl
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 
 class PlayerSpec extends AnyWordSpec with Matchers {
   "A Player" when {
     "new" should {
-      val player1 = Player("Your Name", 1)
-      val player2 = Player("Yo Name", 2)
+      val player1 = PlayerImpl("Your Name", 1)
+      val player2 = PlayerImpl("Yo Name", 2)
       "have a name" in {
         player1.name should be ("Your Name")
         player2.name should be ("Yo Name")

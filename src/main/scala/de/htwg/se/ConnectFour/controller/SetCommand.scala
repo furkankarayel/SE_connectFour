@@ -1,13 +1,13 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour.model.{Grid, Piece}
+import de.htwg.se.ConnectFour.model.fieldbase.{GridImpl, PieceImpl}
 import de.htwg.se.ConnectFour.util.Command
 
-class SetCommand(col: Int, piece:Piece, controller: Controller) extends Command {
-  var memento:Grid = controller.grid
+class SetCommand(col: Int, piece:PieceImpl, controller: Controller) extends Command {
+  var memento:GridImpl = controller.grid
   override def doStep: Unit = {
     memento = controller.grid
-    controller.grid = controller.grid.drop(col:Int, piece:Piece)
+    controller.grid = controller.grid.drop(col:Int, piece:PieceImpl)
   }
   override def undoStep: Unit = {
     val new_memento = controller.grid //save actual grid before undo

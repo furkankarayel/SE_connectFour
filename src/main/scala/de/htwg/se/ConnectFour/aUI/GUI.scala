@@ -1,22 +1,19 @@
 package de.htwg.se.ConnectFour.aUI;
 
-import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState, InitialState, WinState}
+import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState}
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.util.{Observer, UI}
-import org.scalactic.source.Position
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.geometry.{Insets, Pos}
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control.{Alert, Button, TextInputDialog}
 import scalafx.scene.effect.{Glow, InnerShadow}
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.GridPane.{getColumnIndex, getRowIndex}
 import scalafx.scene.layout._
-import scalafx.scene.paint.Color.{BLACK, Black, DarkGray, DarkMagenta, DarkRed, LIGHTYELLOW, LightGoldrenrodYellow, LightSalmon, LightSeaGreen, LightYellow, Red, Yellow, YellowGreen}
-import scalafx.scene.paint.{Color, LinearGradient, Stops}
-import scalafx.scene.shape.Rectangle
+import scalafx.scene.paint.Color.{Black, DarkRed, LightYellow, Red, Yellow}
+import scalafx.scene.paint.{LinearGradient, Stops}
 import scalafx.scene.text.Text
 
 case class GUI(controller:Controller) extends UI with Observer with JFXApp {
@@ -131,7 +128,7 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
     children = Seq(
       new Text {
         text = "Connect "
-        style = "-fx-font: normal bold 80pt sans-serif"
+        style = "-fx-font: normal bold 70pt sans-serif"
         fill = new LinearGradient(
           endX = 0,
           stops = Stops(Red, DarkRed))
@@ -142,7 +139,7 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
       },
       new Text {
         text = "Four"
-        style = "-fx-font: normal bold 80pt sans-serif"
+        style = "-fx-font: normal bold 70pt sans-serif"
         fill = new LinearGradient(
           endX = 0,
           stops = Stops(Yellow, LightYellow)
@@ -209,8 +206,8 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
   stage = new PrimaryStage {
     title.value = "ConnectFour Game"
     minWidth = 650
-    minHeight = 800
-    resizable = false
+    minHeight = 900
+    resizable = true
     scene = new Scene {
       root = new BorderPane {
         style = "-fx-border-color: #353535; -fx-background-color: #b3daff;"
@@ -232,5 +229,4 @@ case class GUI(controller:Controller) extends UI with Observer with JFXApp {
     refreshView()
     true
   }
-
 }

@@ -1,16 +1,15 @@
 package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour.model._
-import de.htwg.se.ConnectFour.aUI._
-import de.htwg.se.ConnectFour.aUI.states.GUI.GameState
+import de.htwg.se.ConnectFour.model.fieldbase.{GridImpl, PieceImpl, PlayerImpl, PlayerBuilderImpl}
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
 import scala.util.Failure
 
-class Controller(var grid:Grid) extends Observable {
-  var players: Vector[Player] = Vector.empty
+class Controller(var grid:GridImpl) extends Observable {
+  var players: Vector[PlayerImpl] = Vector.empty
   var move = 0
-  var currentPlayer:Player = _
+  var currentPlayer:PlayerImpl = _
   val maxPlayers = 2
   val colCount = 7
   val rowCount = 6
@@ -23,7 +22,7 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def addPlayer(name:String):Unit = {
-    val playerBuilder = PlayerBuilder()
+    val playerBuilder = PlayerBuilderImpl()
     if (players.size == 0) {
       val player = playerBuilder.setPlayer(name,1).build()
       players = players.appended(player)
@@ -42,7 +41,7 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def checkWin():Boolean = {
-    val checkList:List[Option[Boolean]] = List(winPatternDescendingDiagonal(),winPatternVertical(),winPatternAscendingDiagonal(),winPatternDescendingDiagonal())
+    val checkList:List[Option[Boolean]] = List(winPatternHorizontal(),winPatternVertical(),winPatternAscendingDiagonal(),winPatternDescendingDiagonal())
     val win = checkList.filterNot(f => f.isEmpty).contains((Some(true)))
     if (win)
       return true
@@ -51,9 +50,9 @@ class Controller(var grid:Grid) extends Observable {
 
   def winPatternHorizontal():Option[Boolean] = {
     try {
-      val currentPiece = Some(Piece(currentPlayer))
+      val currentPiece = Some(PieceImpl(currentPlayer))
       for (i <- 0 to rowCount - 1) {
-        for (j <- 0 to colCount - 3) {
+        for (j <- 0 to colCount - 1) {
           if (grid.cell(i, j).piece == currentPiece && grid.cell(i, j + 1).piece == currentPiece && grid.cell(i, j + 2).piece == currentPiece && grid.cell(i, j + 3).piece == currentPiece)
             return Some(true)
         }
@@ -67,7 +66,7 @@ class Controller(var grid:Grid) extends Observable {
 
   def winPatternVertical():Option[Boolean] = {
     try {
-      val currentPiece = Some(Piece(currentPlayer))
+      val currentPiece = Some(PieceImpl(currentPlayer))
       for (i <- 0 to rowCount - 3) {
         for (j <- 0 to colCount - 1) {
           if (grid.cell(i, j).piece == currentPiece && grid.cell(i + 1, j).piece == currentPiece && grid.cell(i + 2, j).piece == currentPiece && grid.cell(i + 3, j).piece == currentPiece)
@@ -81,7 +80,7 @@ class Controller(var grid:Grid) extends Observable {
   }
   def winPatternAscendingDiagonal():Option[Boolean] = {
     try {
-      val currentPiece = Some(Piece(currentPlayer))
+      val currentPiece = Some(PieceImpl(currentPlayer))
       for (i <- 0 to rowCount-4){
         for (j <- 0 to colCount-4){
           if (grid.cell(i,j).piece == currentPiece && grid.cell(i+1,j+1).piece == currentPiece && grid.cell(i+2,j+2).piece == currentPiece && grid.cell(i+3,j+3).piece == currentPiece)
@@ -95,7 +94,7 @@ class Controller(var grid:Grid) extends Observable {
   }
   def winPatternDescendingDiagonal():Option[Boolean] = {
     try {
-      val currentPiece = Some(Piece(currentPlayer))
+      val currentPiece = Some(PieceImpl(currentPlayer))
       for (i <- 3 to rowCount - 1) {
         for (j <- 0 to colCount - 4) {
           if (grid.cell(i, j).piece == currentPiece && grid.cell(i - 1, j + 1).piece == currentPiece && grid.cell(i - 2, j + 2).piece == currentPiece && grid.cell(i - 3, j + 3).piece == currentPiece)
@@ -116,7 +115,7 @@ class Controller(var grid:Grid) extends Observable {
       case None => Failure(new InputExpected)
     }
 
-    undoManager.doStep(new SetCommand(validCol,Piece(currentPlayer),this));
+    undoManager.doStep(new SetCommand(validCol,PieceImpl(currentPlayer),this));
     move += 1
     print(this.gridPrint)
     notifyObservers
@@ -136,7 +135,7 @@ class Controller(var grid:Grid) extends Observable {
   }
 
   def reset(): Unit = {
-    grid = new Grid
+    grid = new GridImpl
     notifyObservers
   }
 
