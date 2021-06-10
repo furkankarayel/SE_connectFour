@@ -1,11 +1,9 @@
 package de.htwg.se.ConnectFour.model
 
 import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase.Cell
-import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase
+import de.htwg.se.ConnectFour.model.gridbase.{Grid, cellpiecebase}
 import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.{Cell, Piece}
+import de.htwg.se.ConnectFour.model.gridbase.impl.GridImpl
 import de.htwg.se.ConnectFour.model.playerbase.impl.PlayerImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -40,7 +38,7 @@ class GridSpec extends AnyWordSpec with Matchers {
     }
     "when full" should {
       "have no new dropped Piece" in {
-        var afterFull = new GridImpl()
+        var afterFull: Grid = new GridImpl()
         afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
         afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
         afterFull = afterFull.drop(0, cellpiecebase.Piece(PlayerImpl("Your Name", 1)))
@@ -63,20 +61,20 @@ class GridSpec extends AnyWordSpec with Matchers {
         var controller = new Controller(new GridImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
-        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(0,1, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(0,2, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(0,3, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(1,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(2,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(3,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(1,1, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(2,2, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(5,6, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(4,5, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(3,4, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(PieceImpl(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,1, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,2, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,3, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,1, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,2, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(5,6, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(4,5, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,4, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
         controller.checkWin() should be (true)
       }
@@ -84,10 +82,10 @@ class GridSpec extends AnyWordSpec with Matchers {
         var controller = new Controller(new GridImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
-        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(0,1, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(0,2, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(0,3, Cell(Some(PieceImpl(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,1, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,2, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
         val horizontal = controller.winPatternHorizontal()
         var bool = false
@@ -101,10 +99,10 @@ class GridSpec extends AnyWordSpec with Matchers {
         var controller = new Controller(new GridImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
-        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(1,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(2,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(3,0, Cell(Some(PieceImpl(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,0, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
         val vertical = controller.winPatternVertical()
         var bool = false
@@ -118,10 +116,10 @@ class GridSpec extends AnyWordSpec with Matchers {
         var controller = new Controller(new GridImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
-        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(1,1, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(2,2, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(PieceImpl(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,0, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,1, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,2, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
         val ascDiagonal = controller.winPatternAscendingDiagonal()
         var bool = false
@@ -137,10 +135,10 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
-        controller.grid = controller.grid.replaceCell(5,6, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(4,5, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(3,4, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(PieceImpl(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(5,6, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(4,5, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,4, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
         val ascDiagonal = controller.winPatternAscendingDiagonal()
         var bool = false
@@ -154,10 +152,10 @@ class GridSpec extends AnyWordSpec with Matchers {
         var controller = new Controller(new GridImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
-        controller.grid = controller.grid.replaceCell(5,0, Cell(Some(PieceImpl(controller.players(1)))))
-        controller.grid = controller.grid.replaceCell(4,1, Cell(Some(PieceImpl(controller.players(1)))))
-        controller.grid = controller.grid.replaceCell(3,2, Cell(Some(PieceImpl(controller.players(1)))))
-        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(PieceImpl(controller.players(1)))))
+        controller.grid = controller.grid.replaceCell(5,0, Cell(Some(Piece(controller.players(1)))))
+        controller.grid = controller.grid.replaceCell(4,1, Cell(Some(Piece(controller.players(1)))))
+        controller.grid = controller.grid.replaceCell(3,2, Cell(Some(Piece(controller.players(1)))))
+        controller.grid = controller.grid.replaceCell(2,3, Cell(Some(Piece(controller.players(1)))))
         controller.currentPlayer = controller.players(1)
         val descDiagonal = controller.winPatternDescendingDiagonal()
         var bool = false
@@ -171,10 +169,10 @@ class GridSpec extends AnyWordSpec with Matchers {
         var controller = new Controller(new GridImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
-        controller.grid = controller.grid.replaceCell(0,6, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(1,5, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(2,4, Cell(Some(PieceImpl(controller.players(0)))))
-        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(PieceImpl(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(0,6, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(1,5, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(2,4, Cell(Some(Piece(controller.players(0)))))
+        controller.grid = controller.grid.replaceCell(3,3, Cell(Some(Piece(controller.players(0)))))
         controller.currentPlayer = controller.players(0)
         val descDiagonal = controller.winPatternDescendingDiagonal()
         var bool = false

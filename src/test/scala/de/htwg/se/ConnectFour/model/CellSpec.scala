@@ -1,13 +1,9 @@
 package de.htwg.se.ConnectFour.model
 
-import de.htwg.se.ConnectFour.model
-import de.htwg.se.ConnectFour.model.fieldbase.PieceImpl
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase.Cell
 import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.{Cell, Piece}
 import de.htwg.se.ConnectFour.model.playerbase.impl.PlayerImpl
-import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 class CellSpec extends AnyWordSpec with Matchers {
 

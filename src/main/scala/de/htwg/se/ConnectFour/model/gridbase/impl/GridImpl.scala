@@ -1,6 +1,5 @@
 package de.htwg.se.ConnectFour.model.gridbase.impl
 
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase.Cell
 import de.htwg.se.ConnectFour.model.gridbase.Grid
 import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.{Cell, Piece}
 import de.htwg.se.ConnectFour.model.{CannotDropPiece, ColumnFull}

@@ -1,9 +1,10 @@
 package de.htwg.se.ConnectFour.controller
 
-import de.htwg.se.ConnectFour.model.playerbase.Player
-import de.htwg.se.ConnectFour.model.gridbase.{Grid, cellpiecebase}
 import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.Piece
+import de.htwg.se.ConnectFour.model.gridbase.{Grid, cellpiecebase}
+import de.htwg.se.ConnectFour.model.playerbase.Player
 import de.htwg.se.ConnectFour.model.playerbase.impl.PlayerBuilderImpl
+import de.htwg.se.ConnectFour.model.{InputExpected, InvalidColumnNumber}
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
 import scala.util.Failure

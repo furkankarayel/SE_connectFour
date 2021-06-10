@@ -1,7 +1,5 @@
 package de.htwg.se.ConnectFour.model
 
-import de.htwg.se.ConnectFour.model
-import de.htwg.se.ConnectFour.model.fieldbase.gridbase.cellpiecebase
 import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase
 import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.Piece
 import de.htwg.se.ConnectFour.model.playerbase.impl.PlayerImpl
