@@ -9,6 +9,7 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.7" % "test"
 libraryDependencies += "com.google.inject" % "guice" % "4.2.3"
 libraryDependencies += "net.codingwell" %% "scala-guice" % "5.0.1"
 libraryDependencies += "org.scalafx" %% "scalafx" % "15.0.1-R21"
+libraryDependencies += "com.typesafe.play" %% "play-json" % "2.8.8"
 
 lazy val javaFXModules = {
   // Determine OS version of JavaFX binaries
