@@ -1,5 +1,7 @@
 package de.htwg.se.ConnectFour.controller.impl
 
+import com.google.inject.{Guice, Inject}
+import de.htwg.se.ConnectFour.GameModule
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.grid.impl.Piece
@@ -10,7 +12,7 @@ import de.htwg.se.ConnectFour.util.UndoManager
 
 import scala.util.Failure
 
-class ControllerImpl(var grid:Grid) extends Controller {
+class ControllerImpl @Inject private (var grid:Grid) extends Controller {
   var players: Vector[Player] = Vector.empty
   var move = 0
   var currentPlayer:Player = _
@@ -18,7 +20,7 @@ class ControllerImpl(var grid:Grid) extends Controller {
   val colCount = 7
   val rowCount = 6
   override val undoManager: UndoManager = new UndoManager
-
+  val injector: Any = Guice.createInjector(new GameModule)
 
   def createGrid(): Unit = {
     reset()
