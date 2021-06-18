@@ -1,6 +1,6 @@
-package de.htwg.se.ConnectFour.model.gridbase
+package de.htwg.se.ConnectFour.model.grid
 
-import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.{Cell, Piece}
+import de.htwg.se.ConnectFour.model.grid.impl._
 
 trait Grid {
   val rows: Vector[Vector[Cell]]
