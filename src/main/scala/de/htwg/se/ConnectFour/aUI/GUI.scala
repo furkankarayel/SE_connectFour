@@ -3,7 +3,7 @@ package de.htwg.se.ConnectFour.aUI
 ;
 
 import de.htwg.se.ConnectFour.aUI.states.GUI.{DropState, GameState}
-import de.htwg.se.ConnectFour.controller.Controller
+import de.htwg.se.ConnectFour.controller.impl.ControllerImpl
 import de.htwg.se.ConnectFour.util.{Observer, UI}
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -18,7 +18,7 @@ import scalafx.scene.paint.Color.{Black, DarkRed, LightYellow, Red, Yellow}
 import scalafx.scene.paint.{LinearGradient, Stops}
 import scalafx.scene.text.Text
 
-case class GUI(controller: Controller) extends UI with Observer with JFXApp {
+case class GUI(controller: ControllerImpl) extends UI with Observer with JFXApp {
   controller.add(this)
   var gameState: GameState = GameState(controller, this)
 

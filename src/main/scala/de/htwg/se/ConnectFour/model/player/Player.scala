@@ -1,4 +1,4 @@
-package de.htwg.se.ConnectFour.model.playerbase
+package de.htwg.se.ConnectFour.model.player
 
 trait Player {
   val playerNumber: Int

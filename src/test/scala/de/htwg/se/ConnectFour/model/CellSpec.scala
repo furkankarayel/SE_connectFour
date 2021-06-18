@@ -1,7 +1,8 @@
 package de.htwg.se.ConnectFour.model
 
-import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.{Cell, Piece}
-import de.htwg.se.ConnectFour.model.playerbase.impl.PlayerImpl
+import de.htwg.se.ConnectFour.model.grid.impl
+import de.htwg.se.ConnectFour.model.grid.impl.{Cell, Piece}
+import de.htwg.se.ConnectFour.model.player.impl.PlayerImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -22,9 +23,9 @@ class CellSpec extends AnyWordSpec with Matchers {
     }
     "set to a specific value" should {
       val player = PlayerImpl("Your Name",1)
-      val nonEmptyCell = Cell(Some(Piece(player)))
+      val nonEmptyCell = Cell(Some(impl.Piece(player)))
       "return that value" in {
-        nonEmptyCell.piece should be(Some(Piece(PlayerImpl("Your Name",1))))
+        nonEmptyCell.piece should be(Some(impl.Piece(PlayerImpl("Your Name",1))))
       }
       "be set" in {
         nonEmptyCell.isSet should be(true)

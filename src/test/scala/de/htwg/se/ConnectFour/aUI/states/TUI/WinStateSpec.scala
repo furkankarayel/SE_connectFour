@@ -1,13 +1,13 @@
 package de.htwg.se.ConnectFour.aUI.states.TUI
 
-import de.htwg.se.ConnectFour.controller.Controller
-import de.htwg.se.ConnectFour.model.gridbase.impl.GridImpl
+import de.htwg.se.ConnectFour.controller.impl.ControllerImpl
+import de.htwg.se.ConnectFour.model.grid.impl.GridImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class WinStateSpec extends AnyWordSpec with Matchers {
   "A Winstate" when {
-    val controller = new Controller(new GridImpl)
+    val controller = new ControllerImpl(new GridImpl)
     val gameState = GameState(controller)
     gameState.changeState(WinState(controller))
     controller.addPlayer("Franz")

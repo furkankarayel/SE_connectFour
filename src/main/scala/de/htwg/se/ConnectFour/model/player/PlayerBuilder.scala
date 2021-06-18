@@ -1,4 +1,4 @@
-package de.htwg.se.ConnectFour.model.playerbase
+package de.htwg.se.ConnectFour.model.player
 
 import de.htwg.se.ConnectFour.util.Builder
 
