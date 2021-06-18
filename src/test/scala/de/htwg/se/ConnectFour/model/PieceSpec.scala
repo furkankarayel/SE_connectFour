@@ -1,8 +1,7 @@
 package de.htwg.se.ConnectFour.model
 
-import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase
-import de.htwg.se.ConnectFour.model.gridbase.cellpiecebase.Piece
-import de.htwg.se.ConnectFour.model.playerbase.impl.PlayerImpl
+import de.htwg.se.ConnectFour.model.grid.impl.Piece
+import de.htwg.se.ConnectFour.model.player.impl.PlayerImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

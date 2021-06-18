@@ -4,6 +4,7 @@ import de.htwg.se.ConnectFour.aUI.GUI
 import de.htwg.se.ConnectFour.aUI.states.GUI
 import de.htwg.se.ConnectFour.controller.impl.ControllerImpl
 import de.htwg.se.ConnectFour.model.grid.impl.GridImpl
+import de.htwg.se.ConnectFour.model.player.impl.PlayerBuilderImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

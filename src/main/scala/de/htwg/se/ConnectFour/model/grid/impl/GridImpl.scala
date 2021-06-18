@@ -1,7 +1,6 @@
 package de.htwg.se.ConnectFour.model.grid.impl
 
 import de.htwg.se.ConnectFour.model.grid.Grid
-import de.htwg.se.ConnectFour.model.grid.impl.{Cell, Piece}
 import de.htwg.se.ConnectFour.model.{CannotDropPiece, ColumnFull}
 
 import scala.util.{Failure, Success, Try}

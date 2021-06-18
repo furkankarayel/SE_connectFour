@@ -9,8 +9,7 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
-import scalafx.scene.control.Alert.AlertType
-import scalafx.scene.control.{Alert, Button, TextInputDialog}
+import scalafx.scene.control.{Button, TextInputDialog}
 import scalafx.scene.effect.{Glow, InnerShadow}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout._

@@ -1,6 +1,5 @@
 package de.htwg.se.ConnectFour.model
 
-import de.htwg.se.ConnectFour.model.grid.impl
 import de.htwg.se.ConnectFour.model.grid.impl.{Cell, Piece}
 import de.htwg.se.ConnectFour.model.player.impl.PlayerImpl
 import org.scalatest.matchers.should.Matchers

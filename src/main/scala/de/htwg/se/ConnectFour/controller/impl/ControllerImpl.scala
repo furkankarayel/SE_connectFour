@@ -12,7 +12,7 @@ import de.htwg.se.ConnectFour.util.UndoManager
 
 import scala.util.Failure
 
-class ControllerImpl @Inject private (var grid:Grid) extends Controller {
+class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder) extends Controller{
   var players: Vector[Player] = Vector.empty
   var move = 0
   var currentPlayer:Player = _

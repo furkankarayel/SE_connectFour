@@ -1,8 +1,8 @@
 package de.htwg.se.ConnectFour.model
 
 import de.htwg.se.ConnectFour.model.player.impl.PlayerImpl
-import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 class PlayerSpec extends AnyWordSpec with Matchers {
   "A Player" when {
