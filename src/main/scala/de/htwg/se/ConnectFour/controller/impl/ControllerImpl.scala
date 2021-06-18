@@ -6,7 +6,7 @@ import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.grid.impl.Piece
 import de.htwg.se.ConnectFour.model.player.Player
-import de.htwg.se.ConnectFour.model.player.impl.PlayerBuilderImpl
+import de.htwg.se.ConnectFour.model.player.PlayerBuilder
 import de.htwg.se.ConnectFour.model.{InputExpected, InvalidColumnNumber}
 import de.htwg.se.ConnectFour.util.UndoManager
 
@@ -28,14 +28,13 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   }
 
   def addPlayer(name:String):Unit = {
-    val playerBuilder = PlayerBuilderImpl()
     if (players.size == 0) {
-      val player = playerBuilder.setPlayer(name,1).build()
+      val player = playerBuilder.createPlayer(name,1)
       players = players.appended(player)
       println("Player 1 is called: " + name)
     }
     else {
-      val player = playerBuilder.setPlayer(name,2).build()
+      val player = playerBuilder.createPlayer(name,2)
       players = players.appended(player)
       println("Player 2 is called: " + name)
     }

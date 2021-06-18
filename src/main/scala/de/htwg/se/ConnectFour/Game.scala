@@ -9,7 +9,7 @@ import scala.util.{Failure, Success, Try}
 object Game {
   def main(args: Array[String]): Unit = {
     val injector: Injector = Guice.createInjector(new GameModule())
-    injector.getInstance(classOf[Controller])
+    val controller = injector.getInstance(classOf[Controller])
     val uiType = "GUI"
 
     Try(UIFactory(uiType,controller)) match {

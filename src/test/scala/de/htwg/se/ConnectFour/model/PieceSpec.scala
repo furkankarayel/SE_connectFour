@@ -11,7 +11,7 @@ class PieceSpec extends AnyWordSpec with Matchers {
       val player1 = PlayerImpl("Your Name", 1)
       val player2 = PlayerImpl("Your Name", 2)
       val piece1 = Piece(player1)
-      val piece2 = cellpiecebase.Piece(player2)
+      val piece2 = Piece(player2)
       "have a color" in {
         piece1.toString should be (Console.RED + "☻ ")
         piece2.toString should be (Console.YELLOW + "☻ ")

@@ -1,16 +1,12 @@
 package de.htwg.se.ConnectFour.model.player.impl
 
 import de.htwg.se.ConnectFour.model.player.{Player, PlayerBuilder}
+import com.google.inject.Inject
 
-case class PlayerBuilderImpl() extends PlayerBuilder {
-  var name: String = ""
-  var number: Int = 0
+case class PlayerBuilderImpl @Inject()() extends PlayerBuilder {
 
-  override def setPlayer(name: String, number: Int): PlayerBuilderImpl = {
-    this.name = name
-    this.number = number
-    this
+   override def createPlayer(name: String, number: Int): Player = {
+     PlayerImpl(name, number)
   }
 
-  def build(): Player = PlayerImpl(name, number)
 }

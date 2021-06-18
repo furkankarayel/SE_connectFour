@@ -2,13 +2,14 @@ package de.htwg.se.ConnectFour.controller
 
 import de.htwg.se.ConnectFour.controller.impl.ControllerImpl
 import de.htwg.se.ConnectFour.model.grid.impl.GridImpl
+import de.htwg.se.ConnectFour.model.player.impl.PlayerBuilderImpl
 import de.htwg.se.ConnectFour.util.Observer
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class ControllerImplSpec extends AnyWordSpec with Matchers{
   "observed by an Observer" should {
-    val controller = new ControllerImpl(new GridImpl())
+    val controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
     controller.move = 0
     controller.addPlayer("Player1")
     controller.addPlayer("Player2")

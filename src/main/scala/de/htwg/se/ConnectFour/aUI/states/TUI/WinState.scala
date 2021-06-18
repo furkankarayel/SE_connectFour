@@ -1,8 +1,8 @@
 package de.htwg.se.ConnectFour.aUI.states.TUI
 
-import de.htwg.se.ConnectFour.controller.impl.ControllerImpl
+import de.htwg.se.ConnectFour.controller.Controller
 
-case class WinState(controller: ControllerImpl) extends State[GameState] {
+case class WinState(controller: Controller) extends State[GameState] {
   override def handle(input: String, state: GameState): Unit = {
     if (input == "won") {
       if (controller.currentPlayer.color == "red")

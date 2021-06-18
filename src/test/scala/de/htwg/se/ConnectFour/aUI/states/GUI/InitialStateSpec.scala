@@ -10,7 +10,7 @@ import org.scalatest.wordspec.AnyWordSpec
 
 class InitialStateSpec extends AnyWordSpec with Matchers{
   "An initial state" when {
-    val controller = new ControllerImpl(new GridImpl)
+    val controller = new ControllerImpl(new GridImpl(),PlayerBuilderImpl())
     val gui = new GUI(controller)
     val initialState = GameState(controller,gui)
     controller.addPlayer("Franz")

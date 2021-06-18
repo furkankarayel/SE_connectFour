@@ -10,6 +10,7 @@ import net.codingwell.scalaguice.ScalaModule
 
 class GameModule extends AbstractModule with ScalaModule {
   override def configure(): Unit = {
+      bind[PlayerBuilder].to[PlayerBuilderImpl]
       bind[Grid].to[GridImpl]
       bind[Controller].to[ControllerImpl]
   }

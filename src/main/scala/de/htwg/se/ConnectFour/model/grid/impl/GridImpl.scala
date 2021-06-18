@@ -1,12 +1,13 @@
 package de.htwg.se.ConnectFour.model.grid.impl
-
+import com.google.inject.Inject
 import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.{CannotDropPiece, ColumnFull}
 
 import scala.util.{Failure, Success, Try}
 
-case class GridImpl(rows: Vector[Vector[Cell]]) extends Grid {
+case class GridImpl  (rows: Vector[Vector[Cell]]) extends Grid {
 
+  @Inject()
   def this() = this(Vector.tabulate(6, 7) { (rowCount, col) => Cell(None) })
 
   override def cell(row: Int, col: Int): Cell = rows(row)(col)

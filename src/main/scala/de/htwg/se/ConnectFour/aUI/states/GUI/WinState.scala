@@ -1,11 +1,11 @@
 package de.htwg.se.ConnectFour.aUI.states.GUI
 
 import de.htwg.se.ConnectFour.aUI.GUI
-import de.htwg.se.ConnectFour.controller.impl.ControllerImpl
+import de.htwg.se.ConnectFour.controller.Controller
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
 
-case class WinState(controller: ControllerImpl) extends State[GameState] {
+case class WinState(controller: Controller) extends State[GameState] {
   override def handle(input: String, gui: GUI, state: GameState): Unit = {
     if(input == "won")
       if (controller.currentPlayer.color == "red")

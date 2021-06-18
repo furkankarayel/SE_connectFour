@@ -3,6 +3,7 @@ package de.htwg.se.ConnectFour.model
 import de.htwg.se.ConnectFour.controller.impl.ControllerImpl
 import de.htwg.se.ConnectFour.model.grid.{Grid, impl}
 import de.htwg.se.ConnectFour.model.grid.impl.{Cell, GridImpl}
+import de.htwg.se.ConnectFour.model.player.impl.PlayerBuilderImpl
 import de.htwg.se.ConnectFour.model.player.impl.PlayerImpl
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -50,14 +51,14 @@ class GridSpec extends AnyWordSpec with Matchers {
     }
     "when filled specifically" should {
       "wrong it shouldn't be checked correctly" in {
-        var controller = new ControllerImpl(new GridImpl())
+        var controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.currentPlayer = controller.players(0)
         controller.checkWin() should be(false)
       }
       "all patterns should be checked correctly" in {
-        var controller = new ControllerImpl(new GridImpl())
+        var controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,0, Cell(Some(impl.Piece(controller.players(0)))))
@@ -78,7 +79,7 @@ class GridSpec extends AnyWordSpec with Matchers {
         controller.checkWin() should be (true)
       }
       "any horizontal pattern be checked correctly" in {
-        var controller = new ControllerImpl(new GridImpl())
+        var controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,0, Cell(Some(impl.Piece(controller.players(0)))))
@@ -95,7 +96,7 @@ class GridSpec extends AnyWordSpec with Matchers {
         bool should be (true)
       }
       "any vertical pattern be checked correctly" in {
-        var controller = new ControllerImpl(new GridImpl())
+        var controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,0, Cell(Some(impl.Piece(controller.players(0)))))
@@ -112,7 +113,7 @@ class GridSpec extends AnyWordSpec with Matchers {
         bool should be (true)
       }
       "the bottom left corner be checked correctly ascending diagonally" in {
-        var controller = new ControllerImpl(new GridImpl())
+        var controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,0, Cell(Some(impl.Piece(controller.players(0)))))
@@ -130,7 +131,7 @@ class GridSpec extends AnyWordSpec with Matchers {
       }
 
       "the upper right corner be checked correctly ascending diagonally" in {
-        var controller = new ControllerImpl(new GridImpl())
+        var controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
         controller.grid.reset()
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
@@ -148,7 +149,7 @@ class GridSpec extends AnyWordSpec with Matchers {
         bool should be (true)
       }
       "the upper left corner be checked correctly descending diagonally if a player has won the game" in {
-        var controller = new ControllerImpl(new GridImpl())
+        var controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(5,0, Cell(Some(impl.Piece(controller.players(1)))))
@@ -165,7 +166,7 @@ class GridSpec extends AnyWordSpec with Matchers {
         bool should be (true)
       }
       "the bottom right corner be checked correctly descending diagonally if a player has won the game" in {
-        var controller = new ControllerImpl(new GridImpl())
+        var controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
         controller.addPlayer("Player1")
         controller.addPlayer("Player2")
         controller.grid = controller.grid.replaceCell(0,6, Cell(Some(impl.Piece(controller.players(0)))))
