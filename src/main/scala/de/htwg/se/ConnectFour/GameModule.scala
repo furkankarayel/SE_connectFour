@@ -14,6 +14,8 @@ class GameModule extends AbstractModule with ScalaModule {
   override def configure(): Unit = {
       bind[PlayerBuilder].to[PlayerBuilderImpl]
       bind[Grid].to[GridImpl]
+      //bind[FileIO].to[FileIOImpl] //JSON
+      bind[FileIO].to[FileIOImpl]
       bind[Controller].to[ControllerImpl]
   }
 }

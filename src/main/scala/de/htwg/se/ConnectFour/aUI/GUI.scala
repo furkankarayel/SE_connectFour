@@ -193,8 +193,8 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
           case 5 => 0
         }
         val piece: Button = gameFieldButton(y, x)
-        if (controller.grid.cell(y, x).isSet) {
-          val img = controller.grid.cell(y, x).piece.get.player.playerNumber match {
+        if (controller.getGrid().cell(y, x).isSet) {
+          val img = controller.getGrid().cell(y, x).piece.get.player.playerNumber match {
             case 1 => new Image("/red.png")
             case 2 => new Image("/yellow.png")
           }

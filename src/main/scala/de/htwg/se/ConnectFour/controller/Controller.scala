@@ -5,9 +5,8 @@ import de.htwg.se.ConnectFour.model.player.Player
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
 trait Controller extends Observable{
-  var grid:Grid
   var players: Vector[Player]
-  var move:Int
+  var moveCount:Int
   var currentPlayer:Player
   val maxPlayers:Int
   val colCount:Int
@@ -25,6 +24,17 @@ trait Controller extends Observable{
   def drop(input:Option[String]): Unit
   def undoDrop(): Unit
   def redoDrop(): Unit
+  def saveGame(): Unit
+  def loadGame(): Unit
   def reset(): Unit
   def gridPrint(): String
+
+  def getGrid(): Grid
+  def getPlayers(): Vector[Player]
+  def getCurrentPlayer(): Player
+  def getMoveCount: Int
+  def setGrid(grid:Grid): Unit
+  def setPlayers(players:Vector[Player]): Unit
+  def setCurrentPlayer(currentPlayer:Player): Unit
+  def setMoveCount(moveCount:Int): Unit
 }

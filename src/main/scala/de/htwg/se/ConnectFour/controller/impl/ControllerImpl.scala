@@ -1,33 +1,36 @@
 package de.htwg.se.ConnectFour.controller.impl
 
 import com.google.inject.{Guice, Inject}
+import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.ConnectFour.GameModule
 import de.htwg.se.ConnectFour.controller.Controller
+import de.htwg.se.ConnectFour.model.fileio.FileIO
 import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.grid.impl.Piece
-import de.htwg.se.ConnectFour.model.player.Player
-import de.htwg.se.ConnectFour.model.player.PlayerBuilder
+import de.htwg.se.ConnectFour.model.player.{Player, PlayerBuilder}
 import de.htwg.se.ConnectFour.model.{InputExpected, InvalidColumnNumber}
 import de.htwg.se.ConnectFour.util.UndoManager
 
 import scala.util.Failure
 
 class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder) extends Controller{
+  val injector: Any = Guice.createInjector(new GameModule)
+  val fileIo: FileIO = injector.instance[FileIO]
   var players: Vector[Player] = Vector.empty
-  var move = 0
+  var moveCount = 0
   var currentPlayer:Player = _
   val maxPlayers = 2
   val colCount = 7
   val rowCount = 6
   override val undoManager: UndoManager = new UndoManager
-  val injector: Any = Guice.createInjector(new GameModule)
 
-  def createGrid(): Unit = {
+
+  override def createGrid(): Unit = {
     reset()
     notifyObservers
   }
 
-  def addPlayer(name:String):Unit = {
+  override def addPlayer(name:String):Unit = {
     if (players.size == 0) {
       val player = playerBuilder.createPlayer(name,1)
       players = players.appended(player)
@@ -40,12 +43,12 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
     }
   }
 
-  def whoseTurnIsIt(): Unit = {
-    currentPlayer = if (move % 2 == 0) players(0) else players(1)
+  override def whoseTurnIsIt(): Unit = {
+    currentPlayer = if (moveCount % 2 == 0) players(0) else players(1)
     notifyObservers
   }
 
-  def checkWin():Boolean = {
+  override def checkWin():Boolean = {
     val checkList:List[Option[Boolean]] = List(winPatternHorizontal(),winPatternVertical(),winPatternAscendingDiagonal(),winPatternDescendingDiagonal())
     val win = checkList.filterNot(f => f.isEmpty).contains((Some(true)))
     if (win)
@@ -53,7 +56,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
     false
   }
 
-  def winPatternHorizontal():Option[Boolean] = {
+  override def winPatternHorizontal():Option[Boolean] = {
     try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 0 to rowCount - 1) {
@@ -69,7 +72,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   }
 
 
-  def winPatternVertical():Option[Boolean] = {
+  override def winPatternVertical():Option[Boolean] = {
     try {
       val currentPiece = Some(Piece(currentPlayer : Player))
       for (i <- 0 to rowCount - 3) {
@@ -83,7 +86,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
       case e: Exception => None
     }
   }
-  def winPatternAscendingDiagonal():Option[Boolean] = {
+  override def winPatternAscendingDiagonal():Option[Boolean] = {
     try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 0 to rowCount-4){
@@ -97,7 +100,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
       case e: Exception => None
     }
   }
-  def winPatternDescendingDiagonal():Option[Boolean] = {
+  override def winPatternDescendingDiagonal():Option[Boolean] = {
     try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 3 to rowCount - 1) {
@@ -112,7 +115,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
     }
   }
 
-  def drop(input:Option[String]): Unit = {
+  override def drop(input:Option[String]): Unit = {
     whoseTurnIsIt()
     var validCol = 0
     input match {
@@ -121,30 +124,45 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
     }
 
     undoManager.doStep(new SetCommandImpl(validCol,Piece(currentPlayer),this));
-    move += 1
+    moveCount += 1
     print(this.gridPrint)
     notifyObservers
   }
-  def undoDrop(): Unit = {
+  override def undoDrop(): Unit = {
     undoManager.undoStep
-    move -= 1
+    moveCount -= 1
     print (gridPrint)
     notifyObservers
   }
 
-  def redoDrop(): Unit = {
+  override def redoDrop(): Unit = {
     undoManager.redoStep
-    move += 1
+    moveCount += 1
     print(gridPrint)
     notifyObservers
   }
 
-  def reset(): Unit = {
+  override def saveGame(): Unit = {
+    fileIo.save(this)
+  }
+
+  override def loadGame(): Unit = ???
+
+  override def reset(): Unit = {
     grid = grid.reset()
     notifyObservers
   }
 
-  def gridPrint(): String = grid.toString
+  override def gridPrint(): String = grid.toString
+
+  override def getGrid(): Grid = this.grid
+  override def getPlayers(): Vector[Player] = this.players
+  override def getCurrentPlayer(): Player = this.currentPlayer
+  override def getMoveCount: Int = this.moveCount
+  override def setGrid(grid: Grid): Unit = this.grid = grid
+  override def setPlayers(players:Vector[Player]): Unit = this.players = players
+  override def setCurrentPlayer(currentPlayer: Player): Unit = this.currentPlayer = currentPlayer
+  override def setMoveCount(moveCount:Int): Unit = this.moveCount = moveCount
 
 }
 

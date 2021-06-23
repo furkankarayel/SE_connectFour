@@ -10,7 +10,7 @@ import org.scalatest.wordspec.AnyWordSpec
 class ControllerImplSpec extends AnyWordSpec with Matchers{
   "observed by an Observer" should {
     val controller = new ControllerImpl(new GridImpl,new PlayerBuilderImpl())
-    controller.move = 0
+    controller.moveCount = 0
     controller.addPlayer("Player1")
     controller.addPlayer("Player2")
     controller.currentPlayer = controller.players(0)

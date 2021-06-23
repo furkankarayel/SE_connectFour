@@ -8,6 +8,7 @@ case class InitialState(controller: Controller, gui:GUI) extends State[GameState
     if (controller.players.size == controller.maxPlayers) {
       state.changeState(DropState(controller))
       gui.refreshView()
+      controller.saveGame()
     }
   }
 }

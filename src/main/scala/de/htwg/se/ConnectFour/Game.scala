@@ -6,7 +6,7 @@ import de.htwg.se.ConnectFour.controller.Controller
 
 import scala.util.{Failure, Success, Try}
 
-object Game {
+case object Game {
   def main(args: Array[String]): Unit = {
     val injector: Injector = Guice.createInjector(new GameModule())
     val controller = injector.getInstance(classOf[Controller])
