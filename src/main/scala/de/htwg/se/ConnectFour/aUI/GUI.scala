@@ -1,7 +1,4 @@
-package de.htwg.se.ConnectFour.aUI
-
-;
-
+package de.htwg.se.ConnectFour.aUI;
 import de.htwg.se.ConnectFour.aUI.states.GUI.GameState
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.util.{Observer, UI}
@@ -152,8 +149,6 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         controller.loadGame()
-        print(gameState.state)
-        refreshView()
       }
       onMouseEntered = _ => effect = new Glow(0.7)
       onMouseExited = _ => effect = null

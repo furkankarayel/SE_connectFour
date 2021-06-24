@@ -3,25 +3,44 @@ import com.google.inject.Guice
 import de.htwg.se.ConnectFour.GameModule
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.fileio.FileIO
+import de.htwg.se.ConnectFour.model.grid.Grid
+import de.htwg.se.ConnectFour.model.grid.impl.{Cell, Piece}
 import net.codingwell.scalaguice.InjectorExtensions.ScalaInjector
 
 import scala.xml.PrettyPrinter
 
 class FileIOImpl() extends FileIO {
 
-  override def load: Controller = {
-    val injector = Guice.createInjector(new GameModule)
-    val controller = injector.instance[Controller]
+  override def load(controller:Controller): Unit = {
     val file = scala.xml.XML.loadFile("game.xml")
+    val currentPlayer = (file \\ "game" \\ "player" \\ "currentPlayer").text
+    val player1 = (file \\ "game" \\ "player" \\ "player1").text
+    val player2 = (file \\ "game" \\ "player" \\ "player2").text
+    val moveCount = (file \\ "game" \\ "player" \\ "moveCount").text.trim.toInt
 
-    val cellNodes = (file \\ "cell")
-    for (cell <- cellNodes) {
-      val row: Int = (cell \ "@row").text.toInt
-      val col: Int = (cell \ "@col").text.toInt
-      val value: String = cell.text.trim
+    var newGrid: Grid = controller.getGrid()
+    controller.setMoveCount(moveCount)
+    controller.addPlayer(player1)
+    controller.addPlayer(player2)
+    currentPlayer match {
+      case player1 => controller.setCurrentPlayer(controller.players(0))
+      case player2 => controller.setCurrentPlayer(controller.players(1))
     }
 
-    controller
+    val cellNodes = (file \\ "grid" \\ "cell")
+    for (cell <- cellNodes) {
+      val row: Int = (cell \\ "@row").text.toInt
+      val col: Int = (cell \\ "@col").text.toInt
+      val value: Int = cell.text.trim.toInt
+
+      val optPiece = (value) match {
+        case 1 => Some(Piece(controller.players(0)))
+        case 2 => Some(Piece(controller.players(1)))
+        case _ => None
+      }
+      newGrid = newGrid.replaceCell(row, col, Cell(optPiece))
+    }
+    controller.setGrid(newGrid)
   }
   def gameToXml(controller: Controller) = {
     <game>
@@ -59,9 +78,10 @@ class FileIOImpl() extends FileIO {
   }
   override def save(game: Controller): Unit = {
     import java.io._
-    val pw = new PrintWriter(new File("gameboard.xml"))
+    val pw = new PrintWriter(new File("game.xml"))
     val prettyPrinter = new PrettyPrinter(120, 4)
     val xml = prettyPrinter.format(gameToXml(game))
     pw.write(xml)
+    pw.close()
   }
 }

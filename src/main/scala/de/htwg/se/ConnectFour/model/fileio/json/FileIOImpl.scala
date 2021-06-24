@@ -15,10 +15,8 @@ import scala.io.Source
 
 class FileIOImpl @Inject () extends FileIO {
 
-  override def load: Controller = {
+  override def load(controller:Controller): Unit = {
     val source: String = Source.fromFile("game.json").getLines.mkString
-    val injector = Guice.createInjector(new GameModule)
-    val controller = injector.instance[Controller]
     val gameJson: JsValue = Json.parse(source)
     val grid = (gameJson \ "grid")
     val moveCount = (gameJson \ "player" \ "moveCount" \ "value").get.toString().toInt
@@ -48,9 +46,7 @@ class FileIOImpl @Inject () extends FileIO {
       }
       newGrid = newGrid.replaceCell(row, col, Cell(optPiece))
     }
-    print(newGrid.toString)
     controller.setGrid(newGrid)
-    controller
   }
 
   def gameToJson(controller: Controller): JsValue = {

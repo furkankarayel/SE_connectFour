@@ -5,7 +5,7 @@ import de.htwg.se.ConnectFour.controller.Controller
 
 trait FileIO {
 
-  def load: Controller
+  def load(controller:Controller):Unit
 
   def save(game: Controller): Unit
 

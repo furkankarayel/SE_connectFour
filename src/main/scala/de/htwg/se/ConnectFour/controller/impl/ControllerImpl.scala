@@ -147,7 +147,8 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   }
 
   override def loadGame(): Unit = {
-    fileIo.load
+    fileIo.load(this)
+    notifyObservers
   }
 
   override def reset(): Unit = {
