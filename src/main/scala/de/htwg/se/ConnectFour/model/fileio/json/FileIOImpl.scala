@@ -21,7 +21,7 @@ class FileIOImpl @Inject () extends FileIO {
     val controller = injector.instance[Controller]
     val gameJson: JsValue = Json.parse(source)
     val grid = (gameJson \ "grid")
-    val moveCount = (gameJson \ "player" \ "moveCount").get.toString().toInt
+    val moveCount = (gameJson \ "player" \ "moveCount" \ "value").get.toString().toInt
     val currentPlayer = (gameJson \ "player" \ "currentPlayer").get.toString()
     val player1 = (gameJson \ "player" \ "player1").get.toString()
     val player2 = (gameJson \ "player" \ "player2").get.toString()
@@ -35,8 +35,21 @@ class FileIOImpl @Inject () extends FileIO {
       case player1 => controller.setCurrentPlayer(controller.players(0))
       case player2 => controller.setCurrentPlayer(controller.players(1))
     }
+    val cells = (grid \ "cells").as[JsArray]
+    for (cell <- cells.value) {
+      val row = (cell \ "row").get.as[Int]
+      val col = (cell \ "col").get.as[Int]
+      val value = (cell \ "value").get.as[Int]
 
-
+      val optPiece = (value) match {
+        case 1 => Some(Piece(controller.players(0)))
+        case 2 => Some(Piece(controller.players(1)))
+        case _ => None
+      }
+      newGrid = newGrid.replaceCell(row, col, Cell(optPiece))
+    }
+    print(newGrid.toString)
+    controller.setGrid(newGrid)
     controller
   }
 
@@ -62,10 +75,15 @@ class FileIOImpl @Inject () extends FileIO {
                row <- (0 to controller.rowCount - 1).reverse
                }
           yield {
+
+            var player = controller.getGrid().cell(row, col).piece match {
+                case Some(s) => s.player.playerNumber
+                case None => -1
+              }
             Json.obj(
               "row" -> row,
               "col" -> col,
-              "value" -> Json.toJson(controller.getGrid().cell(row, col).toString)
+              "value" -> player
             )
           }
         )

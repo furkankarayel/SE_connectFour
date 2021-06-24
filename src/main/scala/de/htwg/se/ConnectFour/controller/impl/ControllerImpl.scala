@@ -1,7 +1,6 @@
 package de.htwg.se.ConnectFour.controller.impl
 
-import com.google.inject.{Guice, Inject}
-import net.codingwell.scalaguice.InjectorExtensions._
+import com.google.inject.{Guice, Inject, Injector}
 import de.htwg.se.ConnectFour.GameModule
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.fileio.FileIO
@@ -147,7 +146,9 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
     fileIo.save(this)
   }
 
-  override def loadGame(): Unit = ???
+  override def loadGame(): Unit = {
+    fileIo.load
+  }
 
   override def reset(): Unit = {
     grid = grid.reset()
@@ -160,10 +161,10 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   override def getPlayers(): Vector[Player] = this.players
   override def getCurrentPlayer(): Player = this.currentPlayer
   override def getMoveCount: Int = this.moveCount
-  override def setGrid(grid: Grid): Unit = this.grid = grid
-  override def setPlayers(players:Vector[Player]): Unit = this.players = players
-  override def setCurrentPlayer(currentPlayer: Player): Unit = this.currentPlayer = currentPlayer
-  override def setMoveCount(moveCount:Int): Unit = this.moveCount = moveCount
+  override def setGrid(grid: Grid): Unit = this.grid = grid;notifyObservers
+  override def setPlayers(players:Vector[Player]): Unit = this.players = players;notifyObservers
+  override def setCurrentPlayer(currentPlayer: Player): Unit = this.currentPlayer = currentPlayer;notifyObservers
+  override def setMoveCount(moveCount:Int): Unit = this.moveCount = moveCount;notifyObservers
 
 }
 

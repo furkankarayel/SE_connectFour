@@ -192,8 +192,10 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
       onMouseExited = _ => effect = null
     }
     add(undo, 0, 0)
-    add(redo, 1, 0)
-    add(newGame, 2, 0)
+    add(redo, 0, 1)
+    add(newGame, 1, 0)
+    add(save, 2, 0)
+    add(load, 2, 1)
   }
 
   stage = new PrimaryStage {

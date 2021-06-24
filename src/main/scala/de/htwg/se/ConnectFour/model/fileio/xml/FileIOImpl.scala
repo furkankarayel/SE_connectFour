@@ -45,8 +45,12 @@ class FileIOImpl() extends FileIO {
     row <- (0 to controller.rowCount - 1).reverse
     }
     yield {
+      var player = controller.getGrid().cell(row, col).piece match {
+        case Some(s) => s.player.playerNumber
+        case None => -1
+      }
       <cell row={ row.toString } col={ col.toString }>
-        { controller.getGrid().cell(row, col).toString }
+        { player.toString }
       </cell>
     }
       }
