@@ -5,6 +5,7 @@ import de.htwg.se.ConnectFour.GameModule
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.fileio.FileIO
 import de.htwg.se.ConnectFour.model.grid.Grid
+import de.htwg.se.ConnectFour.model.grid.impl.{Cell, Piece}
 import net.codingwell.scalaguice.InjectorExtensions.ScalaInjector
 import play.api.libs.json._
 

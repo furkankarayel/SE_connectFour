@@ -10,11 +10,12 @@ import de.htwg.se.ConnectFour.model.grid.impl.Piece
 import de.htwg.se.ConnectFour.model.player.{Player, PlayerBuilder}
 import de.htwg.se.ConnectFour.model.{InputExpected, InvalidColumnNumber}
 import de.htwg.se.ConnectFour.util.UndoManager
+import net.codingwell.scalaguice.InjectorExtensions.ScalaInjector
 
 import scala.util.Failure
 
 class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder) extends Controller{
-  val injector: Any = Guice.createInjector(new GameModule)
+  val injector: Injector = Guice.createInjector(new GameModule)
   val fileIo: FileIO = injector.instance[FileIO]
   var players: Vector[Player] = Vector.empty
   var moveCount = 0

@@ -113,19 +113,50 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
     }
   }
 
+
+
   val bottombar: GridPane = new GridPane {
     padding = Insets(20)
-    val row: RowConstraints = new RowConstraints() {
-      percentHeight = 100
+    hgap = 10
+    vgap = 10
+
+    val rows: RowConstraints = new RowConstraints() {
+      percentHeight = 50
       prefHeight = 60
     }
-    rowConstraints.add(row)
+
+    rowConstraints.add(rows)
+    rowConstraints.add(rows)
 
     for (_ <- 0 until 3) {
       val col = new ColumnConstraints() {
         percentWidth = 80
       }
       columnConstraints.add(col)
+    }
+
+    val save = new Button("Save") {
+      padding = Insets(10)
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      this.setMaxSize(Double.MaxValue, Double.MaxValue)
+      onMouseClicked = _ => {
+        controller.saveGame()
+      }
+      onMouseEntered = _ => effect = new Glow(0.7)
+      onMouseExited = _ => effect = null
+    }
+
+    val load = new Button("Load") {
+      padding = Insets(10)
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      this.setMaxSize(Double.MaxValue, Double.MaxValue)
+      onMouseClicked = _ => {
+        controller.loadGame()
+        print(gameState.state)
+        refreshView()
+      }
+      onMouseEntered = _ => effect = new Glow(0.7)
+      onMouseExited = _ => effect = null
     }
 
     val undo = new Button("Undo") {
