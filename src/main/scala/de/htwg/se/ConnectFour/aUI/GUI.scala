@@ -134,7 +134,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
 
     val save = new Button("Save") {
       padding = Insets(10)
-      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #4169E1; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         controller.saveGame()
@@ -145,7 +145,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
 
     val load = new Button("Load") {
       padding = Insets(10)
-      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #4169E1; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         controller.loadGame()
@@ -156,7 +156,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
 
     val undo = new Button("Undo") {
       padding = Insets(10)
-      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #00BFFF; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         execute("u")
@@ -167,7 +167,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
 
     val redo = new Button("Redo") {
       padding = Insets(10)
-      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #00BFFF; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         execute("r")
@@ -178,7 +178,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
 
     val newGame = new Button("New Game") {
       padding = Insets(10)
-      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #e6f3ff; -fx-background-radius: 15px;"
+      style = "-fx-font: normal bold 16pt sans-serif; -fx-text-fill: black; -fx-background-color: #4682B4; -fx-background-radius: 15px;"
       this.setMaxSize(Double.MaxValue, Double.MaxValue)
       onMouseClicked = _ => {
         execute("n")

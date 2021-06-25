@@ -1,9 +1,9 @@
-FROM hseeberger/scala-sbt:8u265_1.4.3_2.13.4
+FROM hseeberger/scala-sbt:16.0.1_1.5.4_2.13.6
 
 ADD . /ConnectFour
 
 WORKDIR /ConnectFour
 
-RUN sbt compile
+RUN apt-get update && apt-get install -y libxrender1 libxtst6 libxi6 libgl1-mesa-glx
 
 CMD sbt run
