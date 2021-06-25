@@ -1,0 +1,52 @@
+<game>
+    <player>
+        <moveCount> 8 </moveCount>
+        <currentPlayer> Detlef </currentPlayer>
+        <player1> Detlef </player1>
+        <player2> Detlef </player2>
+    </player>
+    <grid>
+        <cell row="5" col="0"> -1 </cell>
+        <cell row="4" col="0"> -1 </cell>
+        <cell row="3" col="0"> -1 </cell>
+        <cell row="2" col="0"> -1 </cell>
+        <cell row="1" col="0"> -1 </cell>
+        <cell row="0" col="0"> -1 </cell>
+        <cell row="5" col="1"> -1 </cell>
+        <cell row="4" col="1"> -1 </cell>
+        <cell row="3" col="1"> -1 </cell>
+        <cell row="2" col="1"> -1 </cell>
+        <cell row="1" col="1"> -1 </cell>
+        <cell row="0" col="1"> -1 </cell>
+        <cell row="5" col="2"> -1 </cell>
+        <cell row="4" col="2"> -1 </cell>
+        <cell row="3" col="2"> -1 </cell>
+        <cell row="2" col="2"> 2 </cell>
+        <cell row="1" col="2"> 1 </cell>
+        <cell row="0" col="2"> 2 </cell>
+        <cell row="5" col="3"> -1 </cell>
+        <cell row="4" col="3"> -1 </cell>
+        <cell row="3" col="3"> -1 </cell>
+        <cell row="2" col="3"> -1 </cell>
+        <cell row="1" col="3"> -1 </cell>
+        <cell row="0" col="3"> -1 </cell>
+        <cell row="5" col="4"> -1 </cell>
+        <cell row="4" col="4"> -1 </cell>
+        <cell row="3" col="4"> -1 </cell>
+        <cell row="2" col="4"> -1 </cell>
+        <cell row="1" col="4"> -1 </cell>
+        <cell row="0" col="4"> -1 </cell>
+        <cell row="5" col="5"> -1 </cell>
+        <cell row="4" col="5"> -1 </cell>
+        <cell row="3" col="5"> -1 </cell>
+        <cell row="2" col="5"> -1 </cell>
+        <cell row="1" col="5"> -1 </cell>
+        <cell row="0" col="5"> -1 </cell>
+        <cell row="5" col="6"> -1 </cell>
+        <cell row="4" col="6"> -1 </cell>
+        <cell row="3" col="6"> -1 </cell>
+        <cell row="2" col="6"> -1 </cell>
+        <cell row="1" col="6"> -1 </cell>
+        <cell row="0" col="6"> -1 </cell>
+    </grid>
+</game>
