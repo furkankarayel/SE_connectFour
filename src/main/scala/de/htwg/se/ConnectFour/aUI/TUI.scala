@@ -18,12 +18,12 @@ case class TUI(controller: Controller) extends UI with Observer{
     println(Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙" + Console.GREEN + " With typing 'q' you can quit " + Console.BLUE + "◙◙◙◙◙◙◙◙◙◙◙◙◙")
 
     var input:String = ""
-    if (input.length>0)
-      if (!input.isEmpty) processInput(input)
-      else do {
-        input = readLine()
+    while (input != "q") {
+      input = readLine()
+      if (!input.isEmpty) {
         processInput(input)
-      } while (input != "q")
+      }
+    }
   }
 
   override def processInput(input: String):Unit = {
@@ -35,8 +35,5 @@ case class TUI(controller: Controller) extends UI with Observer{
   def execute(input:String): Unit = {
     gameState.handle(input)
   }
-
   override def update: Boolean =  {controller.toString;true}
-
-
 }
