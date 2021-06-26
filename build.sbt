@@ -28,6 +28,5 @@ lazy val javaFXModules = {
 
 libraryDependencies ++= javaFXModules
 
-coverageExcludedPackages := "de.htwg.se.ConnectFour.aui;" +
-  "de.htwg.se.malefiz.model.gameboardComponent.gameboardBaseImpl.Dice;"
+coverageExcludedPackages := "de.htwg.se.ConnectFour.aui;"
 
