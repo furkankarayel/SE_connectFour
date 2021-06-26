@@ -13,6 +13,8 @@ case class InitialState(controller: Controller) extends State[GameState] {
     }
     else if (controller.players.size < 3 && input != "q") {
       controller.addPlayer(input)
+      if(controller.players.size == 2)
+        state.changeState(DropState(controller))
     }
   }
 }
