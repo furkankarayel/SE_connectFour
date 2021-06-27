@@ -27,5 +27,6 @@ lazy val javaFXModules = {
 libraryDependencies ++= javaFXModules
 
 coverageExcludedPackages := "de.htwg.se.ConnectFour.aui.*;" +
-                            "de.htwg.se.ConnectFour.model.fileio.*"
+                            "de.htwg.se.ConnectFour.model.fileio.*" +
+                            "de.htwg.se.ConnectFour.Game"
 

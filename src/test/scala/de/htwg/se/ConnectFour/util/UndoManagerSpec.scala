@@ -33,5 +33,13 @@ class UndoManagerSpec extends AnyWordSpec with Matchers {
       undoManager.redoStep
       command.state should be(1)
     }
+    "do nothing" in {
+      val command = new incrCommand
+      command.state should be(0)
+      undoManager.undoStep
+      command.state should be(0)
+      undoManager.redoStep
+      command.state should be(0)
+    }
   }
 }
