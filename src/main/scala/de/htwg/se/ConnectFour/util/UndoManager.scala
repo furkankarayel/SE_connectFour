@@ -1,5 +1,9 @@
 package de.htwg.se.ConnectFour.util
 
+/**
+ * Undo Manager implementation
+ * Undo/Memento pattern
+ */
 class UndoManager {
   private var undoStack: List[Command]= Nil
   private var redoStack: List[Command]= Nil

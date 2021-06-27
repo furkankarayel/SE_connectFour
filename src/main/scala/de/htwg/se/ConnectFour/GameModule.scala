@@ -10,12 +10,17 @@ import de.htwg.se.ConnectFour.model.player.PlayerBuilder
 import de.htwg.se.ConnectFour.model.player.impl.PlayerBuilderImpl
 import net.codingwell.scalaguice.ScalaModule
 
+/**
+ * GameModule class
+ * here is dependency injection
+ * being done for the game components
+ */
 class GameModule extends AbstractModule with ScalaModule {
   override def configure(): Unit = {
-      bind[PlayerBuilder].to[PlayerBuilderImpl]
-      bind[Grid].to[GridImpl]
+    bind[PlayerBuilder].to[PlayerBuilderImpl]
+    bind[Grid].to[GridImpl]
     bind[FileIO].to[json.FileIOImpl]
-    //  bind[FileIO].to[xml.FileIOImpl]
-      bind[Controller].to[ControllerImpl]
+    //bind[FileIO].to[xml.FileIOImpl]
+    bind[Controller].to[ControllerImpl]
   }
 }

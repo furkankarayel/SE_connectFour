@@ -14,6 +14,11 @@ import scalafx.scene.paint.Color.{Black, DarkRed, LightYellow, Red, Yellow}
 import scalafx.scene.paint.{LinearGradient, Stops}
 import scalafx.scene.text.Text
 
+
+/**
+ * ConnectFour graphical user interface
+ * based on ScalaFX
+ */
 case class GUI(controller: Controller) extends UI with Observer with JFXApp {
   controller.add(this)
   var gameState: GameState = GameState(controller, this)
@@ -39,6 +44,10 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
     }
   }
 
+  /**
+   * Force to type in names
+   * when method is running
+   */
   def begin(): Unit = {
     do {
       val playerSize = controller.players.size
@@ -50,8 +59,12 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
     execute("") // changing the state
   }
 
-
-  def gameFieldButton(x: Int, y: Int): Button = {
+  /**
+   * Method to create a gamefield button.
+   * On mouse click the button passes
+   * its y-value to the gameState
+   */
+  def gameFieldButton(y: Int): Button = {
     val gameFieldButton = new Button {
       style = "-fx-font: normal bold 16pt sans-serif;  -fx-border-color: lightgrey; -fx-text-fill: black; -fx-background-color: #e6f3ff;"
       onMouseClicked = _ => {
@@ -91,6 +104,9 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
     )
   }
 
+  /**
+   * Initialising the game grid.
+   */
   val gameGrid: GridPane = new GridPane {
     gridLinesVisible = false
     padding = Insets(70)
@@ -110,8 +126,9 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
     }
   }
 
-
-
+  /**
+   * Initialising the the bottom bar.
+   */
   val bottombar: GridPane = new GridPane {
     padding = Insets(20)
     hgap = 10
@@ -209,9 +226,17 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
     }
   }
 
+  /**
+   * This method needs to be run
+   * to show the latest drops.
+   */
   def refreshView(): Unit = {
     try {
       for (x <- 0 to controller.colCount - 1; y <- (0 to controller.rowCount - 1).reverse) {
+        /**
+         * Reversing the y values so the dropped pieces
+         * are landing at the bottom
+         **/
         var reverseY = y match {
           case 0 => 5
           case 1 => 4
@@ -220,7 +245,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
           case 4 => 1
           case 5 => 0
         }
-        val piece: Button = gameFieldButton(y, x)
+        val piece: Button = gameFieldButton(y)
         if (controller.getGrid().cell(y, x).isSet) {
           val img = controller.getGrid().cell(y, x).piece.get.player.playerNumber match {
             case 1 => new Image("/red.png")
@@ -237,7 +262,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
         gameGrid.add(piece, x, reverseY)
       }
     } catch {
-      case e => print(e)
+      case any => print(any)
     }
   }
 

@@ -4,6 +4,9 @@ import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.player.Player
 import de.htwg.se.ConnectFour.util.{Observable, UndoManager}
 
+/**
+ * Controller Trait
+ */
 trait Controller extends Observable{
   var players: Vector[Player]
   var moveCount:Int

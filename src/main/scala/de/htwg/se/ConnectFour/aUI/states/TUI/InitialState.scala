@@ -2,6 +2,10 @@ package de.htwg.se.ConnectFour.aUI.states.TUI
 
 import de.htwg.se.ConnectFour.controller.Controller
 
+/**
+ * InitialState of TUI
+ * @param controller
+ */
 case class InitialState(controller: Controller) extends State[GameState] {
   override def handle(input: String, state: GameState): Unit = {
     if (controller.players.size == controller.maxPlayers) {

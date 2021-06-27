@@ -2,6 +2,9 @@ package de.htwg.se.ConnectFour.aUI.states.TUI
 
 import de.htwg.se.ConnectFour.controller.Controller
 
+/**
+ * DropState of TUI
+ */
 case class DropState(controller: Controller) extends State[GameState] {
   override def handle(input: String, state: GameState): Unit = {
     val regExCheck = "([0-6])".r
@@ -18,6 +21,9 @@ case class DropState(controller: Controller) extends State[GameState] {
     }
     if (input == "r") {
       controller.redoDrop()
+    }
+    if (input == "n") {
+      controller.reset()
     }
   }
 

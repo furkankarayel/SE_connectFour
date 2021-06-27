@@ -1,7 +1,5 @@
 name := "ConnectFour"
-
 version := "0.1"
-
 scalaVersion := "2.13.5"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.7"
@@ -28,5 +26,6 @@ lazy val javaFXModules = {
 
 libraryDependencies ++= javaFXModules
 
-coverageExcludedPackages := "de.htwg.se.ConnectFour.aui;"
+coverageExcludedPackages := "de.htwg.se.ConnectFour.aui;" +
+                            "de.htwg.se.ConnectFour.model.fileio"
 

@@ -4,8 +4,12 @@ import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.grid.impl.Piece
 import de.htwg.se.ConnectFour.util.Command
 
+/**
+ *  Command/Memento pattern implementation
+ */
 class SetCommandImpl(col: Int, piece:Piece, controller: ControllerImpl) extends Command {
   var memento:Grid = controller.grid
+  
   override def doStep: Unit = {
     memento = controller.grid
     controller.grid = controller.grid.drop(col:Int, piece:Piece)

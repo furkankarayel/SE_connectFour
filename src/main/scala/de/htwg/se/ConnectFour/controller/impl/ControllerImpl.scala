@@ -10,9 +10,11 @@ import de.htwg.se.ConnectFour.model.player.{Player, PlayerBuilder}
 import de.htwg.se.ConnectFour.model.{InputExpected, InvalidColumnNumber}
 import de.htwg.se.ConnectFour.util.UndoManager
 import net.codingwell.scalaguice.InjectorExtensions.ScalaInjector
-
 import scala.util.Failure
 
+/**
+ *  Controller implementation
+ */
 class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder) extends Controller{
   val injector: Injector = Guice.createInjector(new GameModule)
   val fileIo: FileIO = injector.instance[FileIO]
@@ -23,7 +25,6 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   val colCount = 7
   val rowCount = 6
   override val undoManager: UndoManager = new UndoManager
-
 
   override def createGrid(): Unit = {
     reset()
@@ -86,6 +87,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
       case e: Exception => None
     }
   }
+
   override def winPatternAscendingDiagonal():Option[Boolean] = {
     try {
       val currentPiece = Some(Piece(currentPlayer))
@@ -100,6 +102,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
       case e: Exception => None
     }
   }
+
   override def winPatternDescendingDiagonal():Option[Boolean] = {
     try {
       val currentPiece = Some(Piece(currentPlayer))
@@ -122,7 +125,6 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
       case Some(col) => if (col.toInt <= 6) validCol = col.toInt else Failure(new InvalidColumnNumber)
       case None => Failure(new InputExpected)
     }
-
     undoManager.doStep(new SetCommandImpl(validCol,Piece(currentPlayer),this));
     moveCount += 1
     print(this.gridPrint)
@@ -157,7 +159,6 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   }
 
   override def gridPrint(): String = grid.toString
-
   override def getGrid(): Grid = this.grid
   override def getPlayers(): Vector[Player] = this.players
   override def getCurrentPlayer(): Player = this.currentPlayer
@@ -166,6 +167,5 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   override def setPlayers(players:Vector[Player]): Unit = this.players = players;notifyObservers
   override def setCurrentPlayer(currentPlayer: Player): Unit = this.currentPlayer = currentPlayer;notifyObservers
   override def setMoveCount(moveCount:Int): Unit = this.moveCount = moveCount;notifyObservers
-
 }
 

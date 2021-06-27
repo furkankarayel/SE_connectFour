@@ -1,18 +1,19 @@
 package de.htwg.se.ConnectFour.model.fileio.json
 
-import com.google.inject.{Guice, Inject}
-import de.htwg.se.ConnectFour.GameModule
+import com.google.inject.Inject
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.model.fileio.FileIO
 import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.grid.impl.{Cell, Piece}
-import net.codingwell.scalaguice.InjectorExtensions.ScalaInjector
 import play.api.libs.json._
 
 import java.io.{File, PrintWriter}
 import scala.io.Source
 
-
+/**
+ * FileIO implementation
+ * for exporting the game as JSON File
+ */
 class FileIOImpl @Inject () extends FileIO {
 
   override def load(controller:Controller): Unit = {

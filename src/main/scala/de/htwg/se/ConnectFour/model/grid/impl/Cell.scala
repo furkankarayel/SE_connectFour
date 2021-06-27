@@ -1,5 +1,8 @@
 package de.htwg.se.ConnectFour.model.grid.impl
 
+/**
+ * Cell case class
+ */
 case class Cell(piece: Option[Piece]) {
   def isSet: Boolean = piece.isDefined
 

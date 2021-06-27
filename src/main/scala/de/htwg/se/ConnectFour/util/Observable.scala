@@ -1,5 +1,9 @@
 package de.htwg.se.ConnectFour.util
 
+/**
+ * Observer Trait
+ * for the observer pattern
+ */
 trait Observer {
   def update: Boolean
 }

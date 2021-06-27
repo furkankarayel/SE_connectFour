@@ -1,5 +1,10 @@
 package de.htwg.se.ConnectFour.model
 
+/**
+ * Error classes implementation
+ * for throwing specific errors
+ * regarding the actions
+ */
 trait Error extends Throwable
 
 case class CannotDropPiece() extends Error

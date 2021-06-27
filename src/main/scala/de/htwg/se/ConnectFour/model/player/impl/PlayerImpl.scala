@@ -2,6 +2,9 @@ package de.htwg.se.ConnectFour.model.player.impl
 
 import de.htwg.se.ConnectFour.model.player.Player
 
+/**
+ * Player implementation
+ */
 case class PlayerImpl (playerName: String, playerNumber: Int) extends Player {
   val name: String = playerName
   val number: Int = playerNumber

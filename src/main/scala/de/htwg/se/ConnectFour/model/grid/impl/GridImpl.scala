@@ -1,10 +1,14 @@
 package de.htwg.se.ConnectFour.model.grid.impl
+
 import com.google.inject.Inject
 import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.{CannotDropPiece, ColumnFull}
 
 import scala.util.{Failure, Success, Try}
 
+/**
+ * Game grid implementation
+ */
 case class GridImpl  (rows: Vector[Vector[Cell]]) extends Grid {
 
   @Inject()
@@ -23,7 +27,7 @@ case class GridImpl  (rows: Vector[Vector[Cell]]) extends Grid {
 
     if (idx > -1) {
       Try(this.replaceCell(idx, column, Cell(Some(piece)))) match {
-        case Success(grid) => this.replaceCell(idx, column, Cell(Some(piece)))
+        case Success(v) => this.replaceCell(idx, column, Cell(Some(piece)))
         case Failure(_) => Failure(new CannotDropPiece); this
       }
     } else {
