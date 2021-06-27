@@ -58,7 +58,6 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   }
 
   override def winPatternHorizontal():Option[Boolean] = {
-    try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 0 to rowCount - 1) {
         for (j <- 0 to colCount - 1) {
@@ -67,14 +66,10 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
         }
       }
       None
-    } catch {
-      case e: Exception => None
-    }
   }
 
 
   override def winPatternVertical():Option[Boolean] = {
-    try {
       val currentPiece = Some(Piece(currentPlayer : Player))
       for (i <- 0 to rowCount - 3) {
         for (j <- 0 to colCount - 1) {
@@ -83,13 +78,9 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
         }
       }
       None
-    } catch {
-      case e: Exception => None
-    }
   }
 
   override def winPatternAscendingDiagonal():Option[Boolean] = {
-    try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 0 to rowCount-4){
         for (j <- 0 to colCount-4){
@@ -98,13 +89,9 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
         }
       }
       None
-    } catch {
-      case e: Exception => None
-    }
   }
 
   override def winPatternDescendingDiagonal():Option[Boolean] = {
-    try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 3 to rowCount - 1) {
         for (j <- 0 to colCount - 4) {
@@ -113,9 +100,6 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
         }
       }
       None
-    } catch {
-      case e: Exception => None
-    }
   }
 
   override def drop(input:Option[String]): Unit = {
@@ -127,20 +111,17 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
     }
     undoManager.doStep(new SetCommandImpl(validCol,Piece(currentPlayer),this));
     moveCount += 1
-    print(this.gridPrint)
     notifyObservers
   }
   override def undoDrop(): Unit = {
     undoManager.undoStep
     moveCount -= 1
-    print (gridPrint)
     notifyObservers
   }
 
   override def redoDrop(): Unit = {
     undoManager.redoStep
     moveCount += 1
-    print(gridPrint)
     notifyObservers
   }
 
