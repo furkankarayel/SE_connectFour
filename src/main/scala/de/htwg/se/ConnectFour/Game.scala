@@ -13,7 +13,7 @@ case object Game {
     val uiType = "GUI"
 
     Try(UIFactory(uiType,controller)) match {
-      case Success(v) => println("Bye.")
+      case Success(v) => println("See you next time! Bye.")
       case Failure(v) => println("Could not create UI" + v.getMessage + v.getCause)
     }
   }

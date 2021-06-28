@@ -9,7 +9,7 @@ import scala.util.{Failure, Success, Try}
 /**
  * Game grid implementation
  */
-case class GridImpl  (rows: Vector[Vector[Cell]]) extends Grid {
+case class GridImpl(rows: Vector[Vector[Cell]]) extends Grid {
 
   @Inject()
   def this() = this(Vector.tabulate(6, 7) { (rowCount, col) => Cell(None) })
@@ -19,10 +19,19 @@ case class GridImpl  (rows: Vector[Vector[Cell]]) extends Grid {
   override def replaceCell(row: Int, col: Int, cell: Cell): Grid = copy(rows.updated(row, rows(row).updated(col, cell)))
 
   override def drop(column: Int, piece: Piece): Grid = {
-    val idx = this.rows.indexWhere(row => !row(column).isSet)
+    var idx = 0
+    Try(this.rows.indexWhere(row => !row(column).isSet)) match {
+      case Success(result) => idx = result
+      case Failure(_) => Failure(exception = new Exception)
+    }
+
     if (idx > -1) {
-      this.replaceCell(idx, column, Cell(Some(piece)))
+      Try(this.replaceCell(idx, column, Cell(Some(piece)))) match {
+        case Success(grid) => this.replaceCell(idx, column, Cell(Some(piece)))
+        case Failure(_) => Failure(new CannotDropPiece); this
+      }
     } else {
+      Failure(new ColumnFull)
       this
     }
   }
@@ -32,13 +41,22 @@ case class GridImpl  (rows: Vector[Vector[Cell]]) extends Grid {
   }
 
   override def toString: String = {
-    val builder = new StringBuilder
-    for (row <- this.rows.reverse) {
-      for (col <- row) {
-        builder.append(col)
+    var empty = true
+    for (row <- this.rows)
+      for (col <- row)
+        if (col.isSet)
+          empty = false
+
+    if (!empty) {
+      val builder = new StringBuilder
+      for (row <- this.rows.reverse) {
+        for (col <- row) {
+          builder.append(col)
+        }
+        builder.append("\n")
       }
-      builder.append("\n")
+      return builder.toString()
     }
-    builder.toString()
+    ""
   }
 }

@@ -15,7 +15,7 @@ import scala.util.Failure
 /**
  *  Controller implementation
  */
-class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder) extends Controller{
+class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder) extends Controller {
   val injector: Injector = Guice.createInjector(new GameModule)
   val fileIo: FileIO = injector.instance[FileIO]
   var players: Vector[Player] = Vector.empty
@@ -58,6 +58,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   }
 
   override def winPatternHorizontal():Option[Boolean] = {
+    try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 0 to rowCount - 1) {
         for (j <- 0 to colCount - 1) {
@@ -66,10 +67,14 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
         }
       }
       None
+    } catch {
+      case e: Exception => None
+    }
   }
 
 
   override def winPatternVertical():Option[Boolean] = {
+    try {
       val currentPiece = Some(Piece(currentPlayer : Player))
       for (i <- 0 to rowCount - 3) {
         for (j <- 0 to colCount - 1) {
@@ -78,9 +83,12 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
         }
       }
       None
+    } catch {
+      case e: Exception => None
+    }
   }
-
   override def winPatternAscendingDiagonal():Option[Boolean] = {
+    try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 0 to rowCount-4){
         for (j <- 0 to colCount-4){
@@ -89,9 +97,12 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
         }
       }
       None
+    } catch {
+      case e: Exception => None
+    }
   }
-
   override def winPatternDescendingDiagonal():Option[Boolean] = {
+    try {
       val currentPiece = Some(Piece(currentPlayer))
       for (i <- 3 to rowCount - 1) {
         for (j <- 0 to colCount - 4) {
@@ -100,17 +111,21 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
         }
       }
       None
+    } catch {
+      case e: Exception => None
+    }
   }
 
   override def drop(col:String): Unit = {
     whoseTurnIsIt()
     var validCol = 0
-    if (col.toInt <= 6) validCol = col.toInt
-
+    if (col.toInt <= 6)
+      validCol = col.toInt
     undoManager.doStep(new SetCommandImpl(validCol,Piece(currentPlayer),this));
     moveCount += 1
     notifyObservers
   }
+
   override def undoDrop(): Unit = {
     undoManager.undoStep
     moveCount -= 1
@@ -138,7 +153,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
     notifyObservers
   }
 
-  override def gridPrint(): String = grid.toString
+  override def gridToString(): String = this.grid.toString
   override def getGrid(): Grid = this.grid
   override def getPlayers(): Vector[Player] = this.players
   override def getCurrentPlayer(): Player = this.currentPlayer

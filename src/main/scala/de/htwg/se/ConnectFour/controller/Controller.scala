@@ -30,7 +30,7 @@ trait Controller extends Observable{
   def saveGame(): Unit
   def loadGame(): Unit
   def reset(): Unit
-  def gridPrint(): String
+  def gridToString(): String
 
   def getGrid(): Grid
   def getPlayers(): Vector[Player]

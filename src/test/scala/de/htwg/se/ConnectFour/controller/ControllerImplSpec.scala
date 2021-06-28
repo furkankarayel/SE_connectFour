@@ -47,25 +47,25 @@ class ControllerImplSpec extends AnyWordSpec with Matchers {
       "notify its Observer when a do/undo/redo step is done" should {
         "do" in {
           controller.drop("0")
-          controller.gridPrint()
+          controller.gridToString()
           controller.grid.cell(0, 0).isSet should be(true)
         }
         "undo" in {
           controller.undoDrop()
-          controller.gridPrint()
+          controller.gridToString()
           controller.grid.cell(0, 0).isSet should be(false)
         }
         "redo" in {
           controller.redoDrop()
-          controller.gridPrint()
+          controller.gridToString()
           controller.grid.cell(0, 0).isSet should be(true)
         }
       }
-      "notify its Observer that the game has been loaded" in {
-        controller.loadGame()
-      }
       "notify its Observer that the game has been saved" in {
         controller.saveGame()
+      }
+      "notify its Observer that the game has been loaded" in {
+        controller.loadGame()
       }
     }
   }

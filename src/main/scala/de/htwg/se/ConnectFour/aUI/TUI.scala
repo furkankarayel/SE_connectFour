@@ -1,14 +1,17 @@
 package de.htwg.se.ConnectFour.aUI
 
+import de.htwg.se.ConnectFour.aUI.states.GUI.DropState
 import de.htwg.se.ConnectFour.aUI.states.TUI.GameState
 import de.htwg.se.ConnectFour.controller.Controller
 import de.htwg.se.ConnectFour.util.{Observer, UI}
+
 import scala.io.StdIn.readLine
 
 /**
  * ConnectFour text-based user interface
  */
 case class TUI(controller: Controller) extends UI with Observer{
+  controller.add(this)
   var gameState:GameState = GameState(controller)
 
   override def run(): Unit = {
@@ -36,5 +39,8 @@ case class TUI(controller: Controller) extends UI with Observer{
   def execute(input:String): Unit = {
     gameState.handle(input)
   }
-  override def update: Boolean =  {controller.toString;true}
+  override def update: Boolean =  {
+    print(controller.gridToString())
+    true
+  }
 }

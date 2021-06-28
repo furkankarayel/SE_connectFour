@@ -232,7 +232,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
    */
   def refreshView(): Unit = {
     try {
-      for (x <- 0 to controller.colCount - 1; y <- (0 to controller.rowCount - 1).reverse) {
+      for (x <- 0 to controller.colCount -1; y <- (0 to controller.rowCount - 1).reverse) {
         /**
          * Reversing the y values so the dropped pieces
          * are landing at the bottom
@@ -245,7 +245,7 @@ case class GUI(controller: Controller) extends UI with Observer with JFXApp {
           case 4 => 1
           case 5 => 0
         }
-        val piece: Button = gameFieldButton(y)
+        val piece: Button = gameFieldButton(x)
         if (controller.getGrid().cell(y, x).isSet) {
           val img = controller.getGrid().cell(y, x).piece.get.player.playerNumber match {
             case 1 => new Image("/red.png")
