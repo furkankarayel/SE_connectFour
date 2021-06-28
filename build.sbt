@@ -28,5 +28,5 @@ libraryDependencies ++= javaFXModules
 
 coverageExcludedPackages := "de.htwg.se.ConnectFour.aUI.*;" +
                             "de.htwg.se.ConnectFour.model.fileio.*;" +
-                            "de.htwg.se.ConnectFour.Game.scala;"
+                            "de.htwg.se.ConnectFour.Game;"
 

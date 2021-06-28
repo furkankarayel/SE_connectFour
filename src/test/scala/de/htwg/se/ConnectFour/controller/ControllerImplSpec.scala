@@ -41,9 +41,6 @@ class ControllerImplSpec extends AnyWordSpec with Matchers{
       controller.redoDrop()
       controller.grid.cell(0,0).isSet should be (true)
     }
-    "after dropping without value Failure should raise" in {
-      controller.drop(None) should be (Failure)
-    }
     "notify its Observer after resetting the grid" in {
       controller.reset()
       observer.updated should be (true)
