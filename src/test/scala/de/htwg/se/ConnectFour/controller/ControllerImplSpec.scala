@@ -33,7 +33,7 @@ class ControllerImplSpec extends AnyWordSpec with Matchers{
       controller.currentPlayer should be (controller.players(0))
     }
     "notify its Observer if an do/undo/redo step is done" in {
-      controller.drop(Some("0"))
+      controller.drop("0")
       controller.gridPrint()
       controller.grid.cell(0,0).isSet should be (true)
       controller.undoDrop()

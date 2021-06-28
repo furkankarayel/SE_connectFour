@@ -102,13 +102,11 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
       None
   }
 
-  override def drop(input:Option[String]): Unit = {
+  override def drop(col:String): Unit = {
     whoseTurnIsIt()
     var validCol = 0
-    input match {
-      case Some(col) => if (col.toInt <= 6) validCol = col.toInt else Failure(new InvalidColumnNumber)
-      case None => Failure(new InputExpected)
-    }
+    if (col.toInt <= 6) validCol = col.toInt
+
     undoManager.doStep(new SetCommandImpl(validCol,Piece(currentPlayer),this));
     moveCount += 1
     notifyObservers

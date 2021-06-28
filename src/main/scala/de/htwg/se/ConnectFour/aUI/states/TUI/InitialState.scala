@@ -11,7 +11,7 @@ case class InitialState(controller: Controller) extends State[GameState] {
     if (controller.players.size == controller.maxPlayers) {
       controller.currentPlayer = controller.players(0)
       if (input != "q") {
-        controller.drop(Some(input))
+        controller.drop(input)
         state.changeState(DropState(controller))
       }
     }

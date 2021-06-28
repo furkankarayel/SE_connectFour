@@ -19,9 +19,12 @@ case class GridImpl  (rows: Vector[Vector[Cell]]) extends Grid {
   override def replaceCell(row: Int, col: Int, cell: Cell): Grid = copy(rows.updated(row, rows(row).updated(col, cell)))
 
   override def drop(column: Int, piece: Piece): Grid = {
-    var idx = this.rows.indexWhere(row => !row(column).isSet)
-    if (idx > -1)
+    val idx = this.rows.indexWhere(row => !row(column).isSet)
+    if (idx > -1) {
       this.replaceCell(idx, column, Cell(Some(piece)))
+    } else {
+      this
+    }
   }
 
   override def reset(): Grid = {

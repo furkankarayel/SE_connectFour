@@ -24,7 +24,7 @@ trait Controller extends Observable{
   def winPatternVertical():Option[Boolean]
   def winPatternAscendingDiagonal():Option[Boolean]
   def winPatternDescendingDiagonal():Option[Boolean]
-  def drop(input:Option[String]): Unit
+  def drop(input:String): Unit
   def undoDrop(): Unit
   def redoDrop(): Unit
   def saveGame(): Unit
