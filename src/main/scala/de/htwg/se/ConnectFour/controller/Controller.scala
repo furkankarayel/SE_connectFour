@@ -37,7 +37,6 @@ trait Controller extends Observable{
   def getCurrentPlayer(): Player
   def getMoveCount: Int
   def setGrid(grid:Grid): Unit
-  def setPlayers(players:Vector[Player]): Unit
   def setCurrentPlayer(currentPlayer:Player): Unit
   def setMoveCount(moveCount:Int): Unit
 }

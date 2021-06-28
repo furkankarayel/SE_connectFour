@@ -125,6 +125,7 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
 
   override def saveGame(): Unit = {
     fileIo.save(this)
+    notifyObservers
   }
 
   override def loadGame(): Unit = {
@@ -143,7 +144,6 @@ class ControllerImpl @Inject () (var grid:Grid, val playerBuilder:PlayerBuilder)
   override def getCurrentPlayer(): Player = this.currentPlayer
   override def getMoveCount: Int = this.moveCount
   override def setGrid(grid: Grid): Unit = this.grid = grid;notifyObservers
-  override def setPlayers(players:Vector[Player]): Unit = this.players = players;notifyObservers
   override def setCurrentPlayer(currentPlayer: Player): Unit = this.currentPlayer = currentPlayer;notifyObservers
   override def setMoveCount(moveCount:Int): Unit = this.moveCount = moveCount;notifyObservers
 }
