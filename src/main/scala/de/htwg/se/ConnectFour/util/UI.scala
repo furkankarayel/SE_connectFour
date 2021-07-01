@@ -2,7 +2,7 @@ package de.htwg.se.ConnectFour.util
 
 /**
  * UI Trait
- * factory method pattern
+ * Template pattern
  */
 trait UI{
   def processInput(input: String)
