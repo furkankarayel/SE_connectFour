@@ -39,6 +39,7 @@ case class TUI(controller: Controller) extends UI with Observer{
   def execute(input:String): Unit = {
     gameState.handle(input)
   }
+
   override def update: Boolean =  {
     print(controller.gridToString())
     true

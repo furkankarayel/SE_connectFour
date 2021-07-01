@@ -7,10 +7,8 @@ import de.htwg.se.ConnectFour.model.fileio.FileIO
 import de.htwg.se.ConnectFour.model.grid.Grid
 import de.htwg.se.ConnectFour.model.grid.impl.Piece
 import de.htwg.se.ConnectFour.model.player.{Player, PlayerBuilder}
-import de.htwg.se.ConnectFour.model.{InputExpected, InvalidColumnNumber}
 import de.htwg.se.ConnectFour.util.UndoManager
 import net.codingwell.scalaguice.InjectorExtensions.ScalaInjector
-import scala.util.Failure
 
 /**
  *  Controller implementation
